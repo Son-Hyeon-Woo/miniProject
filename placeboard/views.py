@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Post
 
-<<<<<<< HEAD
 def show(request):
     # 게시물 목록 출력
     postList = Post.objects.order_by('-date')
@@ -13,7 +12,6 @@ def detail(request, postId):
     post = Post.objects.get(id=postId)
     context = {'post': post}
     return render(request, 'placeboard/detail.html', context)
-=======
 
 
 # blog.html 페이지를 부르는 blog 함수
@@ -55,4 +53,3 @@ def remove_post(request, pk):
         post.delete()
         return redirect('blog')
     return render(request, 'placeboard/remove_post.html', {'Post': post})
->>>>>>> master
