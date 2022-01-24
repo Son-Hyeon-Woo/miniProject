@@ -3019,7 +3019,7 @@ textarea.form-control-lg {
   }
 }
 .btn:hover {
-  color: #000000;
+  color: #8d8d8d;
 }
 .btn-check:focus + .btn, .btn:focus {
   outline: 0;
@@ -3247,7 +3247,7 @@ textarea.form-control-lg {
 }
 .btn-dark:hover {
   color: #fff;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   border-color: black;
 }
 .btn-check:focus + .btn-dark, .btn-dark:focus {

@@ -4,57 +4,44 @@ from .forms import UserForm
 from .models import Member
 from django.utils import timezone
 from django.http import HttpResponse
+from django.contrib import auth 
+from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.models import User 
 
-
-def signup(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('index')
-    else:
-        form = UserForm()
-    return render(request, 'member/signup.html', {'form': form})
-
-def signup_custom(request):
+#회원가입
+def signup(request): 
+    if request.method == 'POST': 
+        if request.POST['password1'] == request.POST['password2']: 
+            user = User.objects.create_user( 
+                username=request.POST['username'], 
+                password=request.POST['password1'], 
+                email=request.POST['email'],
+            ) 
+            auth.login(request, user) 
+            return redirect('/') 
+        return render(request, 'signup.html') 
+    return render(request, 'signup.html')
+#로그인
+def login(request):
     if request.method == 'POST':
-        user_id = request.POST.get('user_id')
-        user_pw = request.POST.get('user_pw')
-        user_name = request.POST.get('user_name')
-        m = Member(
-            user_id=user_id, user_pw=user_pw, user_name=user_name)
-        m.date_joined = timezone.now()
-        m.save()
-        return HttpResponse(
-            '가입 완료<br>%s %s %s' % (user_id, user_pw, user_name))
-    else:
-        return render(request, 'member/signup_custom.html')
-
-def login_custom(request):
-    if request.method == 'POST':
-        user_id = request.POST.get('user_id')
-        user_pw = request.POST.get('user_pw')
-        try:
-            m = Member.objects.get(user_id=user_id, user_pw=user_pw)
-        except Member.DoesNotExist as e:
-            return HttpResponse('로그인 실패')
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
         else:
-            request.session['user_id'] = m.user_id
-            request.session['user_name'] = m.user_name
-
-
-        return redirect('../../../')
+            return render(request, 'login.html', {'error': '아이디 혹은 비밀번호를 확인해주세요.'})
     else:
-        return render(request, 'member/login_custom.html')
+        return render(request, 'login.html')
 
-def logout_custom(request):
-    del request.session['user_id'] # 개별 삭제
-    del request.session['user_name'] # 개별 삭제
-    request.session.flush() # 전체 삭제
-    return redirect('index')
+
+# 로그아웃
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
+
+
 
 # Create your views here.

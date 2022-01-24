@@ -16,6 +16,7 @@ class Post(models.Model):
         return self.postname
 
 
+
 # class Answer(models.Model):
 #     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 #     content = models.TextField()

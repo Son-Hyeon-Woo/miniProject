@@ -5,6 +5,5 @@ app_name = 'help'
 
 urlpatterns = [
     path('help/', views.help),
- 
-   
+
 ]
