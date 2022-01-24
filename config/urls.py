@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from django.shortcuts import redirect
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('map/', include('mapquiz.urls')),
-    path('', include('mapquiz.urls')),
+    path('', lambda request : redirect('map/home')),
     path('pb/', include('placeboard.urls')),
     path('member/', include('member.urls')),
     path('rank/', include('rank.urls')),
