@@ -1,13 +1,12 @@
 from django.urls import path
 from . import views
-<<<<<<< HEAD
 
 app_name = 'board'
 
 urlpatterns = [
     path('', views.show, name='show'),
     path('<int:postId>/', views.detail),
-=======
+]
 from .views import *
 # index는 대문, blog는 게시판
 from placeboard.views import blog, posting
@@ -26,5 +25,4 @@ urlpatterns = [
     path('blog/<int:pk>/', posting, name='posting'),
     path('blog/new_post/', new_post, name='new_post'),
     path('blog/<int:pk>/remove/', remove_post, name='remove_post'),
->>>>>>> master
 ]
