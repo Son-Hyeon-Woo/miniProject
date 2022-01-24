@@ -36,7 +36,7 @@ def new_post(request):
                 contents=request.POST['contents'],
                 mainphoto=request.POST['mainphoto'],
             )
-        return redirect('pb/blog/')
+        return redirect('blog')
     return render(request, 'placeboard/new_post.html')
 
 ##게시글 삭제
@@ -44,5 +44,5 @@ def remove_post(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
         post.delete()
-        return redirect('pb/blog/')
+        return redirect('blog')
     return render(request, 'placeboard/remove_post.html', {'Post': post})

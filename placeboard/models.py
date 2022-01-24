@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
   ####  pip install pillow  커맨드창에서 해줘야함
@@ -12,3 +13,6 @@ class Post(models.Model):
     # postname이 Post object 대신 나오기
     def __str__(self):
         return self.postname
+
+
+
