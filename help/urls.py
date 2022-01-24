@@ -9,4 +9,5 @@ urlpatterns = [
     path('why/', views.why),
 
     path('all/', views.all),
+    
 ]

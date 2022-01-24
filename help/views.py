@@ -6,7 +6,7 @@ def why(request):
 
 def help(request):
     return render(request,'help/helpme.html')
-    
+
 
 def all(request):
     return HttpResponse("""<!DOCTYPE html><html>
