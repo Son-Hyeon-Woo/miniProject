@@ -1,4 +1,4 @@
-{% load bootstrap4 %}
+{% comment %} {% load bootstrap4 %}
 {% block content %}
 <div class="wrapper" style="text-align: center;">
     <h1>회원가입</h1>
@@ -19,4 +19,12 @@
         <input type="submit" class="btn btn-primary" value="Sign Up">
     </form>
 </div>
-{% endblock %}
+{% endblock %} {% endcomment %}
+
+<form method="post">
+    {% csrf_token %}
+    아이디 : <input type="text" name="user_id"><br>
+    비밀번호 : <input type="text" name="user_pw"><br>
+    이름 : <input type="text" name="user_name"><br>
+    <input type="submit" value="가입">
+</form>

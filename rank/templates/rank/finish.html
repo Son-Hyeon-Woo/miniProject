@@ -3,85 +3,112 @@
     <head>
     <meta charset="utf-8">
     <title>Rank</title>
+    <style>
+        .setL{ padding-top : 10px; padding-left: 20%; padding-right:0%;} 
+        .setR{padding-right: 10%;}
+        .button1 {width: 130px; height: 100; font-size: 17px; padding-top: 10px; padding-bottom: 10px; }
+        .setbtn {padding-right: 10px; padding-bottom: 10px;}
+        .logo{margin: 3%;}   
+    </style>
     </head>
 
-    <body data-home-page="Home.html" data-home-page-title="Home" class="u-body">
+    <body>
         <header>
-        <div>
-        <a href="http://127.0.0.1:8000/map/home/" class="u-image u-logo u-image-1">
-            <img src="images/default-logo.png" class="u-logo-image u-logo-image-1">
+        <div class = logo>
+        <a href="http://127.0.0.1:8000/map/home/">
+            <img src="images/default-logo.png">
         </a>
         </div></header>
         
-        <div>
-        <table border="1" bordercolor="black" width ="300" height="150" align="center">
-        <thead>
-            <tr style="height: 62px;">
-            <th>내 점수</th>
-            <th>걸린 시간</th>
-            </tr>
-        </thead>
-    
-        <tbody align = "center">
-            <tr style="height: 62px;">
-            <td>1점</td>
-            <td>5m 27s</td>
-            </tr>
-        </tbody>
-        
-        </table>
+        <div class = setL style=" width : auto; float:left;">
+            <table border="1" bordercolor="black" width ="300" height="150">
+                <colgroup>
+                    <col width="20%">
+                    <col width="25%">
+                </colgroup>
+                <thead>
+                    <tr style="height: 62px;">
+                    <th>내 점수</th>
+                    <th>걸린 시간</th>
+                    </tr>
+                </thead>
+
+                <tbody align = "center">
+                    <tr style="height: 62px;">
+                    <td>1점</td>
+                    <td>5m 27s</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class = setL>
+                <button class = button1 onclick="location.href='http://127.0.0.1:8000/map/home/'" style="float:left;">홈으로</button >
+                <button class = button1 onclick="location.href='http://127.0.0.1:8000/map/quiz/'" style="float:left;">다시 하기</button >
+            </div>
+            <div class = setL>
+                <button class = button1 onclick="location.href='http://127.0.0.1:8000/rank/near_place/'">근처 여행지<br>보기</button >
+                <button class = button1 onclick="location.href='http://127.0.0.1:8000/rank/near_food/'">근처 맛집<br>보기</button >
+            </div>
         </div>
-        
-        <div>
-            <table table border="1" bordercolor="black" width ="500" height="300" align = "center">
-            <colgroup>
-                <col width="20%">
-                <col width="25%">
-                <col width="30%">
-                <col width="25%">
-            </colgroup>
-            <thead>
-                <tr style="height: 62px;">
-                <th>등수</th>
-                <th>이름</th>
-                <th>시간</th>
-                <th>점수</th>
-                </tr>
-            </thead>
-            <tbody class="u-table-body" align = 'center'>
-                <tr style="height: 70px;">
-                <td>1등</td>
-                <td>손현우</td>
-                <td>30m07s</td>
-                <td>10점</td>
-                </tr>
-                <tr style="height: 70px;">
-                <td>2등</td>
-                <td>강민수</td>
-                <td> 30m07s</td>
-                <td>9점</td>
-                </tr>
-                <tr style="height: 70px;">
-                <td>3등</td>
-                <td>배경용</td>
-                <td> 30m07s</td>
-                <td> 8점</td>
-                </tr>
-                <tr style="height: 70px;">
-                <td >4등</td>
-                <td >김효정</td>
-                <td> 30m07s</td>
-                <td> 7점</td>
-                </tr>
-            </tbody>
+
+        <div class = setR style=" float:right;">
+            <table table border="1" bordercolor="black" width ="500" height="300">
+                <colgroup>
+                    <col width="20%">
+                    <col width="25%">
+                    <col width="30%">
+                    <col width="25%">
+                </colgroup>
+
+                <thead>
+                    <tr style="height: 62px;">
+                    <th>등수</th>
+                    <th>이름</th>
+                    <th>시간</th>
+                    <th>점수</th>
+                    </tr>
+                </thead>
+
+                <tbody class="u-table-body" align = 'center'>
+                    <tr style="height: 70px;">
+                    <td>1등</td>
+                    <td>손현우</td>
+                    <td>30m07s</td>
+                    <td>10점</td>
+                    </tr>
+
+                    <tr style="height: 70px;">
+                    <td>2등</td>
+                    <td>강민수</td>
+                    <td> 30m07s</td>
+                    <td>9점</td>
+                    </tr>
+
+                    <tr style="height: 70px;">
+                    <td>3등</td>
+                    <td>배경용</td>
+                    <td> 30m07s</td>
+                    <td> 8점</td>
+                    </tr>
+
+                    <tr style="height: 70px;">
+                    <td >4등</td>
+                    <td >김효정</td>
+                    <td> 30m07s</td>
+                    <td> 7점</td>
+                    </tr>
+
+                    <tr style="height: 70px;">
+                        <td >5등</td>
+                        <td >윤지민</td>
+                        <td> 31m07s</td>
+                        <td> 1점</td>
+                        </tr>
+                        
+                </tbody>
             </table>
         </div>
-        </div>
-    </section>
-    <button onclick="location.href='http://127.0.0.1:8000/map/home/'">홈으로</button >
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>4</button>
+        
+        
+        
     </body>
 </html>

@@ -360,18 +360,23 @@ function show() {
         ansmap.setBounds(bounds);
     }, 2500);
 
+
+    //점수를 로컬에 저장
+    var point = {'first' : (1000 - Math.round(dist))}
+    if (0 <= (1000 - Math.round(dist))) {
+        localStorage.setItem("point", JSON.stringify(point));
+        console.log('true 실행');
+    }   else {
+            var point = {'first' : 0};
+            localStorage.setItem("point", JSON.stringify(point));
+            console.log('flase 실행');
+        }
+
+    console.log(point);
 }
 
 // 점수확인 버튼 클릭시 페이지 이동
 function close() {
-    var point = {'first' : (1000 - Math.round(dist))}
-    if (point >= 0) {
-        localStorage.setItem("point", JSON.stringify(point));
-    }
-    else {
-        var point = {'first' : 0}
-    }
-    
 
     document.querySelector(".background").className = "background";
     window.location.href = '/map/quizend'
