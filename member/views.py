@@ -47,7 +47,7 @@ def login_custom(request):
             request.session['user_name'] = m.user_name
 
 
-        return redirect('index')
+        return redirect('../../../')
     else:
         return render(request, 'member/login_custom.html')
 
