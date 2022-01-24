@@ -3,12 +3,12 @@ from django.urls import path
 from . import views
 from .views import *
 # index는 대문, blog는 게시판
-from placeboard.views import index, blog, posting
+from placeboard.views import blog, posting
 # 이미지를 업로드하자
 from django.conf.urls.static import static
 from django.conf import settings
 
-
+app_name='board'
 
 urlpatterns = [
     # path('admin/', admin.site.urls),       <----------------------admin이 unique하지 않다고 이슈떠서 일단 주석해놨어요!! (config에도 있어요)
