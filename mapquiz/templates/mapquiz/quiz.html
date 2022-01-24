@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>로드뷰 생성하기</title>
+    <title>QUIZ</title>
     <!-- custom css CSS 수정 -->
     <style>
         @font-face {
@@ -269,6 +269,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
 // * * * * * * * * * * * * * * * * * * 팝업 지도 JS * * * * * * * * * * * * * * * * * * * * * *
 // 제출하기 버튼을 눌러야 생기는 지도를 위한 함수
+var dist;
 function show() {
     document.querySelector(".background").className = "background show";
 
@@ -335,7 +336,7 @@ function show() {
     polyline.setMap(ansmap);  
     
     //두 좌표 사이의 거리 출력하기
-    var dist = polyline.getLength(); 
+    dist = polyline.getLength(); 
     if (dist < 1000) {
         document.getElementById("dist").innerHTML='정답! 거리는 : ' + Math.round(dist) + '미터 입니다' + '<br> 점수는 ' + (1000 - Math.round(dist)) + '입니다!';
     }
@@ -364,7 +365,14 @@ function show() {
 // 점수확인 버튼 클릭시 페이지 이동
 function close() {
     var point = {'first' : (1000 - Math.round(dist))}
+    if (point >= 0) {
+        localStorage.setItem("point", JSON.stringify(point));
+    }
+    else {
+        var point = {'first' : 0}
+    }
     
+
     document.querySelector(".background").className = "background";
     window.location.href = '/map/quizend'
 }

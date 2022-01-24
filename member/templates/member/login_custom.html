@@ -6,7 +6,10 @@
 </form>
 
 {% if request.session.user_id %}
-    {{ request.session.user_name }} 님 반갑습니다. (로그아웃)
+    <a href="{% url 'member:logout_custom' %}">
+        {{ request.session.user_name }} 님 반갑습니다. (로그아웃)
+    </a>
+    
 {% else %}
     <p>현재 상태 : Guest</p>
 {% endif %}

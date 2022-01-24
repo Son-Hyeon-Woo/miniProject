@@ -16,15 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('map/', include('mapquiz.urls')),
-
+    path('', include('mapquiz.urls')),
     path('pb/', include('placeboard.urls')),
-
     path('member/', include('member.urls')),
-    
     path('rank/', include('rank.urls')),
 
 ]

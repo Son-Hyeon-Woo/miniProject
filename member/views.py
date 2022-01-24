@@ -5,6 +5,7 @@ from .models import Member
 from django.utils import timezone
 from django.http import HttpResponse
 
+
 def signup(request):
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -46,7 +47,7 @@ def login_custom(request):
             request.session['user_name'] = m.user_name
 
 
-        return redirect('member:login')
+        return redirect('index')
     else:
         return render(request, 'member/login_custom.html')
 
