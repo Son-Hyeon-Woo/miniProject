@@ -67,16 +67,90 @@
             background-color: #244848;
             border-color: #224444;
             }
+        #score{
+            position: absolute;
+            display : inline-block;
+            top : 10%;
+            left : 7%;
+            width: 40%;
+            height: 80%;
+            background-color : #fff;
+            }
+        #rank{
+            position: absolute;
+            display : inline-block;
+            top : 10%;
+            left : 53%;
+            width: 40%;
+
+            height: 80%;
+            background-color : #fff;
+            }
+        #bar1{
+            position: relative;
+            display : inline-block;
+            width: 90%;
+            height: 30px;
+            background-color : #bddcb8;
+            top : 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            }
+        #bar2{
+            position: relative;
+            display : inline-block;
+            width: 0%;
+            height: 30px;
+            background-color : #36602f;
+            top : 0%;
+            left: 0%;
+            transition : 2s;
+            }
+        #point{
+            position: relative;
+            top : -15px;
+            vertical-align: middle;
+            font-size: 1.5rem;
+        }
+        #user{
+            position: relative;
+
+            width: 45%;
+            height: 45%;
+            border-radius: 50%;
+            background-color : #36602f;
+            top : 40%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+        }
     </style>
 </head>
 
 <body>
-<div>  <p id = 'point' class = 'Hyemin'></p>  </div>
+    <button class="gohome custombtn Hyemin"  id="submitButton" type="botton" onclick="location.href='/map/home'"> 홈으로 </button>
+    <div id = 'score'> 
+        <div id = 'bar1'>
+            <div id = 'bar2'></div>
+            <p id = 'point' class = 'gmarket'></p> 
+        </div>
 
+        <div id = user> 아이디랑 이름</div>
+    </div> 
+     
+    <div id = 'rank'>  </div>
 
 <script>
+document.body.classList.add("reveal");
 console.log(JSON.parse(localStorage.getItem("point")));
-document.getElementById("point").innerHTML= '총 획득 점수 : ' + JSON.parse(localStorage.getItem("point"));
+let point = JSON.parse(localStorage.getItem("point"));
+document.getElementById("point").innerHTML= '총 획득 점수 : ' + point['first'] ;
+
+setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
+    let bar2 = document.getElementById('bar2');
+    bar2.style.width =  point['first']/10 + '%';
+}, 10);
+
 </script>
 
 
