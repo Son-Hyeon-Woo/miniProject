@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Blog List</title>
+    </head>
+    <body>
+        <h1>게시판 페이지입니다</h1>
+        {% comment %} <!-- 게시판(postlist)의 게시글(list)을 하나씩 보여줍니다 -->
+        <!-- {%%} 내부엔 파이썬이 사용됩니다 --> {% endcomment %}
+        <table>
+        {% for list in postlist %}
+          {% comment %} <!-- 게시글 클릭시 세부페이지로 넘어갑니다--> {% endcomment %}
+          {% comment %} blog 게시판에서 게시글의 제목만 남기고,
+            제목을 클릭하면 posting 세부페이지로 가도록 만들자. {% endcomment %}
+            <ul>
+                <li><a href="{{list.pk}}/">{{list.postname}}</a></li>
+                <li>{{list.postname}}</li>
+                <li>{{list.contents}}</li>
+            </ul>
+        {% endfor %}
+        <button><a href="new_post/">글쓰기</a></button>
+        </table>
+    </body>
+</html>
+

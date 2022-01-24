@@ -1,0 +1,380 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>로드뷰 생성하기</title>
+    <!-- custom css CSS 수정 -->
+    <style>
+        @font-face {
+            font-family: 'IM_Hyemin-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            }
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'GmarketSansBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            background-color : #ebf1eb;
+            margin: 3px;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity .65s .15s
+            }
+        body.reveal {
+            opacity: 1;
+            overflow-y: auto
+            }   
+        
+        body.hidden {
+            opacity: 0
+            }
+        
+        .Hyemin{ font-family: 'IM_Hyemin-Bold', normal; }
+        .gmarket{ font-family: 'GmarketSansMedium';}
+        .gmarket_bold{ font-family: 'GmarketSansBold';}
+        .italic{ font-style: italic }
+        .gohome {
+            position: absolute; 
+            left : 10px; 
+            top : 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            }    
+        .custombtn {
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #fff;
+            background-color: #2a5555;
+            border-color: #2a5555;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.4rem 1.5%;
+            font-size: 1.5rem;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+        .custombtn:hover {
+            color: #fff;
+            background-color: #244848;
+            border-color: #224444;
+            }
+
+        .minimap {
+            transition : 0.5s;
+            position: absolute;
+            bottom : 10px;
+            right : 6px;
+            width: 30%;
+            height: 40%;
+            border-radius: 30px;
+          }
+
+        #hidden_btn {
+            position: absolute;
+            bottom : 50px;
+            left : 50%;
+            transform : translate(-50%);
+            padding: 0.1rem 38%%;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #2a5555;
+            background-color: #fff;
+            border-color: #2a5555;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 2px solid #2a5555;
+            font-size: 1.5rem;
+            border-radius: 0.4rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            /* 숨기기 */
+            z-index: -1;
+            opacity: 0;
+            }
+        .show {
+            opacity: 1;
+            z-index: 1000;
+            transition: all 0.5s;
+            }
+        .window {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            }     
+        .popup {
+            position : relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
+            border-radius: 0.25rem;
+
+            /* 임시 지정 */
+            width: 60%;
+            height: 85%;
+            }        
+        .show .popup {
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+            }
+        #popanswer{
+            position : relative;
+            top : 45%;
+            width : 95%;
+            height : 83%;
+            border-radius: 0.4rem;
+            }
+        #close{
+            position : relative;
+            bottom : -8%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+            }
+
+
+    </style>
+</head>
+
+<body>
+<!-- 상단바를 표시할 div 입니다 -->
+<nav class="Hyemin">
+    <h2 id = 'hello' style = 'text-align: center;'>이 곳을 맞춰볼까요?</h2>
+    <button class="gohome custombtn Hyemin"  id="submitButton" type="botton" onclick="location.href='/map/home'"> 홈으로 </button></div>
+</nav>
+
+<!-- 로드뷰를 표시할 div 입니다 -->
+<div  id="roadview" style="width:100%;height:750px;border-radius: 5px"></div>
+
+<!-- 미니맵를 표시할 div 입니다 -->
+<div id="minimap" class = 'minimap'></div>
+
+<p><em>지도를 클릭해주세요!</em></p> <!-- 나중에 수정 div-->
+
+<!-- 글자 출력중인 div-->
+<div id="clickLatlng" ></div> <!-- 나중에 지우기 div-->
+
+<!-- 제출 후 팝업 띄우는 div-->
+<div>
+    <button id="show" style = 'visibility : hidden'> 제출하기 </button>
+    <div class="background">
+        <div class="window">
+            <div class="popup">
+                <p id = 'dist' class = 'gmarket'></p>
+                <div class="popup" id = 'popanswer'></div>
+                <button id="close" class = 'gmarket custombtn'>점수 확인</button>
+            </div>
+            
+            <div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- API키 인증-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=82cdfefd8c371330aa8531c5f89338c6"></script>
+<script>
+document.body.classList.add("reveal");
+let latlong = JSON.parse("{{ latlong_json|escapejs }}");     //view에서 넘어논 json데이터 js 변수로 선언
+
+// * * * * * * * * * * * * * * * * * * 로드뷰 JS  * * * * * * * * * * * * * * * * * * * * * *
+var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+var roadview = new kakao.maps.Roadview(roadviewContainer);   //로드뷰 객체
+var roadviewClient = new kakao.maps.RoadviewClient();        //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+var position = new kakao.maps.LatLng(latlong['lat'], latlong['long']);  // 넘어온 Json데이터에서 위,경도 추출
+
+// 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+    roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+});
+
+
+// * * * * * * * * * * * * * * * * * * 미니맵 JS * * * * * * * * * * * * * * * * * * * * * *
+var mapContainer = document.getElementById('minimap'), // 좌측하단 미니맵을 표시할 div 
+mapOption = { 
+    center: new kakao.maps.LatLng(35.87152628630865, 128.60172139697093), // 지도의 중심좌표
+    level: 3                                                              // 지도의 확대 레벨
+};
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+var minimap = document.getElementById('minimap');   //html에서 미니맵 객체 가져와서
+minimap.style.width = '20%'                         // 일단 가로 20%
+minimap.style.height = '26%'                        //      세로 26% 설정 (이렇게 안하면 마커 이상하게 찍힘)
+minimap.style.opacity = '0.7'
+
+var marker = new kakao.maps.Marker({     // 지도를 클릭한 위치에 표출할 마커입니다
+    position: map.getCenter()            // 지도 중심좌표에 마커를 생성합니다 
+}); 
+marker.setMap(map);                      // 지도에 마커를 표시합니다
+
+kakao.maps.event.addListener(map, 'mouseout', function() { // 미니맵에서 마우스가 나가면 미니맵 작아지는 함수
+    minimap.style.width = '20%'
+    minimap.style.height = '26%'
+    minimap.style.opacity = '0.8'
+});
+kakao.maps.event.addListener(map, 'mouseover', function() {// 미니맵에서 마우스 올리면 미니맵 커지는 함수
+    minimap.style.width = '30%'
+    minimap.style.height = '40%'
+    minimap.style.opacity = '1'
+});
+
+// 지도에 클릭 이벤트를 등록합니다
+// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+// 클릭으로 생기는 정보를 함수 외부에서도 쓰기위해 미리 전역변수 선언
+var latlng;
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {  
+    // 클릭한 위도, 경도 정보를 가져옵니다 
+    latlng = mouseEvent.latLng; 
+    // 마커 위치를 클릭한 위치로 옮깁니다
+    marker.setPosition(latlng);
+
+    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, '; //나중에 지우기
+    message += '경도는 ' + latlng.getLng() + ' 입니다';
+    
+    var resultDiv = document.getElementById('clickLatlng');  //나중에 지우기
+    resultDiv.innerHTML = message;
+
+    let goanswer = document.getElementById('show'); // 미니맵을 클릭하면 정답 제출 버튼이 활성화
+    goanswer.style.visibility = 'visible';
+});
+
+
+// * * * * * * * * * * * * * * * * * * 팝업 지도 JS * * * * * * * * * * * * * * * * * * * * * *
+// 제출하기 버튼을 눌러야 생기는 지도를 위한 함수
+function show() {
+    document.querySelector(".background").className = "background show";
+
+    var mapContainer2 = document.getElementById('popanswer'), // 지도를 표시할 div 
+    mapOption2 = { 
+        center: new kakao.maps.LatLng(latlng.getLat(), latlng.getLng()), // 지도의 중심좌표
+        level: 4 // 지도의 확대 레벨
+    };
+    // 팝업 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var ansmap = new kakao.maps.Map(mapContainer2, mapOption2); 
+
+
+
+
+    ansmap.setLevel(7, {  // 정답 제출 후 화면 커지는 효과
+        animate: {duration : 1000},
+        anchor: new kakao.maps.LatLng(latlng.getLat(), latlng.getLng())
+    });
+
+    setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
+        var moveLatLon = new kakao.maps.LatLng(latlong['lat'], latlong['long']);
+        ansmap.panTo(moveLatLon);
+    }, 1200);
+
+
+
+
+    // 팝업 지도에 표시될 **정답위치** 마커
+    let ansmarker_src = "{% static 'assets/img/redmarker.png' %}"
+        ansmarker_size = new kakao.maps.Size(29, 33)
+        ansmarker_option = {offset: new kakao.maps.Point(14.5, 33)};
+    var ansmarker_image = new kakao.maps.MarkerImage(ansmarker_src, ansmarker_size, ansmarker_option),
+        markerPosition = new kakao.maps.LatLng(latlong['lat'], latlong['long']); // 마커가 표시될 위치입니다
+    var ansmarker = new kakao.maps.Marker({
+        position: markerPosition, 
+        image: ansmarker_image // 마커이미지 설정 
+    });
+    ansmarker.setMap(ansmap);
+
+
+
+    // 팝업 지도에 표시될 **제출위치** 마커
+    var submitmarkerPosition  = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng());
+    var submit_marker = new kakao.maps.Marker({
+        position: submitmarkerPosition
+    });
+    submit_marker.setMap(ansmap);    
+
+    // 팝업 지도에 표시될 폴리곤 라인
+    // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+    var linePath = [
+    new kakao.maps.LatLng(latlong['lat'], latlong['long']),
+    new kakao.maps.LatLng(latlng.getLat(), latlng.getLng())
+    ];
+
+    var polyline = new kakao.maps.Polyline({
+        path: linePath, // 선을 구성하는 좌표배열 입니다
+        strokeWeight: 5, // 선의 두께 입니다
+        strokeColor: '#FFAE00', // 선의 색깔입니다
+        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+        strokeStyle: 'solid' // 선의 스타일입니다
+    });
+
+    polyline.setMap(ansmap);  
+    
+    //두 좌표 사이의 거리 출력하기
+    var dist = polyline.getLength(); 
+    if (dist < 1000) {
+        document.getElementById("dist").innerHTML='정답! 거리는 : ' + Math.round(dist) + '미터 입니다' + '<br> 점수는 ' + (1000 - Math.round(dist)) + '입니다!';
+    }
+    else {
+        document.getElementById("dist").innerHTML='아쉬워요! 거리는 : ' + Math.round(dist) + '미터 입니다';
+    }
+    
+    //두 좌표가 보이도록 지도를 조정함
+    var points = [
+    new kakao.maps.LatLng(latlong['lat'], latlong['long']),
+    new kakao.maps.LatLng(latlng.getLat(), latlng.getLng())
+    ];
+    // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+    var bounds = new kakao.maps.LatLngBounds();    
+    var i
+    for (i = 0; i < points.length; i++) {        
+        // LatLngBounds 객체에 좌표를 추가합니다
+        bounds.extend(points[i]);
+    }
+    setTimeout(function(){
+        ansmap.setBounds(bounds);
+    }, 2500);
+
+}
+
+// 점수확인 버튼 클릭시 페이지 이동
+function close() {
+    var point = {'first' : (1000 - Math.round(dist))}
+    
+    document.querySelector(".background").className = "background";
+    window.location.href = '/map/quizend'
+}
+
+document.querySelector("#show").addEventListener("click", show);
+document.querySelector("#close").addEventListener("click", close);
+
+</script>
+
+
+
+</body>
+</html>
