@@ -1,8 +1,17 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-# View에 Model(Post 게시글) 가져오기
+from django.shortcuts import render,redirect
 from .models import Post
 
+def show(request):
+    # 게시물 목록 출력
+    postList = Post.objects.order_by('-date')
+    context = {'postList': postList}
+    return render(request, 'placeboard/list.html', context)
+
+def detail(request, postId):
+    # 상세보기
+    post = Post.objects.get(id=postId)
+    context = {'post': post}
+    return render(request, 'placeboard/detail.html', context)
 
 
 # blog.html 페이지를 부르는 blog 함수
