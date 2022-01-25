@@ -35,6 +35,14 @@
             margin: 30px;
             padding: 10px 10px;
         }
+        .errorForm{
+            border : none;
+            margin: 20px;
+            padding: 10px 10px;
+            font-size:15px;
+            color:red;
+            text-align: left;
+        }
           
         .id {
             width: 100%;
@@ -87,17 +95,26 @@
 <body>
     <form method="POST" class = "loginForm">
         {% csrf_token %}
-        <h2>LOGIN</h2>
+        <h2>SIGNUP</h2>
         <div class = "idForm">
             <input name="username" class = "id" type="text" placeholder = "ID">
             <br>
         </div>
         <div class = "passForm">
-            <input name="password" class = "pw" type="password" placeholder = "PassWord">
+            <input name="password1" class = "pw" type="password" placeholder = "PassWord">
             <br>
         </div>
-        <br>
-        <input type="submit" class="btn" value="LOGIN">
+        <div class = "passForm">
+            <input name="password2" class = "pw" type="password" placeholder = "Repeat PassWord">
+            <br>
+        </div>
+        <div class = "idForm">
+            <input name="email" class = "id" type="email" placeholder = "Email">
+        </div>
+        <div class = "errorForm">
+            비밀번호가 일치하지 않습니다.
+        </div>
+        <input type="submit" class="btn" value="SIGN UP">
     </form>
 </div>
 </body>

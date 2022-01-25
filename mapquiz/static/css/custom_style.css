@@ -116,7 +116,7 @@ body.hidden {
     }
 #popanswer{
     position : relative;
-    top : 45%;
+    top : 43%;
     width : 95%;
     height : 83%;
     border-radius: 0.4rem;
@@ -152,6 +152,7 @@ font-size: 1.5rem;
 border-radius: 0.25rem;
 transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .custombtn2 {
     display: inline-block;
     font-weight: 400;
@@ -167,7 +168,9 @@ transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-
     font-size: 1.5rem;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
+}
+    
+
 .custombtn:hover {
 color: #fff;
 background-color: #244848;
@@ -180,11 +183,18 @@ position : absolute;
 top : 20px;
 right : 55px;
 background-color: #fff;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 0;
+height: 4rem;
+width: 4rem;
+border-radius: 100rem;
 }
-.login:hover{
+/* .login:hover{
 
 background-color: #4e4e4e;
-}
+} */
 #user_info{
     position : absolute;
     display:inline-block;
@@ -199,12 +209,94 @@ background-color: #4e4e4e;
     right : 10px;
     background-color: #fff;
     border-radius: 20px;
-    
 }
+#logout {
+    position : absolute;
+    display:inline-block;
+    width : 100px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    line-height: 23px;
+    top : 160px;
+    right : 32px;
+    background-color: #949494fb;
+    border-radius: 20px;
+}
+
 
 @keyframes blink-effect { 50% { opacity: 0.5; }}
 .blink { 
     animation: blink-effect 1s step-end infinite;
-    
 }
 
+#help {
+    position: fixed;
+    top : 25px;
+    left : 25px;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border-style: none;
+    font-size: 15px;
+    vertical-align: top;
+    text-align: center;
+}
+#score{
+    position: absolute;
+    display : inline-block;
+    top : 10%;
+    left : 7%;
+    width: 40%;
+    height: 80%;
+    background-color : #fff;
+    }
+#rank{
+    position: absolute;
+    display : inline-block;
+    top : 10%;
+    left : 53%;
+    width: 40%;
+
+    height: 80%;
+    background-color : #fff;
+    }
+#bar1{
+    position: relative;
+    display : inline-block;
+    width: 90%;
+    height: 30px;
+    background-color : #bddcb8;
+    top : 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    }
+#bar2{
+    position: relative;
+    display : inline-block;
+    width: 0%;
+    height: 30px;
+    background-color : #36602f;
+    top : 0%;
+    left: 0%;
+    transition : 2s;
+    }
+#point{
+    position: relative;
+    top : -15px;
+    vertical-align: middle;
+    font-size: 1.5rem;
+}
+#user{
+    position: relative;
+
+    width: 45%;
+    height: 45%;
+    border-radius: 50%;
+    background-color : #36602f;
+    top : 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

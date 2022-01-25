@@ -35,7 +35,16 @@
             margin: 30px;
             padding: 10px 10px;
         }
-          
+
+        .errorForm{
+            border : none;
+            margin: 20px;
+            padding: 10px 10px;
+            font-size:15px;
+            color:red;
+            text-align: left;
+        }
+
         .id {
             width: 100%;
             border:none;
@@ -96,7 +105,9 @@
             <input name="password" class = "pw" type="password" placeholder = "PassWord">
             <br>
         </div>
-        <br>
+        <div class = "errorForm">
+            아이디 혹은 비밀번호를 확인해주세요.
+        </div>          
         <input type="submit" class="btn" value="LOGIN">
     </form>
 </div>
