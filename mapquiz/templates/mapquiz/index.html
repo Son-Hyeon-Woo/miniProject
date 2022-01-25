@@ -35,7 +35,12 @@
                   {% else %}
                     <button class="goquiz custombtn Hyemin" id="submitButton" type="botton" onclick=""> 먼저 로그인 해주세요! </button></div>
                   {% endif %}
-
+                  <p><br></p>
+                  {% if user.is_authenticated %}
+                  <button class="custombtn2 Hyemin" id="submitButton" type="botton" onclick="location.href='/pb/blog'" > 여러분의 여행지를 소개해 주세요 </button></div>
+                  {% else %}
+                  <button class="custombtn2 Hyemin" id="submitButton" type="botton" onclick=""> 먼저 로그인 해주세요! </button></div>
+                  {% endif %}
                   <!-- to get an API token!-->
               </div>
           </div>
