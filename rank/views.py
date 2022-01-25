@@ -12,3 +12,6 @@ def near_food(request):
 def near_place(request):
     
     return render(request, 'rank/near_place.html')
+
+def ranking(request):
+    return render(request, 'rank/ranking.html')
