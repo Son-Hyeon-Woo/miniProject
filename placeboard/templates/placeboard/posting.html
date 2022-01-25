@@ -1,3 +1,4 @@
+{% load static %}
 <html>
     <head>
         <title>Posting!</title>
@@ -6,26 +7,29 @@
         <h1>게시글 개별 페이지입니다</h1>
         <p>{{post.postname}}</p><p>{{post.date}}</p>
         <p>{{post.contents}}</p>
-        
-        {% for post in page_obj %}
-        <div class="item" style="padding-top: 15px;">
-          <p style="text-align: left; font-size: 0.8em;">
-            <img src="{{ post.mainphoto.url }}" style="width: 180px; height: 150px;" alt=""> <br>
-            <span style="font-weight: bold;">{{ post.postname }}</span> <br>
-            작성자: {{ post.writer }} <br>
-            작성일: {{ post.date|date:"Y-m-d" }} <br>
-            {% comment %} 조회수: {{ post.hit }} {% endcomment %}
-        </p>
-        </div>
-      {% endfor %}
-      
         <!-- 이미지 보여주기 -->
         {% if post.mainphoto %}
             <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="600">
             <br>
         {% endif %}
-        <a href="remove/">삭제</a>
         
+        <button id = 'help' class = 'gmarket'>삭제</button>  
+            <div class="background">
+              <div class="window">
+                  <div class="popup">
+                      <p id = 'dist' class = 'gmarket'></p>
+                      <div class="popup" id = 'popanswer' style = 'color : #000'>
+                        
+                        
+                        <p class="mb-5 Hyemin">  삭제하시겠습니까?</p>
+                        <a href="remove/">삭제</a>
+                        
+                      </div>
+                        
+                      <button id="close" class = 'gmarket custombtn' style = 'bottom : -10%'>닫기</button>
+                  </div>    
+              </div>
+            </div>
         <a href="{% url 'placeboard:blog' %}">목록</a>  
     </body>
 </html>

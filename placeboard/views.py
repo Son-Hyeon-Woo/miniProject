@@ -4,8 +4,9 @@ from .models import Post
 from config import settings
 import os
 from .forms import FileUploadForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 # blog.html 페이지를 부르는 blog 함수
 def blog(request):
      # 모든 Post를 가져와 postlist에 저장합니다
@@ -38,31 +39,6 @@ def new_post(request):
             'fileuploadForm': fileuploadForm,
         }
         return render(request, 'placeboard/new_post.html', context)
-#게시글 작성 페이지
-# def new_post(request):
-#     if request.method == 'POST':
-#         mainphoto = request.FILES.get('mainphoto')
-
-#         if mainphoto:
-#             with open('media/%s' % mainphoto.name, 'wb') as file:
-#                 for chunk in mainphoto.chunks():
-#                     file.write(chunk)
-
-#             new_article=Post.objects.create(
-#                 postname=request.POST['postname'],
-#                 contents=request.POST['contents'],
-#                 mainphoto=mainphoto.name,
-#                 # date=request.POST['date'],
-#             )
-#         else:
-#             new_article=Post.objects.create(
-#                 postname=request.POST['postname'],
-#                 contents=request.POST['contents'],
-#                 mainphoto=''
-#                 # date=request.POST['date'],
-#             )
-#         return redirect('/pb/blog')
-#     return render(request, 'placeboard/new_post.html')
 
 ##게시글 삭제
 def remove_post(request, pk):

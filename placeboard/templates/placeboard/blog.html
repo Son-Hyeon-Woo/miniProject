@@ -29,8 +29,7 @@
           <div class="masthead-content text-white">
               <div class="container-fluid px-4 px-lg-0">
                   <h1 class="Hyemin italic">게시판 페이지입니다</h1>
-                  {% comment %} <!-- 게시판(postlist)의 게시글(list)을 하나씩 보여줍니다 -->
-                  <!-- {%%} 내부엔 파이썬이 사용됩니다 --> {% endcomment %}
+                 
                   <table>
                     <thead>
                       <tr class="text-center">
@@ -43,15 +42,7 @@
                   </thead>
                   <tbody>
                       {% if postlist %}
-                       {% comment %} {% for post in postlist %}
-                      <tr class="text-center">
-                          <td>{{ post.id }}</td>
-                          <td>{{ post.postname|truncatechars:30 }}</td>
-                          <td>{{ post.writer }}</td>
-                          <td>{{ post.date|date:'Y. m. d' }}</td>
-                          <td>{{ post.hits }}</td>
-                      </tr>
-                      {% endfor %}  {% endcomment %}
+                      
                   {% for list in postlist %}
                       <ul>
                         <li><a href="{{list.pk}}/">{{list.postname}}</a></li>
