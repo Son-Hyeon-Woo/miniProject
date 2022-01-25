@@ -1,10 +1,10 @@
 from platform import java_ver
 from django.shortcuts import render
-from django.http import HttpResponse,JsonResponse
 from .models import Place
 import random, json
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def quiz(request):
     place_list = Place.objects.all()
     num = random.randrange(0,len(place_list))
