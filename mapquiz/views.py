@@ -10,6 +10,7 @@ def quiz(request):
     num = random.randrange(0,len(place_list))
     answer = place_list[num]
     latlong = {
+        'name' : answer.place_name,
         'lat' : answer.place_lat,
         'long' : answer.place_long
     }
