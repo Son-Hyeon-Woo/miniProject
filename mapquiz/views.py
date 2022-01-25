@@ -5,15 +5,14 @@ from .models import Place
 import random, json
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-import rank
-@login_required
 
+@login_required
 def quiz(request):
     place_list = Place.objects.all()
     num = random.randrange(0,len(place_list))
 
     answer = place_list[num]
-    rank.near_food(request,answer)
+
     latlong = {
         'ID': answer.place_id,
         'name' : answer.place_name,

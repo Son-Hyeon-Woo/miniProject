@@ -5,4 +5,5 @@ class Member(models.Model):
     user_pw = models.CharField(max_length=50)
     user_name = models.CharField(max_length=50)
     date_joined = models.DateTimeField()
+    user_point = models.IntegerField(default=None, null=True)
 # Create your models here.
