@@ -7,12 +7,12 @@ def finish(request):
     
     return render(request, 'rank/finish.html')
 
-def near_food(request):
+def near_food(request,now):
     around_place=Around_place.objects.all()
     result=[]
     
     for c in around_place:
-        if c.id_p==4:   #4==선택한 place의 id
+        if c.id_p==now.place_id:   #4==선택한 place의 id
             result.append(c.name)
 
     return render(request, 'rank/near_food.html', { 'data': result })
