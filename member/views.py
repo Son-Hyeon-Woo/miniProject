@@ -19,7 +19,7 @@ def signup(request):
             ) 
             auth.login(request, user) 
             return redirect('/') 
-        return render(request, 'signup.html') 
+        return render(request, 'signuperror.html') 
     return render(request, 'signup.html')
 #로그인
 def login(request):
