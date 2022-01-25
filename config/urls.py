@@ -24,5 +24,6 @@ urlpatterns = [
     path('member/', include('member.urls')),
     path('rank/', include('rank.urls')),
     path('help/', include('help.urls')),
+    path('mypage/', include('mypage.urls')),
 
 ]
