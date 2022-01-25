@@ -4,11 +4,10 @@ from django.shortcuts import render
 from .models import Place
 import random, json
 from django.contrib.auth.decorators import login_required
-
+from django.http import JsonResponse
 @login_required
 
 def quiz(request):
-
     place_list = Place.objects.all()
     num = random.randrange(0,len(place_list))
 

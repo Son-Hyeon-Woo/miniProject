@@ -1,6 +1,8 @@
 from platform import java_ver
 from django.shortcuts import render
 from rank.models import Around_place
+
+
 def finish(request):
     
     return render(request, 'rank/finish.html')

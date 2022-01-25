@@ -27,7 +27,34 @@
       .Hyemin{ font-family: 'IM_Hyemin-Bold', normal; }
       .italic{ font-style: italic }
 
-      
+      .goquiz button {
+        font-size: 0.85rem;
+        font-weight: 200;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: calc(1rem + 2px);
+      }
+      .custombtn {
+        display: inline-block;
+        font-weight: 200;
+        line-height: 1.5;
+        color: #fff;
+        background-color: #2a5555;
+        border-color: #2a5555;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        padding: 0.4rem 10rem;
+        font-size: 1.5rem;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+      .custombtn:hover {
+        color: #fff;
+        background-color: #244848;
+        border-color: #224444;
+      }
       }
 </style>
 </head>
@@ -41,6 +68,7 @@
                 
                 {% for item in data %}
                     <h3 class="Hyemin italic"> {{ item }}</h3>
+                    {% comment %} <button class=" custombtn Hyemin" id="submitButton" type="botton" onclick="location.href='/map/quiz'">  {{ item }} </button></div> {% endcomment %}
                 {% endfor %}
               
             </div>
@@ -48,9 +76,4 @@
     </div> 
     
     
-    {% comment %} <p class="Hyemin italic" >여기 맛집<P>
-        {% for item in data %}
-        <h3 class="Hyemin italic">{{ item.id }} / {{ item.name }}</h3>
-        {% endfor %} {% endcomment %}
-       
 </body>    
