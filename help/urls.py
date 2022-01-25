@@ -5,5 +5,5 @@ app_name = 'help'
 
 urlpatterns = [
     path('help/', views.help),
-
+    path('around/', views.around),
 ]
