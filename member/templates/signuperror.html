@@ -32,6 +32,14 @@
             margin: 30px;
             padding: 10px 10px;
         }
+        .errorForm{
+            border : none;
+            margin: 20px;
+            padding: 10px 10px;
+            font-size:15px;
+            color:red;
+            text-align: left;
+        }
           
         .id {
             width: 100%;
@@ -99,9 +107,10 @@
         </div>
         <div class = "idForm">
             <input name="email" class = "id" type="email" placeholder = "Email">
-            <br>
         </div>
-        <br>
+        <div class = "errorForm">
+            비밀번호가 일치하지 않습니다.
+        </div>
         <input type="submit" class="btn" value="SIGN UP">
     </form>
 </div>
