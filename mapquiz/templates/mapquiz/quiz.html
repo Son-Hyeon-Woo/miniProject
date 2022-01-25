@@ -21,11 +21,13 @@
             type="botton" 
             onclick="location.href='/map/home'"
             style = "padding: 0.4rem 1.5%;"> 홈으로 </button></div>
-    <a class="login btn gmarket" style = "background-color : #fff0"href="">
-        <img src="{% static 'assets/img/smile.png' %}" width=40px, height=40px>
+    <a class="login btn gmarket" 
+        style = "background-color : #50727272; top : 5px; right : 35px; height : 3.5rem; width : 3.5rem;"
+        href = "">
+        <img src="{% static 'assets/img/smile.png' %}" width=45px, height=45px>
         <a  id = 'user_info' 
             class = 'gmarket'
-            style = 'top : 25px; right : 100px; width : 200px;'> 다른 장소로 할래요! ->
+            style = 'top:25px; right : 100px; width : 200px;'> 다른 장소로 할래요! ->
         </a> 
     </a>
 </nav>
@@ -52,7 +54,7 @@
                 <div class="popup" id = 'popanswer'></div>
                 <button id="close" class = 'gmarket custombtn'>점수 확인</button>
             </div>
-            
+
             <div>
         </div>
     </div>
@@ -135,9 +137,6 @@ function show() {
     };
     // 팝업 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
     var ansmap = new kakao.maps.Map(mapContainer2, mapOption2); 
-
-
-
 
     ansmap.setLevel(7, {  // 정답 제출 후 화면 커지는 효과
         animate: {duration : 1000},

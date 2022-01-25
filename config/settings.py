@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'mapquiz',
     'bootstrap4',
     'placeboard',
-    'help',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

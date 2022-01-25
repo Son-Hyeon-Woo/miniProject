@@ -183,11 +183,18 @@ position : absolute;
 top : 20px;
 right : 55px;
 background-color: #fff;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 0;
+height: 4rem;
+width: 4rem;
+border-radius: 100rem;
 }
-.login:hover{
+/* .login:hover{
 
 background-color: #4e4e4e;
-}
+} */
 #user_info{
     position : absolute;
     display:inline-block;
@@ -202,12 +209,38 @@ background-color: #4e4e4e;
     right : 10px;
     background-color: #fff;
     border-radius: 20px;
-    
 }
+#logout {
+    position : absolute;
+    display:inline-block;
+    width : 100px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    line-height: 23px;
+    top : 160px;
+    right : 32px;
+    background-color: #949494fb;
+    border-radius: 20px;
+}
+
 
 @keyframes blink-effect { 50% { opacity: 0.5; }}
 .blink { 
     animation: blink-effect 1s step-end infinite;
-    
 }
 
+#help {
+    position: fixed;
+    top : 25px;
+    left : 25px;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border-style: none;
+    font-size: 15px;
+    vertical-align: top;
+    text-align: center;
+}
