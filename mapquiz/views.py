@@ -15,6 +15,7 @@ def quiz(request):
     answer = place_list[num]
     rank.near_food(request,answer)
     latlong = {
+        'ID': answer.place_id,
         'name' : answer.place_name,
         'lat' : answer.place_lat,
         'long' : answer.place_long

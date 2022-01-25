@@ -217,6 +217,7 @@ function show() {
 
     //점수를 로컬에 저장
     var point = {'first' : (1000 - Math.round(dist))}
+
     if (0 <= (1000 - Math.round(dist))) {
         localStorage.setItem("point", JSON.stringify(point));
     }   else {
@@ -225,6 +226,8 @@ function show() {
         }
 
     console.log(point);
+    let place_for =latlong['ID'];
+    localStorage.setItem("ID_near", JSON.stringify(place_for));
 }
 
 // 점수확인 버튼 클릭시 페이지 이동
