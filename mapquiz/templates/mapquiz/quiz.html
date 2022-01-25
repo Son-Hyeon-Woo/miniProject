@@ -192,7 +192,7 @@ function show() {
     //두 좌표 사이의 거리 출력하기
     dist = polyline.getLength(); 
     if (dist < 1000) {
-        document.getElementById("dist").innerHTML='정답! 거리는 : ' + Math.round(dist) + '미터 입니다' + '<br> 점수는 ' + (1000 - Math.round(dist)) + '입니다!';
+        document.getElementById("dist").innerHTML='정답! 거리는 : ' + Math.round(dist) + '미터 입니다';
     }
     else {
         document.getElementById("dist").innerHTML='아쉬워요! 거리는 : ' + Math.round(dist) + '미터 입니다';
