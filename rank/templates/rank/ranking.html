@@ -46,6 +46,7 @@
         .italic{ font-style: italic }
         .custombtn {
             display: inline-block;
+            width: 150px;
             font-weight: 400;
             line-height: 1.2;
             color: #fff;
@@ -127,6 +128,17 @@
         .setbtn1{
             padding :20px;
         }
+        .fsize{
+            font-family: 'IM_Hyemin-Bold', normal;
+            font-weight: 400;
+            line-height: 1.2;
+            font-size: 1.5rem;
+        }
+        .table{
+            border-collapse : collapse;
+            border: 1px solid #bddcb8;
+            margin-left:auto; margin-right:auto; margin-top:8%
+        }
     </style>
 </head>
 
@@ -139,77 +151,77 @@
         </div>
 
         <div id = user> 아이디랑 이름</div>
-            <div style="padding: 10%; padding-top:200px; float:left" >
+            <div style="padding: 4.3%; padding-top:200px; float:left" >
                 <button class = custombtn onclick="location.href='http://127.0.0.1:8000/map/home/'">홈으로</button >
             </div>
             <div style="padding-top:200px; float:left">
                 <button class = custombtn onclick="location.href='http://127.0.0.1:8000/map/quiz/'">다시 하기</button >
             </div>
-            <div style="padding: 10%; padding-top:200px; float:left">
+            <div style="padding: 4.3%; padding-top:200px; float:left">
                 <button class = custombtn onclick="location.href='http://127.0.0.1:8000/rank/near_place/'">근처 여행지<br>보기</button >
             </div>
             <div style="padding-top:200px; float:left">
                 <button class = custombtn onclick="location.href='http://127.0.0.1:8000/rank/near_food/'">근처 맛집<br>보기</button >
             </div>
     </div> 
-    
-    <div id = 'rank'>
+    <div border:1px solid #ffebb5; background-color:#ffebb5; border-radius:16px;></div>
+    <div class=fsize id = 'rank'>
         <h1 align = 'center'>RANKING</h2>
-        <table table border="1" bordercolor="black" width ="500" height="300" style="margin : 20%;">
-            <colgroup>
-                <col width="20%">
-                <col width="25%">
-                <col width="30%">
-                <col width="25%">
-            </colgroup>
-
-            <thead>
-                <tr style="height: 62px; background-color : #bddcb8;">
-                <th>등수</th>
-                <th>이름</th>
-                <th>시간</th>
-                <th>점수</th>
-                </tr>
-            </thead>
-
-            <tbody class="u-table-body" align = 'center'>
-                <tr style="height: 70px;">
-                <td>1등</td>
-                <td>손현우</td>
-                <td>30m07s</td>
-                <td>10점</td>
-                </tr>
-
-                <tr style="height: 70px;">
-                <td>2등</td>
-                <td>강민수</td>
-                <td> 30m07s</td>
-                <td>9점</td>
-                </tr>
-
-                <tr style="height: 70px;">
-                <td>3등</td>
-                <td>배경용</td>
-                <td> 30m07s</td>
-                <td> 8점</td>
-                </tr>
-
-                <tr style="height: 70px;">
-                <td >4등</td>
-                <td >김효정</td>
-                <td> 30m07s</td>
-                <td> 7점</td>
-                </tr>
-
-                <tr style="height: 70px;">
-                    <td >5등</td>
-                    <td >윤지민</td>
-                    <td> 31m07s</td>
-                    <td> 1점</td>
+            <table class=table border=1px solid #bddcb8; border-radius :16px; width =90% height=70%>
+                <colgroup>
+                    <col width="20%">
+                    <col width="25%">
+                    <col width="30%">
+                    <col width="25%">
+                </colgroup>
+    
+                <thead>
+                    <tr style="height: 62px; background-color : #bddcb8;">
+                    <th>등수</th>
+                    <th>이름</th>
+                    <th>시간</th>
+                    <th>점수</th>
                     </tr>
-                    
-            </tbody>
-        </table>
+                </thead>
+    
+                <tbody align = 'center'>
+                    <tr style="height: 70px;">
+                    <td>🥇1등</td>
+                    <td>손현우</td>
+                    <td>30m07s</td>
+                    <td>10점</td>
+                    </tr>
+    
+                    <tr style="height: 70px;">
+                    <td>🥈2등</td>
+                    <td>강민수</td>
+                    <td> 30m07s</td>
+                    <td>9점</td>
+                    </tr>
+    
+                    <tr style="height: 70px;">
+                    <td>🥉3등</td>
+                    <td>배경용</td>
+                    <td> 30m07s</td>
+                    <td> 8점</td>
+                    </tr>
+    
+                    <tr style="height: 70px;">
+                    <td >4등</td>
+                    <td >김효정</td>
+                    <td> 30m07s</td>
+                    <td> 7점</td>
+                    </tr>
+    
+                    <tr style="height: 70px;">
+                        <td >5등</td>
+                        <td >윤지민</td>
+                        <td> 31m07s</td>
+                        <td> 1점</td>
+                        </tr>
+                        
+                </tbody>
+            </table>
     </div>
     
 
