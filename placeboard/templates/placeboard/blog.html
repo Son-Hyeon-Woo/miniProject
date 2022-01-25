@@ -76,6 +76,7 @@
       {% comment %} <script src="{% static 'js/index_script.js'%}"></script> {% endcomment %}
 
       <script>
+        document.body.classList.add("reveal");
         let sub_bnt = document.getElementById("submitButton");
         sub_bnt.addEventListener('click', warning);
         function warning() {
