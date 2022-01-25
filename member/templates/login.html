@@ -2,32 +2,99 @@
 <head>
     <meta charset="utf-8">
     <style>
-        .wrapper {
-            border: 1px solid black;
-            width: 400px;
-            padding: 30px;
-            box-sizing: border-box;
-            margin: auto;
-            weight: bold;
+        .loginForm {
+            position:absolute;
+            width:350px;
+            height:500px;
+            padding: 30px, 20px;
+            background-color:#FFFFFF;
+            text-align:center;
+            top:40%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            border: 2px solid black;
+            border-radius: 15px;
+        }
+          
+        .loginForm h2{
+            text-align: center;
+            margin: 30px;
+        }
+          
+        .idForm{
+            border-bottom: 2px solid #adadad;
+            margin: 30px;
+            padding: 10px 10px;
+        }
+          
+        .passForm{
+            border-bottom: 2px solid #adadad;
+            margin: 30px;
+            padding: 10px 10px;
+        }
+          
+        .id {
+            width: 100%;
+            border:none;
+            outline:none;
+            color: #636e72;
+            font-size:16px;
+            height:25px;
+            background: none;
+        }
+          
+        .pw {
+            width: 100%;
+            border:none;
+            outline:none;
+            color: #636e72;
+            font-size:16px;
+            height:25px;
+            background: none;
+        }
+          
+        .btn {
+            position:relative;
+            left:40%;
+            transform: translateX(-50%);
+            margin-bottom: 40px;
+            width:80%;
+            height:40px;
+            background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+            background-position: left;
+            background-size: 200%;
+            color:white;
+            font-weight: bold;
+            border:none;
+            cursor:pointer;
+            transition: 0.4s;
+            display:inline;
+        }
+          
+        .btn:hover {
+            background-position: right;
+        }
+          
+        .bottomText {
+            text-align: center;
         }
     </style>
 </head>
 
-<div class="wrapper">
-    <div style="text-align: center;">
-        <h1>로그인</h1>
-        <form method="POST">
-            {% csrf_token %}
-            아이디:
+<body>
+    <form method="POST" class = "loginForm">
+        {% csrf_token %}
+        <h2>LOGIN</h2>
+        <div class = "idForm">
+            <input name="username" class = "id" type="text" placeholder = "ID">
             <br>
-            <input name="username" type="text">
+        </div>
+        <div class = "passForm">
+            <input name="password" class = "pw" type="password" placeholder = "PassWord">
             <br>
-            비밀번호:
-            <br>
-            <input name="password" type="password">
-            <br><br>
-            <input type="submit" class="btn btn-primary" value="Login">
-        </form>
-    </div>
+        </div>
+        <input type="submit" class="btn" value="LOGIN">
+    </form>
 </div>
+</body>
 {% endblock %}
