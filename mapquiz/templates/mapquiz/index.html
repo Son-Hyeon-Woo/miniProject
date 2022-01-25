@@ -63,6 +63,7 @@
       <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
       <script src="{% static 'js/scripts.js'%}"></script>
       <script>
+        document.body.classList.add("reveal");
         let sub_bnt = document.getElementById("submitButton");
         sub_bnt.addEventListener('click', warning);
         function warning() {
