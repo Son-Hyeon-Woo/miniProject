@@ -22,9 +22,13 @@
             onclick="location.href='/map/home'"
             style = "padding: 0.4rem 1.5%;"> 홈으로 </button></div>
     <a class="login btn gmarket" 
-       href="">
-        <img src="{% static 'assets/img/smile.png' %}" width=40px, height=40px>
-        <a id = 'user_info' class = 'gmarket'> {{ user.username }}</a> 
+        style = "background-color : #50727272; top : 5px; right : 35px; height : 3.5rem; width : 3.5rem;"
+        href = "">
+        <img src="{% static 'assets/img/smile.png' %}" width=45px, height=45px>
+        <a  id = 'user_info' 
+            class = 'gmarket'
+            style = 'top:25px; right : 100px; width : 200px;'> 다른 장소로 할래요! ->
+        </a> 
     </a>
 </nav>
 
@@ -34,14 +38,15 @@
 <!-- 미니맵를 표시할 div 입니다 -->
 <div id="minimap" class = 'minimap'></div>
 
-<p><em>지도를 클릭해주세요!</em></p> <!-- 나중에 수정 div-->
+<p id = where></p> <!-- 나중에 수정 div-->
 
 <!-- 글자 출력중인 div-->
-<div id="clickLatlng" ></div> <!-- 나중에 지우기 div-->
 
 <!-- 제출 후 팝업 띄우는 div-->
 <div>
-    <button id="show" style = 'visibility : hidden'> 제출하기 </button>
+    <button class = 'custombtn gmarket' 
+            id="show" 
+            style = 'visibility : hidden; position : relative; left : 25%; '> 제출하기 </button>
     <div class="background">
         <div class="window">
             <div class="popup">
@@ -49,7 +54,7 @@
                 <div class="popup" id = 'popanswer'></div>
                 <button id="close" class = 'gmarket custombtn'>점수 확인</button>
             </div>
-            
+
             <div>
         </div>
     </div>
@@ -61,7 +66,7 @@
 <script>
 document.body.classList.add("reveal");
 let latlong = JSON.parse("{{ latlong_json|escapejs }}");     //view에서 넘어논 json데이터 js 변수로 선언
-
+document.getElementById('where').innerHTML = latlong['name']
 // * * * * * * * * * * * * * * * * * * 로드뷰 JS  * * * * * * * * * * * * * * * * * * * * * *
 var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
 var roadview = new kakao.maps.Roadview(roadviewContainer);   //로드뷰 객체
@@ -113,11 +118,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     // 마커 위치를 클릭한 위치로 옮깁니다
     marker.setPosition(latlng);
 
-    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, '; //나중에 지우기
-    message += '경도는 ' + latlng.getLng() + ' 입니다';
-    
-    var resultDiv = document.getElementById('clickLatlng');  //나중에 지우기
-    resultDiv.innerHTML = message;
 
     let goanswer = document.getElementById('show'); // 미니맵을 클릭하면 정답 제출 버튼이 활성화
     goanswer.style.visibility = 'visible';
@@ -137,9 +137,6 @@ function show() {
     };
     // 팝업 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
     var ansmap = new kakao.maps.Map(mapContainer2, mapOption2); 
-
-
-
 
     ansmap.setLevel(7, {  // 정답 제출 후 화면 커지는 효과
         animate: {duration : 1000},
@@ -195,7 +192,7 @@ function show() {
     //두 좌표 사이의 거리 출력하기
     dist = polyline.getLength(); 
     if (dist < 1000) {
-        document.getElementById("dist").innerHTML='정답! 거리는 : ' + Math.round(dist) + '미터 입니다' + '<br> 점수는 ' + (1000 - Math.round(dist)) + '입니다!';
+        document.getElementById("dist").innerHTML='정답! 거리는 : ' + Math.round(dist) + '미터 입니다';
     }
     else {
         document.getElementById("dist").innerHTML='아쉬워요! 거리는 : ' + Math.round(dist) + '미터 입니다';
@@ -220,23 +217,24 @@ function show() {
 
     //점수를 로컬에 저장
     var point = {'first' : (1000 - Math.round(dist))}
+
     if (0 <= (1000 - Math.round(dist))) {
         localStorage.setItem("point", JSON.stringify(point));
-        console.log('true 실행');
     }   else {
             var point = {'first' : 0};
             localStorage.setItem("point", JSON.stringify(point));
-            console.log('flase 실행');
         }
 
     console.log(point);
+    let place_for =latlong['ID'];
+    localStorage.setItem("ID_near", JSON.stringify(place_for));
 }
 
 // 점수확인 버튼 클릭시 페이지 이동
 function close() {
 
     document.querySelector(".background").className = "background";
-    window.location.href = '/map/quizend'
+    window.location.href = '/rank/ranking'
 }
 
 document.querySelector("#show").addEventListener("click", show);

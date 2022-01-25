@@ -19,7 +19,7 @@ def signup(request):
             ) 
             auth.login(request, user) 
             return redirect('/') 
-        return render(request, 'signup.html') 
+        return render(request, 'signuperror.html') 
     return render(request, 'signup.html')
 #로그인
 def login(request):
@@ -31,7 +31,7 @@ def login(request):
             auth.login(request, user)
             return redirect('/')
         else:
-            return render(request, 'login.html', {'error': '아이디 혹은 비밀번호를 확인해주세요.'})
+            return render(request, 'loginerror.html')
     else:
         return render(request, 'login.html')
 
