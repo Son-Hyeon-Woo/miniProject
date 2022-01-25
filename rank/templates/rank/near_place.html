@@ -1,3 +1,60 @@
-<p>
+ {% comment %} <p>
     근처 장소 페이지입니다. 
-</p>
+</p>  {% endcomment %}
+
+
+{% load static %}
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+<title>주변 맛집</title>
+
+<style>
+    @font-face {
+        font-family: 'IM_Hyemin-Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+      .Hyemin{ font-family: 'IM_Hyemin-Bold', normal; }
+      .italic{ font-style: italic }
+
+      
+      }
+</style>
+</head>
+<body>
+    <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="{% static 'assets/mp4/bg.mp4' %%}"  type="video/mp4" /></video>
+    <div class="masthead"> 
+        <div class="masthead-content text-white">
+            
+            <div class="container-fluid px-4 px-lg-0">
+                <h1 class="mb-5 Hyemin">주변 가볼만한 곳</h1>
+                
+                {% for item in data %}
+                    <h3 class="Hyemin italic"> {{ item }}</h3>
+                {% endfor %}
+              
+            </div>
+        </div>
+    </div> 
+    
+    
+    {% comment %} <p class="Hyemin italic" >여기 맛집<P>
+        {% for item in data %}
+        <h3 class="Hyemin italic">{{ item.id }} / {{ item.name }}</h3>
+        {% endfor %} {% endcomment %}
+       
+</body>         
