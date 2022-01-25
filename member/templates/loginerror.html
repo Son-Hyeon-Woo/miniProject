@@ -1,0 +1,112 @@
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <style>
+        .loginForm {
+            position:absolute;
+            width:350px;
+            height:500px;
+            padding: 30px, 20px;
+            background-color:#FFFFFF;
+            text-align:center;
+            top:40%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            border: 2px solid black;
+            border-radius: 15px;
+        }
+          
+        .loginForm h2{
+            text-align: center;
+            margin: 30px;
+        }
+          
+        .idForm{
+            border-bottom: 2px solid #adadad;
+            margin: 30px;
+            padding: 10px 10px;
+        }
+          
+        .passForm{
+            border-bottom: 2px solid #adadad;
+            margin: 30px;
+            padding: 10px 10px;
+        }
+
+        .errorForm{
+            border : none;
+            margin: 20px;
+            padding: 10px 10px;
+            font-size:15px;
+            color:red;
+            text-align: left;
+        }
+
+        .id {
+            width: 100%;
+            border:none;
+            outline:none;
+            color: #636e72;
+            font-size:16px;
+            height:25px;
+            background: none;
+        }
+          
+        .pw {
+            width: 100%;
+            border:none;
+            outline:none;
+            color: #636e72;
+            font-size:16px;
+            height:25px;
+            background: none;
+        }
+          
+        .btn {
+            position:relative;
+            left:40%;
+            transform: translateX(-50%);
+            margin-bottom: 40px;
+            width:80%;
+            height:40px;
+            background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+            background-position: left;
+            background-size: 200%;
+            color:white;
+            font-weight: bold;
+            border:none;
+            cursor:pointer;
+            transition: 0.4s;
+            display:inline;
+        }
+          
+        .btn:hover {
+            background-position: right;
+        }
+          
+        .bottomText {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="POST" class = "loginForm">
+        {% csrf_token %}
+        <h2>LOGIN</h2>
+        <div class = "idForm">
+            <input name="username" class = "id" type="text" placeholder = "ID">
+            <br>
+        </div>
+        <div class = "passForm">
+            <input name="password" class = "pw" type="password" placeholder = "PassWord">
+            <br>
+        </div>
+        <div class = "errorForm">
+            아이디 혹은 비밀번호를 확인해주세요.
+        </div>          
+        <input type="submit" class="btn" value="LOGIN">
+    </form>
+</div>
+</body>
+{% endblock %}
