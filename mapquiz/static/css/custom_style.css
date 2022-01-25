@@ -76,4 +76,12 @@ background-color: #4e4e4e;
     right : 10px;
     background-color: #fff;
     border-radius: 20px;
+    
 }
+
+@keyframes blink-effect { 50% { opacity: 0.5; }}
+.blink { 
+    animation: blink-effect 1s step-end infinite;
+    
+}
+
