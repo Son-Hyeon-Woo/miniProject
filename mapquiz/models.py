@@ -11,9 +11,14 @@ class Place(models.Model):
     def __str__(self) -> str:
         return self.place_name
     
-    class Meta:
-        db_table = 'place'
-        app_label = 'mapquiz'
-        managed = False
+class QuizLog(models.Model):
+
+    user_id = CharField(max_length=100, null=True)
+    play_time = IntegerField(null=True, default=0)
+    point = IntegerField(default=0)
+    
+    def __str__(self) -> str:
+        return self.user_id
+    
 
 # Create your models here.
