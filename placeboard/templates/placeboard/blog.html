@@ -43,7 +43,7 @@
                   </thead>
                   <tbody>
                       {% if postlist %}
-                      {% for post in postlist %}
+                       {% comment %} {% for post in postlist %}
                       <tr class="text-center">
                           <td>{{ post.id }}</td>
                           <td>{{ post.postname|truncatechars:30 }}</td>
@@ -51,7 +51,13 @@
                           <td>{{ post.date|date:'Y. m. d' }}</td>
                           <td>{{ post.hits }}</td>
                       </tr>
-                      {% endfor %}
+                      {% endfor %}  {% endcomment %}
+                  {% for list in postlist %}
+                      <ul>
+                        <li><a href="{{list.pk}}/">{{list.postname}}</a></li>
+                          <li>{{list.contents}}</li>
+                      </ul>
+                  {% endfor %} 
                       {% else %}
                       <tr class="text-center">
                           <td colspan="5">

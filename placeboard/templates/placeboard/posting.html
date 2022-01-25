@@ -7,14 +7,15 @@
         <p>{{post.postname}}</p><p>{{post.date}}</p>
         <p>{{post.contents}}</p>
         
+
         <!-- 이미지 보여주기 -->
         {% if post.mainphoto %}
-            <img src = "{{ post.mainphoto.url }}" alt="" height="600">
+            <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="600">
             <br>
         {% endif %}
         <a href="remove/">삭제</a>
         
-        <a href="{% url 'blog' %}">목록</a>  
+        <a href="{% url 'placeboard:blog' %}">목록</a>  
     </body>
 </html>
 
