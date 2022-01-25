@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.Hyemin{ font-family: 'IM_Hyemin-Bold', normal; }
+.gmarket{ font-family: 'GmarketSansMedium';}
+.gmarket_bold{ font-family: 'GmarketSansBold';}
+.italic{ font-style: italic }
+
+
+
+.goquiz button {
+font-size: 0.85rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 1px;
+padding: calc(1rem + 2px);
+}
+.custombtn {
+display: inline-block;
+font-weight: 400;
+line-height: 1.5;
+color: #fff;
+background-color: #2a5555;
+border-color: #2a5555;
+text-align: center;
+text-decoration: none;
+vertical-align: middle;
+border: 1px solid transparent;
+padding: 0.4rem 10rem;
+font-size: 1.5rem;
+border-radius: 0.25rem;
+transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.custombtn:hover {
+color: #fff;
+background-color: #244848;
+border-color: #224444;
+}
+
+.login{
+position : absolute;
+top : 20px;
+right : 55px;
+background-color: #fff;
+}
+.login:hover{
+
+background-color: #4e4e4e;
+}
+#user_info{
+    position : absolute;
+    display:inline-block;
+    width : 150px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    line-height: 23px;
+    top : 95px;
+    right : 10px;
+    background-color: #fff;
+    border-radius: 20px;
+    
+}
+
+@keyframes blink-effect { 50% { opacity: 0.5; }}
+.blink { 
+    animation: blink-effect 1s step-end infinite;
+    
+}
+
