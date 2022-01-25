@@ -14,6 +14,7 @@ urlpatterns = [
     path('blog/', blog, name='blog'),
     # URL:80/blog/숫자로 접속하면 게시글-세부페이지(posting)
     path('blog/<int:pk>/', posting, name='posting'),
+    # path('blog/new_post/', new_post, name='new_post'),
     path('blog/new_post/', new_post, name='new_post'),
     path('blog/<int:pk>/remove/', remove_post, name='remove_post'),
 ]

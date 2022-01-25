@@ -7,7 +7,18 @@
         <p>{{post.postname}}</p><p>{{post.date}}</p>
         <p>{{post.contents}}</p>
         
-
+        {% for post in page_obj %}
+        <div class="item" style="padding-top: 15px;">
+          <p style="text-align: left; font-size: 0.8em;">
+            <img src="{{ post.mainphoto.url }}" style="width: 180px; height: 150px;" alt=""> <br>
+            <span style="font-weight: bold;">{{ post.postname }}</span> <br>
+            작성자: {{ post.writer }} <br>
+            작성일: {{ post.date|date:"Y-m-d" }} <br>
+            {% comment %} 조회수: {{ post.hit }} {% endcomment %}
+        </p>
+        </div>
+      {% endfor %}
+      
         <!-- 이미지 보여주기 -->
         {% if post.mainphoto %}
             <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="600">
