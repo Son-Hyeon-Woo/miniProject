@@ -13,7 +13,7 @@ def near_food(request):
         if c.id_p==4:   #4==선택한 place의 id
             result.append(c.name)
 
-    return render(request, 'rank/near_place.html', { 'data': result })
+    return render(request, 'rank/near_food.html', { 'data': result })
 
 def near_place(request):
     

@@ -1,13 +1,15 @@
+from multiprocessing.connection import answer_challenge
 from platform import java_ver
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from .models import Place
 import random, json
 
-
 def quiz(request):
+
     place_list = Place.objects.all()
     num = random.randrange(0,len(place_list))
+
     answer = place_list[num]
     latlong = {
         'lat' : answer.place_lat,
