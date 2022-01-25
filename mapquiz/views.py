@@ -1,9 +1,11 @@
 from multiprocessing.connection import answer_challenge
 from platform import java_ver
 from django.shortcuts import render
-from django.http import HttpResponse,JsonResponse
 from .models import Place
 import random, json
+from django.contrib.auth.decorators import login_required
+
+@login_required
 
 def quiz(request):
 

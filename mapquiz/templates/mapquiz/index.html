@@ -18,9 +18,6 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <link href="{% static 'css/custom_style.css' %}" rel="stylesheet" />
 
-    <!-- custom css CSS 수정 -->
-      
-
 
   </head>
   <body>
@@ -35,21 +32,28 @@
                   <p class="mb-5 Hyemin">  대구에 대해서 얼마나 알고있으신가요? <br>  이 도시의 걷고 싶은 여러 명소를 보여드릴게요</p>
                   <!-- * * * * * * * * * * * * * * *-->
                   {% if user.is_authenticated %}
-                  <button class="goquiz custombtn Hyemin" id="submitButton" type="botton" onclick="location.href='/map/quiz'"> 여행 떠나기 </button></div>
+                    <button class="goquiz custombtn Hyemin" id="submitButton" type="botton" onclick="location.href='/map/quiz'"> 여행 떠나기 </button></div>
                   {% else %}
-                  <button class="goquiz custombtn Hyemin" id="submitButton" type="botton" onclick=""> 먼저 로그인 해주세요! </button></div>
+                    <button class="goquiz custombtn Hyemin" id="submitButton" type="botton" onclick=""> 먼저 로그인 해주세요! </button></div>
+                  {% endif %}
+                  <p><br></p>
+                  {% if user.is_authenticated %}
+                  <button class="custombtn2 Hyemin" id="submitButton" type="botton" onclick="location.href='/pb/blog'" > 여러분의 여행지를 소개해 주세요 </button></div>
+                  {% else %}
+                  <button class="custombtn Hyemin" id="submitButton" type="botton" onclick=""> 먼저 로그인 해주세요! </button></div>
                   {% endif %}
                   <!-- to get an API token!-->
               </div>
           </div>
       </div>
+   
       <!-- For more icon options, visit https://fontawesome.com/icons?d=gallery&p=2&s=brands-->
       <div class="social-icons">
         <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
           {% if user.is_authenticated %}
           <a class="login btn gmarket" href="">
             <img src="{% static 'assets/img/smile.png' %}" width=40px, height=40px>
-            <a id = 'user_info' class = 'gmarket'> {{ user.username }} <br> 님 반갑습니다.</a> 
+            <a id = 'user_info' class = 'gmarket'> {{ user.username }}님 <br>  반가워요!</a> 
           </a>
             
           {% else %}
@@ -63,9 +67,9 @@
       <!-- Bootstrap core JS-->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
       <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-      {% comment %} <script src="{% static 'js/index_script.js'%}"></script> {% endcomment %}
-
+      <script src="{% static 'js/scripts.js'%}"></script>
       <script>
+        document.body.classList.add("reveal");
         let sub_bnt = document.getElementById("submitButton");
         sub_bnt.addEventListener('click', warning);
         function warning() {
