@@ -17,7 +17,8 @@ def signup(request):
                 password=request.POST['password1'], 
                 email=request.POST['email'],
             ) 
-            auth.login(request, user) 
+            auth.login(request, user)
+            user.save()
             return redirect('/') 
         return render(request, 'signuperror.html') 
     return render(request, 'signup.html')
