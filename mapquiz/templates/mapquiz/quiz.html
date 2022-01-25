@@ -219,11 +219,9 @@ function show() {
     var point = {'first' : (1000 - Math.round(dist))}
     if (0 <= (1000 - Math.round(dist))) {
         localStorage.setItem("point", JSON.stringify(point));
-        console.log('true 실행');
     }   else {
             var point = {'first' : 0};
             localStorage.setItem("point", JSON.stringify(point));
-            console.log('flase 실행');
         }
 
     console.log(point);
