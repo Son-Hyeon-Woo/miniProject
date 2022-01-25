@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>QUIZ_END</title>
+    <!-- custom css CSS 수정 -->
+    <style>
+        @font-face {
+            font-family: 'IM_Hyemin-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            }
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'GmarketSansBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            background-color : #ebf1eb;
+            margin: 3px;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity .65s .15s
+            }
+        body.reveal {
+            opacity: 1;
+            overflow-y: auto
+            }   
+        
+        body.hidden {
+            opacity: 0
+            }
+        
+        .Hyemin{ font-family: 'IM_Hyemin-Bold', normal; }
+        .gmarket{ font-family: 'GmarketSansMedium';}
+        .gmarket_bold{ font-family: 'GmarketSansBold';}
+        .italic{ font-style: italic }
+        .custombtn {
+            display: inline-block;
+            width: 150px;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #fff;
+            background-color: #2a5555;
+            border-color: #2a5555;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.4rem 1.5%;
+            font-size: 1.5rem;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+        .custombtn:hover {
+            color: #fff;
+            background-color: #244848;
+            border-color: #224444;
+            }
+        #score{
+            position: absolute;
+            display : inline-block;
+            top : 10%;
+            left : 7%;
+            width: 40%;
+            height: 80%;
+            background-color : #fff;
+            }
+        #rank{
+            position: absolute;
+            display : inline-block;
+            top : 10%;
+            left : 53%;
+            width: 40%;
+
+            height: 80%;
+            background-color : #fff;
+            }
+        #bar1{
+            position: relative;
+            display : inline-block;
+            width: 90%;
+            height: 30px;
+            background-color : #bddcb8;
+            top : 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            }
+        #bar2{
+            position: relative;
+            display : inline-block;
+            width: 0%;
+            height: 30px;
+            background-color : #36602f;
+            top : 0%;
+            left: 0%;
+            transition : 2s;
+            }
+        #point{
+            position: relative;
+            top : -15px;
+            vertical-align: middle;
+            font-size: 1.5rem;
+        }
+        #user{
+            position: relative;
+
+            width: 45%;
+            height: 45%;
+            border-radius: 50%;
+            background-color : #36602f;
+            top : 40%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+        }
+        .setbtn1{
+            padding :20px;
+        }
+        .fsize{
+            font-family: 'IM_Hyemin-Bold', normal;
+            font-weight: 400;
+            line-height: 1.2;
+            font-size: 1.5rem;
+        }
+        .table{
+            border-collapse : collapse;
+            border: 1px solid #bddcb8;
+            margin-left:auto; margin-right:auto; margin-top:8%
+        }
+    </style>
+</head>
+
+<body>
+    <button class="gohome custombtn Hyemin"  id="submitButton" type="botton" onclick="location.href='/map/home'"> 홈으로 </button>
+    <div id = 'score'> 
+        <div id = 'bar1'>
+            <div id = 'bar2'></div>
+            <p id = 'point' class = 'gmarket'></p> 
+        </div>
+
+        <div id = user> 아이디랑 이름</div>
+            <div style="padding: 4.3%; padding-top:200px; float:left" >
+                <button class = custombtn onclick="location.href='http://127.0.0.1:8000/map/home/'">홈으로</button >
+            </div>
+            <div style="padding-top:200px; float:left">
+                <button class = custombtn onclick="location.href='http://127.0.0.1:8000/map/quiz/'">다시 하기</button >
+            </div>
+            <div style="padding: 4.3%; padding-top:200px; float:left">
+                <button class = custombtn onclick="location.href='http://127.0.0.1:8000/rank/near_place/'">근처 여행지<br>보기</button >
+            </div>
+            <div style="padding-top:200px; float:left">
+                <button class = custombtn onclick="location.href='http://127.0.0.1:8000/rank/near_food/'">근처 맛집<br>보기</button >
+            </div>
+    </div> 
+    <div border:1px solid #ffebb5; background-color:#ffebb5; border-radius:16px;></div>
+    <div class=fsize id = 'rank'>
+        <h1 align = 'center'>RANKING</h2>
+            <table class=table border=1px solid #bddcb8; border-radius :16px; width =90% height=70%>
+                <colgroup>
+                    <col width="20%">
+                    <col width="25%">
+                    <col width="30%">
+                    <col width="25%">
+                </colgroup>
+    
+                <thead>
+                    <tr style="height: 62px; background-color : #bddcb8;">
+                    <th>등수</th>
+                    <th>이름</th>
+                    <th>시간</th>
+                    <th>점수</th>
+                    </tr>
+                </thead>
+    
+                <tbody align = 'center'>
+                    <tr style="height: 70px;">
+                    <td>🥇1등</td>
+                    <td>손현우</td>
+                    <td>30m07s</td>
+                    <td>10점</td>
+                    </tr>
+    
+                    <tr style="height: 70px;">
+                    <td>🥈2등</td>
+                    <td>강민수</td>
+                    <td> 30m07s</td>
+                    <td>9점</td>
+                    </tr>
+    
+                    <tr style="height: 70px;">
+                    <td>🥉3등</td>
+                    <td>배경용</td>
+                    <td> 30m07s</td>
+                    <td> 8점</td>
+                    </tr>
+    
+                    <tr style="height: 70px;">
+                    <td >4등</td>
+                    <td >김효정</td>
+                    <td> 30m07s</td>
+                    <td> 7점</td>
+                    </tr>
+    
+                    <tr style="height: 70px;">
+                        <td >5등</td>
+                        <td >윤지민</td>
+                        <td> 31m07s</td>
+                        <td> 1점</td>
+                        </tr>
+                        
+                </tbody>
+            </table>
+    </div>
+    
+
+
+<script>
+document.body.classList.add("reveal");
+console.log(JSON.parse(localStorage.getItem("point")));
+let point = JSON.parse(localStorage.getItem("point"));
+document.getElementById("point").innerHTML= '총 획득 점수 : ' + point['first'] ;
+
+setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
+    let bar2 = document.getElementById('bar2');
+    bar2.style.width =  point['first']/10 + '%';
+}, 10);
+
+</script>
+
+
+
+</body>
+</html>
