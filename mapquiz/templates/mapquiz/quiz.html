@@ -5,11 +5,27 @@
     <meta charset="utf-8">
     <title>QUIZ</title>
     <link href="{% static 'css/custom_style.css' %}" rel="stylesheet" />
-    <!-- custom css CSS 수정 -->
-    <style>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    </script>
+        
         
 
-    </style>
 </head>
 
 <body>
@@ -54,19 +70,20 @@
                 <div class="popup" id = 'popanswer'></div>
                 <button id="close" class = 'gmarket custombtn'>점수 확인</button>
             </div>
-
-            <div>
         </div>
     </div>
-    
 </div>
+
 
 <!-- API키 인증-->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=82cdfefd8c371330aa8531c5f89338c6"></script>
 <script>
-document.body.classList.add("reveal");
+let start = new Date(); //플레이 타임 기록용
+document.body.classList.add("reveal"); // 화면전환 효과용
+
 let latlong = JSON.parse("{{ latlong_json|escapejs }}");     //view에서 넘어논 json데이터 js 변수로 선언
 document.getElementById('where').innerHTML = latlong['name']
+
 // * * * * * * * * * * * * * * * * * * 로드뷰 JS  * * * * * * * * * * * * * * * * * * * * * *
 var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
 var roadview = new kakao.maps.Roadview(roadviewContainer);   //로드뷰 객체
@@ -126,7 +143,9 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
 // * * * * * * * * * * * * * * * * * * 팝업 지도 JS * * * * * * * * * * * * * * * * * * * * * *
 // 제출하기 버튼을 눌러야 생기는 지도를 위한 함수
-var dist;
+var dist = 0;
+let point = 0;
+
 function show() {
     document.querySelector(".background").className = "background show";
 
@@ -147,9 +166,6 @@ function show() {
         var moveLatLon = new kakao.maps.LatLng(latlong['lat'], latlong['long']);
         ansmap.panTo(moveLatLon);
     }, 1200);
-
-
-
 
     // 팝업 지도에 표시될 **정답위치** 마커
     let ansmarker_src = "{% static 'assets/img/redmarker.png' %}"
@@ -216,28 +232,61 @@ function show() {
 
 
     //점수를 로컬에 저장
-    var point = {'first' : (1000 - Math.round(dist))}
+    point = 1000 - Math.round(dist);
 
     if (0 <= (1000 - Math.round(dist))) {
         localStorage.setItem("point", JSON.stringify(point));
     }   else {
-            var point = {'first' : 0};
+            point = 0;
             localStorage.setItem("point", JSON.stringify(point));
         }
 
+
     console.log(point);
     
-// 점수확인 버튼 클릭시 페이지 이동
-function close() {
 
-    document.querySelector(".background").className = "background";
-    window.location.href = '/rank/ranking/';
-    {% comment %} {{latlong_json}}' {% endcomment %}
+    
+    let place_for =latlong['ID'];
+    localStorage.setItem("ID_near", JSON.stringify(place_for));
 }
 
 document.querySelector("#show").addEventListener("click", show);
 document.querySelector("#close").addEventListener("click", close);
 
+
+// 점수확인 버튼 클릭시 페이지 이동
+function close() {
+    let user = JSON.parse("{{ user|escapejs }}");   //현재 사용자의 정보
+    let end = new Date();                           // 플레이타임 기록용
+    let play_time = Math.round((end - start) / 1000)
+    let username = user['name'];
+
+    document.querySelector(".background").className = "background";
+
+    window.location.href = '/rank/ranking/';
+    
+
+    
+    const csrftoken = getCookie('csrftoken');
+    const formData = new FormData();
+    console.log(play_time)
+
+    formData.append('play_time', play_time);
+    formData.append('point', point);
+    formData.append('username', username);
+
+    const data = axios({
+        url: '/rank/ranking/',
+        method: 'POST',
+        data: formData,
+        headers: { 'X-CSRFToken': csrftoken }
+    });
+        data.then(function (result) {
+            window.location.href = '/rank/ranking'
+            console.log(result.data);
+        });
+
+}
 </script>
 </body>
 </html>
