@@ -10,11 +10,12 @@ def finish(request):
 
 def near_food(request):
     around_place=Around_place.objects.all()
+    need_id={}
     if request.method=='POST':
-        payment=json.loads(request.body)  
+        need_id=json.loads(request.body)  
     # request = Request(url+)
     # getJson = json.loads(request.body)
-   
+    print(json.dumps(need_id, sort_keys=True))
     return render(request, 'rank/near_food.html', { 'data': around_place })
 
 def near_place(request):

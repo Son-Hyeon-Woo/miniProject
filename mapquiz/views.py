@@ -21,7 +21,8 @@ def quiz(request):
         'long' : answer.place_long
     }
     latlong_json = json.dumps(latlong)
-    return render( request, 'mapquiz/quiz.html', {'latlong_json': latlong_json,})
+    return render( request, 'mapquiz/quiz.html', 
+    {'latlong_json': latlong_json,})
 
 def index(request):
 
