@@ -45,8 +45,12 @@
         .gmarket_bold{ font-family: 'GmarketSansBold';}
         .italic{ font-style: italic }
         .custombtn {
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 1cm;
+            position: absolute;
             display: inline-block;
-            width: 150px;
+            width: 33%;
             font-weight: 400;
             line-height: 1.2;
             color: #fff;
@@ -59,8 +63,8 @@
             user-select: none;
             border: 1px solid transparent;
             padding: 0.4rem 1.5%;
-            font-size: 1.5rem;
-            border-radius: 0.25rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
             transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
             }
         .custombtn:hover {
@@ -70,7 +74,6 @@
             }
         #score{
             position: absolute;
-            display : inline-block;
             top : 10%;
             left : 7%;
             width: 40%;
@@ -114,65 +117,80 @@
             top : -15px;
             vertical-align: middle;
             font-size: 1.5rem;
-        }
+            }
         #user{
-            position: relative;
-            width: 200px;
-            height: 200px;
+            margin : 0px;
+            display : inline-block;
+            position: absolute;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             border: 2px solid #36602f;
-            top : 25%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            
-        }
+            left:50%;
+            top: 35%;
+            transform: translate(-50%, -50%)
+            }
         .setbtn1{
             padding :20px;
-        }
-        .fsize{
-            font-family: 'IM_Hyemin-Bold', normal;
-            font-weight: 400;
-            line-height: 1.2;
-            font-size: 1.5rem;
-        }
-        .table{
-            border-collapse : collapse;
-            border: 1px solid #bddcb8;
-            margin-left:auto; margin-right:auto; margin-top:8%
-        }
+            }   
         table {
             border-collapse : collapse;
-            border: 1px solid #bddcb8;
-            margin-left:auto; margin-right:auto; margin-top:8%
-            border: 1px solid #bddcb8;
+            border: 1px solid #78b76c;
+            margin-left:auto; margin-right:auto; margin-top:8%;
+
           }
-          th, td {
-            border: 0.5px solid #bddcb8;
+        th, td {
+            border: 0.5px solid #78b76c;
           }
+        #user2{
+            position :  absolute;
+            left :          50%;
+            top :           50%;
+            transform:      translate(-50%, -50%);
+            font-size:      50px;
+            font-weight:    bold;
+            text-align:     center;
+            vertical-align: middle;
+            }
+        .score_btn{
+            position :  absolute;
+            display : inline-block;
+            font-size:  50px;
+            width: 22%;
+            height: 10%;
+        }
+
+        
     </style>
 </head>
 
 <body>
-    <button class="gohome custombtn Hyemin"  id="submitButton" type="botton" onclick="location.href='/map/home'"> 홈으로 </button>
     <div id = 'score'> 
         <div id = 'bar1'>
             <div id = 'bar2'></div>
             <p id = 'point' class = 'gmarket'></p> 
         </div>
 
-        <div id = user>  {{current_user.username}} </div>
-            <div style="padding: 4.3%; padding-top:200px; float:left" >
-                <button class = custombtn onclick="location.href='http://127.0.0.1:8000/map/home/'" style="height: 70px;" >홈으로</button >
-            </div>
-            <div style="padding-top:200px; float:left">
-                <button class = custombtn onclick="location.href='http://127.0.0.1:8000/map/quiz/'" style="height: 70px;">다시 하기</button >
-            </div>
-            <div style="padding: 4.3%; padding-top:200px; float:left">
-                <button class = custombtn onclick="location.href='http://127.0.0.1:8000/rank/near_place/'" style="height: 70px;" >근처 여행지<br>보기</button >
-            </div>
-            <div style="padding-top:200px; float:left">
-                <button class = custombtn onclick="location.href='http://127.0.0.1:8000/rank/near_food/'" style="height: 70px;">근처 맛집<br>보기</button >
-            </div>
+        <div >
+            <button class = 'custombtn gmarket' style = 'bottom : 3cm; left : 30%;' onclick= "location.href='http://127.0.0.1:8000/map/home/'"> 홈으로</button >
+        </div>
+        <div>
+            <button class = 'custombtn gmarket' style = 'bottom : 3cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/map/quiz/'">다시 하기</button >
+        </div>
+        <div >
+            <button class = 'custombtn gmarket' style = 'left : 3cm; left : 30%;' onclick="location.href='http://127.0.0.1:8000/rank/near_place/'">근처 여행지<br>보기</button>
+        </div>
+        <div >
+            <button class = 'custombtn gmarket' style = 'left : 6cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/rank/near_food/'">근처 맛집<br>보기</button>
+        </div>
+
+        
+
+        <div id = user class = 'Hyemin'>  
+            <div id = user2>{{current_user.username}}</div> 
+            <div id = user2 style="top: 130%; font-size : 25px;width: 150%;">나의 총점수 : {{current_user_point.pnt_sum}}</div> 
+        </div>
+
     </div> 
 
     <div id = 'rank' class = 'Hyemin'>
@@ -180,7 +198,7 @@
             <colgroup>
                 <col width="20%">
                 <col width="25%">
-                <col width="30%">
+                <col width="35%">
                 <col width="25%">
             </colgroup>
     
@@ -206,13 +224,6 @@
         </table>
     </div>
 
-
-    
-
-
-    
-
-
 <script>
 document.body.classList.add("reveal");
 
@@ -220,7 +231,7 @@ let url = new URL(location.href);
 let urlParams = url.searchParams;
 
 let point = urlParams.get('point');
-document.getElementById("point").innerHTML= '총 획득 점수 : ' +point ;
+document.getElementById("point").innerHTML= '이번 판 획득 점수 : ' +point ;
 
 setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
     let bar2 = document.getElementById('bar2');

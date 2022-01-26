@@ -52,7 +52,10 @@ def ranking(request):
             cnt += 1
             if cnt == 10:
                 break;
-        
+            
         current_user = request.user
+        current_user_point = data.get(user_id = current_user.id )
         
-        return render(request, 'rank/ranking.html',{'data2':data2,'current_user':current_user})
+
+        
+        return render(request, 'rank/ranking.html',{'data2':data2,'current_user':current_user,'current_user_point':current_user_point})
