@@ -1,88 +1,180 @@
-{% load static %}
 
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+        thead {
+            background-color:#cecece;
+        }
 
-<html lang="ko-kr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title> Blog List </title>
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        .content {
+            max-width:1000px;
+            margin: auto;
+            padding:10px;
+        }
 
-    <!-- Core theme CSS (includes Bootstrap)-->
-    
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/custom_style.css' %}" rel="stylesheet" />
+        .header {
+            text-align: center;
+        }
 
-    <!-- custom css CSS 수정 -->
-      
-  </head>
-  <body>
-      <!-- Background Video-->
-      <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="{% static 'assets/mp4/bg.mp4' %%}"  type="video/mp4" /></video>
-      <!-- Masthead-->
-      <div class="masthead">
-          <div class="masthead-content text-white">
-              <div class="container-fluid px-4 px-lg-0">
-                  <h1 class="Hyemin italic">게시판 페이지입니다</h1>
-                 
-                  <table>
-                    <thead>
-                      <tr class="text-center">
-                          <th>번호</th>
-                          <th>제목</th>
-                          <th>작성자</th>
-                          <th>등록일</th>
-                          <th>조회수</th>
+        .board {
+            width: 100%
+        }
+
+        .even_bgcolor {
+            background-color:#85d4d4;
+        }
+
+        .pagination {
+            display: flex;           
+        }
+
+        .current {
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .abutton {
+            background-color: #e6e6ff;
+            color: #7b7b7b;
+            font-size: small;
+        }
+
+    </style>
+
+
+    <body>
+      <div class="content">
+          <div class="header">
+              <h1>게시판 페이지입니다</h1>
+          </div>
+          <div style="text-align:right">
+              
+              <button><a onclick="location.href='{% url 'placeboard:new_post' %}'">글쓰기</a></button>
+              <button><a onclick="location.href='/map/home'">홈으로</a></button>
+          </div>
+  
+          <div style="height:280px; ">
+              <table class="board">
+                  <thead>
+                      <tr class="header">
+                          <th style="width:10%;">번호</th>
+                          <th style="width:50%">제목</th>
+                          <th style="width:20%">작성일자</th>
+                          <th style="width:20%">작성자</th>
                       </tr>
                   </thead>
                   <tbody>
-                      {% if postlist %}
-                      
-                  {% for list in postlist %}
-                      <ul>
-                        <li><a href="{{list.pk}}/">{{list.postname}}</a></li>
-                          <li>{{list.contents}}</li>
-                      </ul>
-                  {% endfor %} 
-                      {% else %}
-                      <tr class="text-center">
-                          <td colspan="5">
-                              작성된 게시글이 없습니다.
+                  {% if board_list %}
+                      {% for data in board_list %}
+                      <tr class="{% cycle '' 'even_bgcolor' %}">
+                          <td style="text-align:center;">{{ forloop.counter }}</td>
+                          <td>
+                              <a href="{% url 'placeboard:posting' data.id %}">
+                                  {{ data.postname }}
+                              </a>
                           </td>
+                          <td>{{ data.date|date:'Y-m-d' }}</td>
+                          <td>{{ data.writer }}</td>
                       </tr>
-                      {% endif %}
+                      {% endfor %}
+                  {% else %}
+                      <tr>
+                          <td>작성된 게시글이 없습니다.</td>
+                      </tr>
+                  {% endif %}
                   </tbody>
-                    
-          </table>
-          
-          <button><a href="new_post/">글쓰기</a></button>
-          <button><a onclick="location.href='/map/home'">홈으로</a></button>
-              </div>
+              </table>
           </div>
+  
+          <!-- Pagination -->
+          <div style="text-align:center">
+              <div class="pagination">
+              
+                  <div style="width:35%; margin: 5px;">
+                  {% if board_list.has_previous %}
+                      <a class="abutton" href="?page=1">맨 앞으로</a>
+                      <a class="abutton" href="?page={{ board_list.previous_page_number }}">이전</a>
+                  {% endif %}
+                  </div>
+  
+                  <div style="width:30%; margin: 5px;">
+                  {% for page in board_list.paginator.page_range %}
+                      {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
+                      <span class="{% if page == board_list.number %}current{% endif %}">
+                          <a href="?page={{ page }}">{{ page}}</a>
+                      </span>
+                      {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
+                          ..
+                      {% endif %}
+                  {% endfor %}
+                  </div>
+  
+                  <div style="width:35%; margin: 5px;">
+                  {% if board_list.has_next %}
+                      <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
+                      <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
+                  {% endif %}
+                  </div>
+  
+              </div>  
+          </div> 
       </div>
-   
-     
-      <!-- Bootstrap core JS-->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-      {% comment %} <script src="{% static 'js/index_script.js'%}"></script> {% endcomment %}
-
-      <script>
-        document.body.classList.add("reveal");
-        let sub_bnt = document.getElementById("submitButton");
-        sub_bnt.addEventListener('click', warning);
-        function warning() {
-          document.getElementById("user_info").style.blink
-        }
+  </body>
+  </html>
 
 
-      </script>
+
+
+  {% comment %} <body>
+    <div class="content">
+      <div class="header">
+        <h1>게시판 페이지입니다</h1>
+      </div>
+      
+        <thead>
+          <tr class="text-center">
+              <th>번호</th>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>등록일</th>
+              <th>조회수</th>
+          </tr>
+        </thead>
+      <table>
+
         
+      
+        <tbody>
+        {% if postlist %}
+          {% for list in postlist %}
+              <ul>
+                <li><a href="{{list.pk}}/">{{list.postname}}</a></li>
+                  <li>{{list.contents}}</li>
+              </ul>
+          {% endfor %} 
+        {% else %}
+        <tr class="text-center">
+            <td colspan="5">
+                작성된 게시글이 없습니다.
+            </td>
+        </tr>
+        {% endif %}
+        </tbody>
+          
+      </table>
+      
+      <button><a href="new_post/">글쓰기</a></button>
+      <button><a onclick="location.href='/map/home'">홈으로</a></button>
+  
+
     </body>
-</html>
+</html> {% endcomment %}
 

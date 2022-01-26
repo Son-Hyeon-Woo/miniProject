@@ -12,14 +12,31 @@
 </head>
 <body>
     <h1>글쓰기 페이지</h1>
-    <form method="POST" enctype='multipart/form-data'>
+    <form action="/pb/blog/new_post/" method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
-        제목<br>
+
+
+        
+        {{fileuploadForm.postname.label}}
+        {{fileuploadForm.postname}}
+        <br>
+        {{fileuploadForm.contents.label}}
+        {{fileuploadForm.contents}}
+        <br>
+        {{fileuploadForm.mainphoto.label}}
+        {{fileuploadForm.mainphoto}}
+        <br>
+
+        {% comment %} 제목<br>
         <input type="text" name="postname"><br>
         내용<br>
-        <textarea rows="10" cols="50" name="contents"></textarea><br>
-        <input type="file" name="mainphoto"><br>
+        <textarea rows="10" cols="50" name="contents"></textarea><br> 
+        <input type="file" name="mainphoto"><br> {% endcomment %}
+
+
+        
         <input type="submit" value="글쓰기">
+        <button><a onclick="location.href='/pb/blog'">전페이지</a></button>
     </form>
 </body>
 </html>

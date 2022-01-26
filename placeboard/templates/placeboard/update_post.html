@@ -1,0 +1,19 @@
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>수정 페이지</title>
+</head>
+<body>
+    <h1>수정 페이지</h1>
+    <form method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        제목<br>
+        <input type="text" name="postname"><br>
+        내용<br>
+        <textarea rows="10" cols="50" name="contents"></textarea><br>
+        <input type="file" name="mainphoto"><br>
+        <input type="submit" value="수정하기"onclick="location.href='/blog/edit/{{post.pk}}/'">
+    </form>
+</body>
+</html>

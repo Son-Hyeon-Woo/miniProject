@@ -1,8 +1,10 @@
 from django.db import models
 from django.db.models.fields import CharField, FloatField, IntegerField
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import User
 
-class Place(models.Model):
-    
+class Place(models.Model):    
     place_name = CharField(max_length=100, null=True)
     place_lat = FloatField(null=True, default=0)
     place_long = FloatField(null=True, default=0)
@@ -12,11 +14,9 @@ class Place(models.Model):
         return self.place_name
     
 class QuizLog(models.Model):
-
-    user_id = CharField(max_length=100, null=True)
     play_time = IntegerField(null=True, default=0)
     point = IntegerField(default=0)
-    
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     def __str__(self) -> str:
         return self.user_id
     
