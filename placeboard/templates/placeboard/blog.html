@@ -2,13 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <title>Place Board</title>
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
+    
 </head>
 
 
     <body bgcolor = #ebf1eb>
+        {% comment %} <!-- Background Video-->
+      <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="{% static 'assets/mp4/bg.mp4' %%}"  type="video/mp4" /></video> {% endcomment %}
+    
       <div class="content">
           <div class="Hyemin">
               <h1>여행지를 소개해 주세요</h1>
