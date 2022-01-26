@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
         }
 
         .content {
-            max-width:500px;
+            max-width:1000px;
             margin: auto;
             padding:10px;
         }
@@ -24,7 +25,7 @@
         }
 
         .even_bgcolor {
-            background-color:#e8efff;
+            background-color:#85d4d4;
         }
 
         .pagination {
@@ -52,7 +53,6 @@
     <body>
       <div class="content">
           <div class="header">
-              <h2>{{ 여행지 게시판 }}</h2>
               <h1>게시판 페이지입니다</h1>
           </div>
           <div style="text-align:right">
@@ -61,14 +61,14 @@
               <button><a onclick="location.href='/map/home'">홈으로</a></button>
           </div>
   
-          <div style="height:280px;">
+          <div style="height:280px; ">
               <table class="board">
                   <thead>
                       <tr class="header">
                           <th style="width:10%;">번호</th>
-                          <th style="width:60%">제목</th>
-                          <th style="width:30%">작성일자</th>
-                          <th style="width:30%">작성자</th>
+                          <th style="width:50%">제목</th>
+                          <th style="width:20%">작성일자</th>
+                          <th style="width:20%">작성자</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -82,6 +82,7 @@
                               </a>
                           </td>
                           <td>{{ data.date|date:'Y-m-d' }}</td>
+                          <td>{{ data.writer }}</td>
                       </tr>
                       {% endfor %}
                   {% else %}
