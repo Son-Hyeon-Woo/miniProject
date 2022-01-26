@@ -226,8 +226,7 @@ function show() {
         }
 
     console.log(point);
-    let place_for =latlong['ID'];
-    localStorage.setItem("ID_near", JSON.stringify(place_for));
+    
 }
 
 // 점수확인 버튼 클릭시 페이지 이동
@@ -240,6 +239,25 @@ function close() {
 document.querySelector("#show").addEventListener("click", show);
 document.querySelector("#close").addEventListener("click", close);
 
+var jqxhr = $.ajax("/rest/1/pages/245")
+.done(function() {
+  alert("성공");
+})
+.fail(function() {
+  alert("실패");
+ })
+.always(function() {
+  alert("완료");
+});
+      
+
+
+jQuery.ajax({
+    url: "/rest/1/pages/245", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+    data: { name: "lat" },  // HTTP 요청과 함께 서버로 보낼 데이터
+    method: "POST",   // HTTP 요청 메소드(GET, POST 등)
+    dataType: "json" // 서버에서 보내줄 데이터의 타입
+})
 </script>
 
 
