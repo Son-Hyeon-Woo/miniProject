@@ -8,6 +8,7 @@ from django.http import JsonResponse
 
 @login_required
 
+@login_required
 def quiz(request):
     place_list = Place.objects.all()
     num = random.randrange(0,len(place_list))

@@ -14,4 +14,5 @@ def changePW(request):
 def changeEM(request):
     return render(request, 'mypage/changeEM.html')
 def deleteID(request):
+    request.user.delete()
     return render(request, 'mypage/deleteID.html')
