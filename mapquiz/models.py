@@ -9,7 +9,7 @@ class Place(models.Model):
     place_lat = FloatField(null=True, default=0)
     place_long = FloatField(null=True, default=0)
     place_id = IntegerField(primary_key=True)
-    
+    explain = CharField(max_length=200,null=True)
     def __str__(self) -> str:
         return self.place_name
     

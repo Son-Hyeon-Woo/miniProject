@@ -1,70 +1,30 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Place Board</title>
+    <link href="{% static 'css/default.css' %}" rel="stylesheet" />
 </head>
-<style type="text/css">
-        thead {
-            background-color:#cecece;
-        }
-
-        .content {
-            max-width:1000px;
-            margin: auto;
-            padding:10px;
-        }
-
-        .header {
-            text-align: center;
-        }
-
-        .board {
-            width: 100%
-        }
-
-        .even_bgcolor {
-            background-color:#85d4d4;
-        }
-
-        .pagination {
-            display: flex;           
-        }
-
-        .current {
-            font-weight: bold;
-        }
-
-        a {
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .abutton {
-            background-color: #e6e6ff;
-            color: #7b7b7b;
-            font-size: small;
-        }
-
-    </style>
 
 
-    <body>
+    <body bgcolor = #ebf1eb>
       <div class="content">
-          <div class="header">
-              <h1>게시판 페이지입니다</h1>
+          <div class="Hyemin">
+              <h1>여행지를 소개해 주세요</h1>
           </div>
           <div style="text-align:right">
               
-              <button><a onclick="location.href='{% url 'placeboard:new_post' %}'">글쓰기</a></button>
-              <button><a onclick="location.href='/map/home'">홈으로</a></button>
+              <button class="custombtn Hyemin"><a onclick="location.href='{% url 'placeboard:new_post' %}'">글쓰기</a></button>
+              <button class="custombtn Hyemin"><a onclick="location.href='/map/home'">홈으로</a></button>
+              <p>
+                
           </div>
   
           <div style="height:280px; ">
               <table class="board">
                   <thead>
-                      <tr class="header">
+                      <tr class="Hyemin">
                           <th style="width:10%;">번호</th>
                           <th style="width:50%">제목</th>
                           <th style="width:20%">작성일자</th>
@@ -75,7 +35,8 @@
                   {% if board_list %}
                       {% for data in board_list %}
                       <tr class="{% cycle '' 'even_bgcolor' %}">
-                          <td style="text-align:center;">{{ forloop.counter }}</td>
+                          <td style="text-align:center;">{{ data.id }}</td>
+                          {% comment %} forloop.counter {% endcomment %}
                           <td>
                               <a href="{% url 'placeboard:posting' data.id %}">
                                   {{ data.postname }}
@@ -93,15 +54,15 @@
                   </tbody>
               </table>
           </div>
-  
+          <p>
           <!-- Pagination -->
           <div style="text-align:center">
               <div class="pagination">
               
                   <div style="width:35%; margin: 5px;">
                   {% if board_list.has_previous %}
-                      <a class="abutton" href="?page=1">맨 앞으로</a>
-                      <a class="abutton" href="?page={{ board_list.previous_page_number }}">이전</a>
+                      <a class="custombtn Hyemin" href="?page=1">맨 앞으로</a>
+                      <a class="custombtn Hyemin" href="?page={{ board_list.previous_page_number }}">이전</a>
                   {% endif %}
                   </div>
   
@@ -109,7 +70,7 @@
                   {% for page in board_list.paginator.page_range %}
                       {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
                       <span class="{% if page == board_list.number %}current{% endif %}">
-                          <a href="?page={{ page }}">{{ page}}</a>
+                          <a class="custombtn2 Hyemin" href="?page={{ page }}">{{ page}}</a>
                       </span>
                       {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
                           ..
@@ -119,8 +80,8 @@
   
                   <div style="width:35%; margin: 5px;">
                   {% if board_list.has_next %}
-                      <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
-                      <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
+                      <a class="custombtn Hyemin" href="?page={{ board_list.next_page_number }}">다음</a>
+                      <a class="custombtn Hyemin" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
                   {% endif %}
                   </div>
   
@@ -129,52 +90,4 @@
       </div>
   </body>
   </html>
-
-
-
-
-  {% comment %} <body>
-    <div class="content">
-      <div class="header">
-        <h1>게시판 페이지입니다</h1>
-      </div>
-      
-        <thead>
-          <tr class="text-center">
-              <th>번호</th>
-              <th>제목</th>
-              <th>작성자</th>
-              <th>등록일</th>
-              <th>조회수</th>
-          </tr>
-        </thead>
-      <table>
-
-        
-      
-        <tbody>
-        {% if postlist %}
-          {% for list in postlist %}
-              <ul>
-                <li><a href="{{list.pk}}/">{{list.postname}}</a></li>
-                  <li>{{list.contents}}</li>
-              </ul>
-          {% endfor %} 
-        {% else %}
-        <tr class="text-center">
-            <td colspan="5">
-                작성된 게시글이 없습니다.
-            </td>
-        </tr>
-        {% endif %}
-        </tbody>
-          
-      </table>
-      
-      <button><a href="new_post/">글쓰기</a></button>
-      <button><a onclick="location.href='/map/home'">홈으로</a></button>
-  
-
-    </body>
-</html> {% endcomment %}
 

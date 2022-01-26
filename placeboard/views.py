@@ -16,7 +16,7 @@ def blog(request):
     postlist = Post.objects.all()
     # blog.html 페이지를 열 때, 모든 Post인 postlist도 같이 가져옵니다 
     
-    paginator = Paginator(postlist, 5)
+    paginator = Paginator(postlist, 10)
     page = int(request.GET.get('page', 1))
     board_list = paginator.get_page(page)
     return render(request, 'placeboard/blog.html',{'postlist':postlist , 'board_list':board_list})
@@ -65,8 +65,8 @@ def boardEdit(request, pk):
     if request.method == "POST":
         post.postname = request.POST['postname']
         post.contents = request.POST['contents']
-        post.mainphoto = request.FILES['mainphoto']
-        writer = request.user
+        mainphoto = request.FILES['mainphoto']
+        post.writer = request.user
         
         post.save()
         return redirect('/pb/blog')
