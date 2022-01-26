@@ -253,6 +253,7 @@ function show() {
 document.querySelector("#show").addEventListener("click", show);
 document.querySelector("#close").addEventListener("click", close);
 
+document.getElementById('where').innerHTML = latlong['ID']
 
 // 점수확인 버튼 클릭시 페이지 이동
 function close() {
@@ -263,7 +264,7 @@ function close() {
 
     document.querySelector(".background").className = "background";
 
-    window.location.href = '/rank/ranking/';
+    window.location.href = '/rank/ranking/{{latlong_json}}';
     
 
     
