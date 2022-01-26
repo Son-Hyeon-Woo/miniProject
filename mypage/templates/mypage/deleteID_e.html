@@ -83,6 +83,11 @@
         {% csrf_token %}
         <input name="delete_confirm" type="text">
         <br>
+
+        <div class = "errorForm">
+            <p>입력하신 '회원탈퇴'가 일치하지 않습니다.<br> 다시 한번 확인 후 입력해 주세요.</p>
+        </div>  
+
         <input class="btn btn-primary" type="submit" value="확인"> 
         
         <a href="http://127.0.0.1:8000/mypage/mp/">

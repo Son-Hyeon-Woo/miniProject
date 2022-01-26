@@ -33,6 +33,7 @@ def changePW(request):
     if request.method == "POST":
         user = request.user
         origin_password = request.POST["origin_password"]
+        
         if check_password(origin_password, user.password):
             new_password = request.POST["new_password"]
             confirm_password = request.POST["confirm_password"]
@@ -84,6 +85,33 @@ def changeEM_e(request):
         return render(request, 'mypage/changeEM.html')
 
 
+
 def deleteID(request):
-    request.user.delete()
+    if request.method == "POST":
+        user = request.user
+        
+        # 아이디 가져오기
+        text_confirm = '회원탈퇴'
+        delete_confirm = request.POST["delete_confirm"]
+        
+        if text_confirm == delete_confirm:
+            request.user.delete()
+            return redirect('/')
+        else:
+            return render(request, 'mypage/deleteID_e.html')
+    return render(request, 'mypage/deleteID.html')
+
+def deleteID_e(request):
+    if request.method == "POST":
+        user = request.user
+        
+        # 아이디 가져오기
+        text_confirm = '회원탈퇴'
+        delete_confirm = request.POST["delete_confirm"]
+        
+        if text_confirm == delete_confirm:
+            request.user.delete()
+            return redirect('/')
+        else:
+            return render(request, 'mypage/deleteID_e.html')
     return render(request, 'mypage/deleteID.html')
