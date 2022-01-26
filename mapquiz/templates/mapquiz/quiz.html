@@ -283,7 +283,7 @@ function close() {
         headers: { 'X-CSRFToken': csrftoken }
     });
         data.then(function (result) {
-            window.location.href = '/rank/ranking'
+            window.location.href = '/rank/ranking/{{}}'
             console.log(result.data);
         });
 
