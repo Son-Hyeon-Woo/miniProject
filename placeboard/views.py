@@ -34,11 +34,13 @@ def new_post(request):
         postname = request.POST['postname']
         contents = request.POST['contents']
         mainphoto = request.FILES["mainphoto"]
+        writer = request.user
         # mainphoto = request.POST["mainphoto"]
         post = Post(
             postname=postname,
             contents=contents,
             mainphoto=mainphoto,
+            writer=writer,
         )
         post.save()
         return redirect('/pb/blog')
@@ -64,7 +66,8 @@ def boardEdit(request, pk):
         post.postname = request.POST['postname']
         post.contents = request.POST['contents']
         post.mainphoto = request.FILES['mainphoto']
-
+        writer = request.user
+        
         post.save()
         return redirect('/pb/blog')
 
