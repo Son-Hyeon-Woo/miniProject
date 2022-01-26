@@ -229,9 +229,8 @@
 
 <script>
 document.body.classList.add("reveal");
-console.log(JSON.parse(localStorage.getItem("point")));
-let point = JSON.parse(localStorage.getItem("point"));
-document.getElementById("point").innerHTML= '총 획득 점수 : ' + point['first'] ;
+let data = JSON.parse("{{ data|escapejs }}");
+document.getElementById("point").innerHTML= '총 획득 점수 : ' + data['point'] ;
 
 setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
     let bar2 = document.getElementById('bar2');
