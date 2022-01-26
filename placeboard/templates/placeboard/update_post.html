@@ -1,19 +1,30 @@
-
-
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>수정 페이지</title>
+    <link href="{% static 'css/default.css' %}" rel="stylesheet" />
 </head>
-<body>
-    <h1>수정 페이지</h1>
-    <form method="POST" enctype='multipart/form-data'>
+
+
+    <body bgcolor = #ebf1eb>
+      <div class="content">
+          <div class="Hyemin">
+            <h1>수정 페이지</h1>
+          </div>
+    <form class="Hyemin" method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
-        제목<br>
+        제목
         <input type="text" name="postname"><br>
-        내용<br>
+        내용
         <textarea rows="10" cols="50" name="contents"></textarea><br>
+        사진
         <input type="file" name="mainphoto"><br>
-        <input type="submit" value="수정하기"onclick="location.href='/blog/edit/{{post.pk}}/'">
+        <br>
+        <input class="custombtn Hyemin" type="submit" value="수정하기"onclick="location.href='/blog/edit/{{post.pk}}/'">
+        <a class="custombtn Hyemin" onclick="location.href='/pb/blog/{{post.pk}}/'">게시판으로</a>
+        
     </form>
 </body>
 </html>
