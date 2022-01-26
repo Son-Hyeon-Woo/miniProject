@@ -48,9 +48,41 @@ def changePW(request):
             return render(request, 'mypage/changePW_e.html')
     else:
         return render(request, 'mypage/changePW.html')
-    
+
+
 def changeEM(request):
-    return render(request, 'mypage/changeEM.html')
+    if request.method == "POST":
+        user = request.user
+        origin_email = user.email
+        new_email = request.POST["new_email"]
+
+        if origin_email != new_email:
+            user.email = new_email
+            user.save()
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('http://127.0.0.1:8000/map/home/')
+        else:
+            return render(request, 'mypage/changeEM_e.html')
+    else:
+        return render(request, 'mypage/changeEM.html')
+
+
+def changeEM_e(request):
+    if request.method == "POST":
+        user = request.user
+        origin_email = user.email
+        new_email = request.POST["new_email"]
+
+        if origin_email != new_email:
+            user.email = new_email
+            user.save()
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('http://127.0.0.1:8000/map/home/')
+        else:
+            return render(request, 'mypage/changeEM_e.html')
+    else:
+        return render(request, 'mypage/changeEM.html')
+
 
 def deleteID(request):
     request.user.delete()
