@@ -1,37 +1,51 @@
 {% load static %}
-<html>
-    <head>
-        <title>Posting!</title>
-    </head>
-    <body>
-        <h1>게시글 개별 페이지입니다</h1>
-        <p>{{post.postname}}</p><p>{{post.date}}</p>
-        <p>{{post.contents}}</p>
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+
+    <meta charset="UTF-8">
+    <title>Posting!</title>
+    <link href="{% static 'css/default.css' %}" rel="stylesheet" />
+    
+</head>
+ 
+    <body bgcolor = #ebf1eb>
+        <div class=" content">
+            <div class="Hyemin">
+                <h1>제목 :{{post.postname}}</h1>
+                <p>작성자 :{{post.writer}}  <p style="text-align:right">작성일자 :{{post.date}}</p>
+            </div>
+            
+        
         <!-- 이미지 보여주기 -->
         {% if post.mainphoto %}
-            <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="600">
+            <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
             <br>
         {% endif %}
-        
-        <button id = 'help' class = 'gmarket'>삭제</button>  
+        <p>{{post.contents}}</p>
+
+
+        {% comment %} <button id = 'help' class = 'gmarket'>삭제</button>  
             <div class="background">
               <div class="window">
                   <div class="popup">
                       <p id = 'dist' class = 'gmarket'></p>
-                      <div class="popup" id = 'popanswer' style = 'color : #000'>
+                        <p class="mb-5 Hyemin">  삭제하시겠습니까?</p> {% endcomment %}
+
+                        <a class="custombtn Hyemin" href="remove/">삭제</a>
                         
-                        
-                        <p class="mb-5 Hyemin">  삭제하시겠습니까?</p>
-                        <a href="remove/">삭제</a>
-                        
-                      </div>
-                        
+                      
+{% comment %}                         
                       <button id="close" class = 'gmarket custombtn' style = 'bottom : -10%'>닫기</button>
                   </div>    
               </div>
-            </div>
-        <a href="{% url 'placeboard:blog' %}">목록</a>  
-        <a href="edit/">수정</a>
+            </div> {% endcomment %}
+            <a class="custombtn Hyemin" href="edit/">수정</a>
+            <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
+            
+        </div>
+        
     </body>
 </html>
 
