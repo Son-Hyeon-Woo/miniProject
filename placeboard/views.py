@@ -33,7 +33,7 @@ def new_post(request):
         contents = request.POST['contents']
         mainphoto = request.FILES["mainphoto"]
         writer = request.user
-        # mainphoto = request.POST["mainphoto"]
+        
         post = Post(
             postname=postname,
             contents=contents,
@@ -59,42 +59,6 @@ def remove_post(request, pk):
 
 
 
-# def boardEdit(request, pk):
-#     post = Post.objects.get(id=pk)
-#     if request.method == "POST":
-#         if(post.writer == request.user or request.user.level == '0'):
-#             file_change_check = request.POST.get('fileChange', False)
-#             file_check = request.POST.get('upload_files-clear', False)
-
-#             if file_check or file_change_check:
-#                 os.remove(os.path.join(settings.MEDIA_ROOT, post.upload_files.path))
-
-#             form = NoticeWriteForm(request.POST, request.FILES, instance=post)
-#             if form.is_valid():
-#                 notice = form.save(commit = False)
-#                 if request.FILES:
-#                     if 'upload_files' in request.FILES.keys():
-#                         notice.filename = request.FILES['upload_files'].name
-#                 notice.save()
-#                 messages.success(request, "수정되었습니다.")
-#                 return redirect('/notice/'+str(pk))
-#     else:
-#         post = Notice.objects.get(id=pk)
-#         if post.writer == request.user or request.user.level == '0':
-#             form = NoticeWriteForm(instance=post)
-#             context = {
-#                 'form': form,
-#                 'edit': '수정하기',
-#             }
-#             if post.filename and post.upload_files:
-#                 context['filename'] = post.filename
-#                 context['file_url'] = post.upload_files.url
-#             return render(request, "notice/notice_write.html", context)
-#         else:
-#             messages.error(request, "본인 게시글이 아닙니다.")
-#             return redirect('/notice/'+str(pk))
-
-
 def boardEdit(request, pk):
     post = Post.objects.get(id=pk)
     if request.method == "POST":
@@ -110,6 +74,7 @@ def boardEdit(request, pk):
         fileuploadForm = FileUploadForm
         context = {
             'fileuploadForm': fileuploadForm,
+            'post':post
         }
         return render(request, 'placeboard/update_post.html', context)
 
