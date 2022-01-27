@@ -16,7 +16,7 @@ class Place(models.Model):
 class QuizLog(models.Model):
     play_time = IntegerField(null=True, default=0)
     point = IntegerField(default=0)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     def __str__(self) -> str:
         return self.user_id
     
