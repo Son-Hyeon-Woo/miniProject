@@ -94,11 +94,44 @@
                     </div>
                 </div>
             {% endcomment %}
-            <a class="custombtn Hyemin bottom_btn" href="remove/">삭제</a>            
-            <a class="custombtn Hyemin bottom_btn" href="edit/">수정</a>
-            <a class="custombtn Hyemin bottom_btn" href="{% url 'placeboard:blog' %}">목록</a>  
-            
-            </div>
+
+
+
+            <p><b>댓글 목록</b></p>
+            {% for comment in comments %}
+                <li>{{ comment.comment }} //{{ comment.writer }}/{{ comment.date }}</li>
+
+                <!--<form action="{# url 'boards:comment_delete' board_id=board.id comment_id=comment.id #}"></form> 같은 의미-->
+            <form action="{% url 'placeboard:comment_delete' post.id comment.id %}" method="post">
+                {% csrf_token %}
+            <input class="custombtn3 Hyemin" type="submit" value="삭제">
+            </form>
+
+            {% empty %}
+                <p>아직 댓글이 없습니다.</p>
+            {% endfor %}
+
+            <hr />
+            <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
+                {% csrf_token %}    <!-- 우리 웹 서버에서 어떤 작성이 일어날때는 csrf_token이 필요하다라는 의미 // 보안상 필요 -->
+                <input type="text" name="content" size="50%" placeholder="댓글을 입력해 주세요.">
+                <input class="custombtn3 Hyemin" type="submit" value="댓글달기">
+
+                {% if messages %}
+                    <div>
+                    {% for message in messages %}
+                        {{ message.tags }}! {{ message.message }}
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            </form>
+            <hr />
+    
+            <a class="custombtn Hyemin" href="remove/">삭제</a>
+            <a class="custombtn Hyemin" href="edit/">수정</a>
+            <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
+
+            </center>
 
         </div>
     </body>
