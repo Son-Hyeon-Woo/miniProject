@@ -8,15 +8,17 @@ from django.shortcuts import redirect
 from mapquiz.models import QuizLog
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from mapquiz.models import Place
 
-
-def finish(request):
-    return render(request, 'rank/finish.html')
 
 def near_food(request):
-    request.session.get('place_id', '0')
-    around_place=Around_place.objects.all()
-    return render(request, 'rank/near_food.html', { 'data': around_place })
+    a=request.session.get('place_id', '0')
+    print(a)
+    place=Place.objects.filter(place_id=a)
+    #place=Place.objects.all()
+    around_place=Around_place.objects.filter(id_p=a)
+    
+    return render(request, 'rank/near_food.html',{ 'data': around_place ,'data2' : place})
 
 def near_place(request):
     return render(request, 'rank/near_place.html')
