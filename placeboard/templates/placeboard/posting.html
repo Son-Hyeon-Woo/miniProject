@@ -8,6 +8,36 @@
     <title>Posting!</title>
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
     
+    <style>
+        .content2{
+            position: relative;
+            left: 50%;
+            transform: translate(-50%,15%);
+            display: block;
+            height: 90%;
+            width: 50%;
+            background-color: rgb(255, 255, 255);
+            margin: 20px;
+            border-radius: 7%;
+            padding: 50px;
+            
+        }
+        .top_btn{
+            position: relative;
+            top : 0px;
+            background-color: rgb(6, 114, 30);
+            width: 90px;
+            height: 15px;
+            font-size: 15px;
+        }
+        .bottom_btn{
+            width: 120px;
+            height: 30px;
+            font-size: 25px;
+        }
+
+    </style>
+
 </head>
  
     <body bgcolor = #ebf1eb>
@@ -28,42 +58,42 @@
             {% endif %}
             </div>
         </div>
-        <div class=" content">
+        <div class="content content2">
             <div class="Hyemin">
                 <h1>제목 :{{post.postname}}</h1>
-                <p>작성자 :{{post.writer}}  <p style="text-align:right">작성일자 :{{post.date}}</p>
+                <p>작성자 :{{post.writer}}  <p style="text-align:left">작성일자 :{{post.date}}</p>
             </div>
-            
+        
         
         <!-- 이미지 보여주기 -->
         {% if post.mainphoto %}
             <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
             <br>
         {% endif %}
-        <p>{{post.contents}}</p>
 
+        <p class = 'gmarket'>{{post.contents}}</p>
 
-        {% comment %} <button id = 'help' class = 'gmarket'>삭제</button>  
-            <div class="background">
-              <div class="window">
-                  <div class="popup">
-                      <p id = 'dist' class = 'gmarket'></p>
-                        <p class="mb-5 Hyemin">  삭제하시겠습니까?</p> {% endcomment %}
+        <a class="custombtn Hyemin top_btn" href="download/">사진 저장하기</a>
 
-                        <a class="custombtn Hyemin" href="remove/">삭제</a>
-                        
-                      
-{% comment %}                         
-                      <button id="close" class = 'gmarket custombtn' style = 'bottom : -10%'>닫기</button>
-                  </div>    
-              </div>
-            </div> {% endcomment %}
-            <a class="custombtn Hyemin" href="edit/">수정</a>
-            <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
+        <div style="position: relative; top:15px">
+
+            {% comment %}
+                <button id = 'help' class = 'gmarket'>삭제</button>  
+                <div class="background">
+                    <div class="window">
+                        <div class="popup">
+                        <p id = 'dist' class = 'gmarket'></p>
+                        <p class="mb-5 Hyemin">  삭제하시겠습니까?</p>
+                        </div>
+                    </div>
+                </div>
+            {% endcomment %}
+
+            <a class="custombtn Hyemin bottom_btn" href="remove/">삭제</a>            
+            <a class="custombtn Hyemin bottom_btn" href="edit/">수정</a>
+            <a class="custombtn Hyemin bottom_btn" href="{% url 'placeboard:blog' %}">목록</a>  
             
+            </div>
         </div>
-        
     </body>
 </html>
-
-
