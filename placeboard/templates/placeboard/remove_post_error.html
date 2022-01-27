@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #back{
+            position: absolute;
+            top : 6%;
+            left : 28%;
+            width: 40%;
+            height: 80%;
+            background-color : #fff;
+            }
+    </style>
+</head>
+
+<body bgcolor = #ebf1eb>
+    <div id = back class="content">
+    <div class="Hyemin">
+    <center style="margin-top: 30%;">
+    <form method="POST">
+        {% csrf_token %}
+        <h3 style="font-size: 200%;">'{{ post.postname }}' 게시글을<br>삭제할 권한이 없습니다.</h3>
+        <br><br><br><br>
+        <a href="/pb/blog/{{post.pk}}/">
+            <button type="button" class="btn">돌아가기</button>
+        </a>
+
+    </form>
+    </center>
+</div>
+</body>
+</html>

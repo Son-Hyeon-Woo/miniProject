@@ -28,7 +28,7 @@ class Post(models.Model):
     def delete(self, *args, **kargs):
         if self.mainphoto:
             path_photo=self.mainphoto
-            print(path_photo)
+            
             os.remove(os.path.join(settings.MEDIA_ROOT, self.mainphoto.path))
                   
         super(Post, self).delete(*args, **kargs)
