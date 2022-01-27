@@ -10,8 +10,6 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 
 
-def finish(request):
-    return render(request, 'rank/finish.html')
 
 def near_food(request):
     request.session.get('place_id', '0')
