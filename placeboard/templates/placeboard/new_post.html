@@ -1,18 +1,20 @@
-
-{% load bootstrap4 %}
-{% block content %}
-
-{% endblock%}
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <title>글쓰기 페이지</title>
+    <link href="{% static 'css/default.css' %}" rel="stylesheet" />
 </head>
-<body>
-    <h1>글쓰기 페이지</h1>
-    <form action="/pb/blog/new_post/" method="POST" enctype='multipart/form-data'>
+
+
+<body bgcolor = #ebf1eb>
+    <div class="content">
+    <div class="Hyemin">
+        <h1>여행지 소개</h1>
+    </div>
+    <form class="Hyemin" action="/pb/blog/new_post/" method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
 
 
@@ -34,9 +36,10 @@
         <input type="file" name="mainphoto"><br> {% endcomment %}
 
 
-        
-        <input type="submit" value="글쓰기">
-        <button><a onclick="location.href='/pb/blog'">전페이지</a></button>
+        <br>
+        <input class="custombtn Hyemin" type="submit" value="글쓰기">
+        <button class="custombtn Hyemin"><a onclick="location.href='/pb/blog'">뒤로가기</a></button>
     </form>
+    </div>
 </body>
 </html>

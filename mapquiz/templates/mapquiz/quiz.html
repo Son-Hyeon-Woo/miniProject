@@ -262,6 +262,8 @@ function close() {
     let play_time = Math.round((end - start) / 1000)
     let username = user['name'];
 
+
+
     document.querySelector(".background").className = "background";
 
     window.location.href = '/rank/ranking/{{latlong_json}}';
@@ -270,7 +272,6 @@ function close() {
     
     const csrftoken = getCookie('csrftoken');
     const formData = new FormData();
-    console.log(play_time)
 
     formData.append('play_time', play_time);
     formData.append('point', point);
@@ -283,8 +284,13 @@ function close() {
         headers: { 'X-CSRFToken': csrftoken }
     });
         data.then(function (result) {
+<<<<<<< HEAD
             window.location.href = '/rank/ranking/{{}}'
             console.log(result.data);
+=======
+        formData.append('point', point);
+                window.location.href = '/rank/ranking' + '/?id=' + username + '&point=' + point + '&play_time=' + play_time
+>>>>>>> origin/master
         });
 
 }

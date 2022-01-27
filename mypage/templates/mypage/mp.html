@@ -72,17 +72,16 @@
     <div style="text-align: center;">
         <h1>마이페이지</h1>
         {% csrf_token %}
-        <p>아이디 :  디비에서 가져온 아이디</p>
+        <p>아이디 : {{user.username}}</p>
         <div style="padding: 1%;"><!--db삭제-->
             <button class = custombtn1 onclick="location.href='http://127.0.0.1:8000/mypage/deleteID/'" style="height: 5%; width:20%;" >회원 탈퇴</button >
         </div>
-        <p>비밀번호 :  디비에서 가져온 비밀번호</p>
-
+        <p>비밀번호</p>
         <div style="padding: 2%;">  <!--pw변경-->
             <button class = custombtn1 onclick="location.href='http://127.0.0.1:8000/mypage/changePW/'" style="height: 5%; width:20%;" >PW 변경</button >
         </div>
 
-        <p>이메일: 디비에서 가져온 이메일</p>
+        <p>이메일: {{user.email}}</p>
         <div style="padding: 2%;">  <!--이메일 변경-->
             <button class = custombtn1 onclick="location.href='http://127.0.0.1:8000/mypage/changeEM/'" style="height: 5%; width:23%;" >이메일 변경</button >
         </div>

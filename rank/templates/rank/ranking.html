@@ -45,8 +45,12 @@
         .gmarket_bold{ font-family: 'GmarketSansBold';}
         .italic{ font-style: italic }
         .custombtn {
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 1cm;
+            position: absolute;
             display: inline-block;
-            width: 150px;
+            width: 33%;
             font-weight: 400;
             line-height: 1.2;
             color: #fff;
@@ -59,8 +63,8 @@
             user-select: none;
             border: 1px solid transparent;
             padding: 0.4rem 1.5%;
-            font-size: 1.5rem;
-            border-radius: 0.25rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
             transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
             }
         .custombtn:hover {
@@ -70,7 +74,6 @@
             }
         #score{
             position: absolute;
-            display : inline-block;
             top : 10%;
             left : 7%;
             width: 40%;
@@ -83,7 +86,7 @@
             top : 10%;
             left : 53%;
             width: 40%;
-
+            
             height: 80%;
             background-color : #fff;
             }
@@ -96,6 +99,7 @@
             top : 5%;
             left: 50%;
             transform: translateX(-50%);
+            border-radius :16px;
             }
         #bar2{
             position: relative;
@@ -106,50 +110,68 @@
             top : 0%;
             left: 0%;
             transition : 2s;
+            border-radius :16px;
             }
         #point{
             position: relative;
             top : -15px;
             vertical-align: middle;
             font-size: 1.5rem;
-        }
+            }
         #user{
-            position: relative;
-
-            width: 45%;
-            height: 45%;
+            margin : 0px;
+            display : inline-block;
+            position: absolute;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            background-color : #36602f;
-            top : 40%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-
-        }
+            border: 2px solid #36602f;
+            left:50%;
+            top: 35%;
+            transform: translate(-50%, -50%)
+            }
         .setbtn1{
             padding :20px;
-        }
-        .fsize{
-            font-family: 'IM_Hyemin-Bold', normal;
-            font-weight: 400;
-            line-height: 1.2;
-            font-size: 1.5rem;
-        }
-        .table{
+            }   
+        table {
             border-collapse : collapse;
-            border: 1px solid #bddcb8;
-            margin-left:auto; margin-right:auto; margin-top:8%
+            border: 1px solid #78b76c;
+            margin-left:auto; margin-right:auto; margin-top:8%;
+
+          }
+        th, td {
+            border: 0.5px solid #78b76c;
+          }
+        #user2{
+            position :  absolute;
+            left :          50%;
+            top :           50%;
+            transform:      translate(-50%, -50%);
+            font-size:      50px;
+            font-weight:    bold;
+            text-align:     center;
+            vertical-align: middle;
+            }
+        .score_btn{
+            position :  absolute;
+            display : inline-block;
+            font-size:  50px;
+            width: 22%;
+            height: 10%;
         }
+
+        
     </style>
 </head>
 
 <body>
-    <button class="gohome custombtn Hyemin"  id="submitButton" type="botton" onclick="location.href='/map/home'"> 홈으로 </button>
     <div id = 'score'> 
         <div id = 'bar1'>
             <div id = 'bar2'></div>
             <p id = 'point' class = 'gmarket'></p> 
         </div>
 
+<<<<<<< HEAD
         <div id = user> 아이디랑 이름</div>
             <div style="padding: 4.3%; padding-top:200px; float:left" >
                 <button class = custombtn onclick="location.href='http://127.0.0.1:8000/map/home/'" style="height: 70px;" >홈으로</button >
@@ -165,78 +187,79 @@
                 <p>{{latlong_json}}</p>
                 <button class = custombtn onclick="location.href='http://127.0.0.1:8000/rank/near_food/{{latlong_json}}'" style="height: 70px;">근처 맛집<br>보기</button >
             </div>
-    </div> 
-    <div border:1px solid #ffebb5; background-color:#ffebb5; border-radius:16px;></div>
-    <div class=fsize id = 'rank'>
-        <h1 align = 'center'>RANKING</h2>
-            <table class=table border=1px solid #bddcb8; border-radius :16px; width =90% height=70%>
-                <colgroup>
-                    <col width="20%">
-                    <col width="25%">
-                    <col width="30%">
-                    <col width="25%">
-                </colgroup>
-    
-                <thead>
-                    <tr style="height: 62px; background-color : #bddcb8;">
-                    <th>등수</th>
-                    <th>이름</th>
-                    <th>시간</th>
-                    <th>점수</th>
-                    </tr>
-                </thead>
-    
-                <tbody align = 'center'>
-                    <tr style="height: 70px;">
-                    <td>🥇1등</td>
-                    <td>손현우</td>
-                    <td>30m07s</td>
-                    <td>10점</td>
-                    </tr>
-    
-                    <tr style="height: 70px;">
-                    <td>🥈2등</td>
-                    <td>강민수</td>
-                    <td> 30m07s</td>
-                    <td>9점</td>
-                    </tr>
-    
-                    <tr style="height: 70px;">
-                    <td>🥉3등</td>
-                    <td>배경용</td>
-                    <td> 30m07s</td>
-                    <td> 8점</td>
-                    </tr>
-    
-                    <tr style="height: 70px;">
-                    <td >4등</td>
-                    <td >김효정</td>
-                    <td> 30m07s</td>
-                    <td> 7점</td>
-                    </tr>
-    
-                    <tr style="height: 70px;">
-                        <td >5등</td>
-                        <td >윤지민</td>
-                        <td> 31m07s</td>
-                        <td> 1점</td>
-                        </tr>
-                        
-                </tbody>
-            </table>
-    </div>
-    
+=======
+        <div >
+            <button class = 'custombtn gmarket' style = 'bottom : 3cm; left : 30%;' onclick= "location.href='http://127.0.0.1:8000/map/home/'"> 홈으로</button >
+        </div>
+        <div>
+            <button class = 'custombtn gmarket' style = 'bottom : 3cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/map/quiz/'">다시 하기</button >
+        </div>
+        <div >
+            <button class = 'custombtn gmarket' style = 'left : 3cm; left : 30%;' onclick="location.href='http://127.0.0.1:8000/rank/near_place/'">근처 여행지<br>보기</button>
+        </div>
+        <div >
+            <button class = 'custombtn gmarket' style = 'left : 6cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/rank/near_food/'">근처 맛집<br>보기</button>
+        </div>
 
+        
+
+        <div id = user class = 'Hyemin'>  
+            <div id = user2>{{current_user.username}}</div> 
+            <div id = user2 style="top: 130%; font-size : 25px;width: 150%;">나의 총점수 : {{current_user_point.pnt_sum}}</div> 
+        </div>
+
+>>>>>>> origin/master
+    </div> 
+
+    <div id = 'rank' class = 'Hyemin'>
+        <table class='table' border-radius :16px; width =90%; height=70%>
+            <colgroup>
+                <col width="20%">
+                <col width="25%">
+                <col width="35%">
+                <col width="25%">
+            </colgroup>
+    
+            <thead>
+                <tr style="height: 62px; background-color : #bddcb8;">
+                <th>등수</th>
+                <th>이름</th>
+                <th>총 플레이 시간</th>
+                <th>총 점수</th>
+                </tr>
+            </thead>
+            
+            <tbody align = 'center'>
+                {% for item in data2 %}
+                <tr style="height: 70px;">
+                <th>{{ forloop.counter }}등</th>
+                <th>{{item.user_name}}</th>
+                <th>{{item.time_sum}}</th>
+                <th>{{item.pnt_sum}}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 <script>
 document.body.classList.add("reveal");
+<<<<<<< HEAD
 console.log(JSON.parse(localStorage.getItem("point")));
 let point = JSON.parse(localStorage.getItem("point"));
 document.getElementById("point").innerHTML= '총 획득 점수 : ' + point['first'] ;
+=======
+
+let url = new URL(location.href);
+let urlParams = url.searchParams;
+
+let point = urlParams.get('point');
+document.getElementById("point").innerHTML= '이번 판 획득 점수 : ' +point ;
+>>>>>>> origin/master
 
 setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
     let bar2 = document.getElementById('bar2');
-    bar2.style.width =  point['first']/10 + '%';
+    bar2.style.width =  point/10 + '%';
 }, 10);
 
 

@@ -1,14 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
-    <title>글 삭제</title>
+    <title>글삭제</title>
+    <link href="{% static 'css/default.css' %}" rel="stylesheet" />
 </head>
-<body>
+
+
+
+   
+<body bgcolor = #ebf1eb>
+    <div class="content">
+    <div class="Hyemin">
     <form method="POST">
         {% csrf_token %}
         <h3>{{ Post.postname }} - 삭제하기</h3>
-        <button>삭제 </button>
+        <button class="custombtn Hyemin">삭제 </button>
     </form>
+</div>
+</div>
 </body>
 </html>
