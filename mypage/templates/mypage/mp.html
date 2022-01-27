@@ -1,6 +1,9 @@
 <head>
     <meta charset="utf-8">
     <style>
+        body {
+            background-color: #2a5555;
+          }
         .wrapper {
             border: 1px solid black;
             width: 400px;
@@ -55,14 +58,36 @@
             font-weight: 400;
             line-height: 1.2;
             font-size: 1.5rem;
-            border: 1px solid black;
-            width: 500px;
-            height: 700px;
+            border: 1px solid none;
+            width: 350px;
+            height: 550px;
             padding: 30px;
             margin: auto;
             margin-top: 2%;
-            background: #97dab8;
-            border-radius: 2%;
+            background: #FFFFFF;
+            border-radius: 15px;
+        }
+        .btn {
+            position:relative;
+            left:40%;
+            transform: translateX(-50%);
+            margin-bottom: 40px;
+            width:80%;
+            height:40px;
+            background: linear-gradient(125deg,#81ecec,#2a5555,#81ecec);
+            background-position: left;
+            background-size: 200%;
+            color:white;
+            font-weight: bold;
+            border:none;
+            cursor:pointer;
+            transition: 0.4s;
+            display:inline;
+            border-radius: 5px;
+        }
+          
+        .btn:hover {
+            background-position: right;
         }
         
     </style>
@@ -70,24 +95,24 @@
 <body>
 <div class=fsize>
     <div style="text-align: center;">
-        <h1>마이페이지</h1>
+        <h2>마이페이지</h2>
         {% csrf_token %}
-        <p>아이디 : {{user.username}}</p>
-        <div style="padding: 1%;"><!--db삭제-->
-            <button class = custombtn1 onclick="location.href='http://127.0.0.1:8000/mypage/deleteID/'" style="height: 5%; width:20%;" >회원 탈퇴</button >
+        <h5>현재 아이디 : {{user.username}}</h5>
+        <div><!--db삭제-->
+            <button class = btn onclick="location.href='http://127.0.0.1:8000/mypage/deleteID/'" style="height: 5%; width:80%;" >회원 탈퇴</button >
         </div>
-        <p>비밀번호</p>
-        <div style="padding: 2%;">  <!--pw변경-->
-            <button class = custombtn1 onclick="location.href='http://127.0.0.1:8000/mypage/changePW/'" style="height: 5%; width:20%;" >PW 변경</button >
+        <h5><p>비밀번호 변경</p></h5>
+        <div>  <!--pw변경-->
+            <button class = btn onclick="location.href='http://127.0.0.1:8000/mypage/changePW/'" style="height: 5%; width:80%;" >PW 변경</button >
         </div>
 
-        <p>이메일: {{user.email}}</p>
-        <div style="padding: 2%;">  <!--이메일 변경-->
-            <button class = custombtn1 onclick="location.href='http://127.0.0.1:8000/mypage/changeEM/'" style="height: 5%; width:23%;" >이메일 변경</button >
+        <h5><p>현재 이메일 : {{user.email}}</p></h5>
+        <div style="padding: 1;">  <!--이메일 변경-->
+            <button class = btn onclick="location.href='http://127.0.0.1:8000/mypage/changeEM/'" style="height: 5%; width:80%;" >이메일 변경</button >
         </div>
         
         <div class = center style="padding-top: 30%; padding-top : 10%; padding-left : auto; " >
-            <button class = custombtn onclick="location.href='http://127.0.0.1:8000/'" style="height: 10%;" >확인</button >
+            <button class = btn onclick="location.href='http://127.0.0.1:8000/'" style="height: 10%;" >홈으로</button >
         </div>
         
     </div>

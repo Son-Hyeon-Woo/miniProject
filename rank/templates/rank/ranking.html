@@ -118,36 +118,48 @@
             vertical-align: middle;
             font-size: 1.5rem;
             }
-        #user{
-            margin : 0px;
-            display : inline-block;
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 2px solid #36602f;
-            left:50%;
-            top: 35%;
-            transform: translate(-50%, -50%)
+        #time{
+            position: relative;
+            top : -30px;
+            vertical-align: middle;
+            font-size: 1.2rem;
             }
+
         .setbtn1{
             padding :20px;
             }   
         table {
             border-collapse : collapse;
             border: 1px solid #78b76c;
-            margin-left:auto; margin-right:auto; margin-top:8%;
+            margin-left:auto; margin-right:auto; margin-top:5%;
 
           }
         th, td {
             border: 0.5px solid #78b76c;
           }
-        #user2{
+        #user{
+            font-family: 'IM_Hyemin-Bold';
+            border: 2px solid #36602f;
+            padding: 12px;
+            border-radius: 50px;
+            display : table-cell;
             position :  absolute;
             left :          50%;
-            top :           50%;
+            top :           40%;
             transform:      translate(-50%, -50%);
             font-size:      50px;
+            font-weight:    bold;
+            text-align:     center;
+            vertical-align: middle;
+            }
+        #user2{
+            font-family: 'IM_Hyemin-Bold';
+            display : table-cell;
+            position :  absolute;
+            left :          50%;
+            top :           55%;
+            transform:      translate(-50%, -50%);
+            font-size:      25px;
             font-weight:    bold;
             text-align:     center;
             vertical-align: middle;
@@ -169,42 +181,40 @@
         <div id = 'bar1'>
             <div id = 'bar2'></div>
             <p id = 'point' class = 'gmarket'></p> 
+            <p id = 'time' class = 'gmarket'></p> 
         </div>
         
+
         <div >
-            <button class="custombtn gmarket" style = 'bottom : 4.5cm; left : 70%;' onclick= "location.href='http://127.0.0.1:8000/pb/blog/'"> 다른 여행지<br>공유</button>
-        </div>
-        <div >
-            <button class = 'custombtn gmarket' style = 'bottom : 3cm; left : 30%;' onclick= "location.href='http://127.0.0.1:8000/map/home/'"> 홈으로</button >
+            <button class = 'custombtn gmarket' style = 'padding-top:2%; padding-bottom:2%; bottom : 3cm; left : 30%;' onclick= "location.href='http://127.0.0.1:8000/map/home/'"> 홈으로</button >
         </div>
         <div>
-            <button class = 'custombtn gmarket' style = 'bottom : 3cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/map/quiz/'">다시 하기</button >
+            <button class = 'custombtn gmarket' style = 'padding-top:2%; padding-bottom:2%; bottom : 3cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/map/quiz/'">다시 하기</button >
         </div>
         <div >
-            <button class = 'custombtn gmarket' style = 'left : 3cm; left : 30%;' onclick="location.href='http://127.0.0.1:8000/rank/near_place/'">근처 여행지<br>보기</button>
+            <button class = 'custombtn gmarket' style = 'left : 3cm; left : 30%;' onclick="location.href='http://127.0.0.1:8000/pb/blog/'">다른 여행지<br>공유</button>
         </div>
         <div >
             <button class = 'custombtn gmarket' style = 'left : 6cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/rank/near_food/'">근처 맛집<br>보기</button>
         </div>
 
-        
 
-        <div id = user class = 'Hyemin'>  
-            <div id = user2>{{current_user.username}}</div> 
-            <div id = user2 style="top: 130%; font-size : 25px;width: 150%;">나의 총점수 : {{current_user_point.pnt_sum}}</div> 
-        </div>
+        <div id = user> {{current_user.username}}</div>
+        <div id = user2 >나의 총점수 : {{current_user_point.pnt_sum}}</div> 
 
     </div> 
 
     <div id = 'rank' class = 'Hyemin'>
+        
         <table class='table' border-radius :16px; width =90%; height=70%>
             <colgroup>
-                <col width="20%">
-                <col width="25%">
+                <col width="15%">
+                <col width="28%">
                 <col width="35%">
                 <col width="25%">
             </colgroup>
-    
+
+            <h1 style="text-align: center; font-size:270%">👑RANKING👑</h1>
             <thead>
                 <tr style="height: 62px; background-color : #bddcb8;">
                 <th>등수</th>
@@ -216,10 +226,10 @@
             
             <tbody align = 'center'>
                 {% for item in data2 %}
-                <tr style="height: 70px;">
+                <tr style="height: 53px;">
                 <th>{{ forloop.counter }}등</th>
                 <th>{{item.user_name}}</th>
-                <th>{{item.time_sum}}</th>
+                <th>{{item.time_sum}}초</th>
                 <th>{{item.pnt_sum}}</th>
                 </tr>
                 {% endfor %}
@@ -230,12 +240,12 @@
 <script>
 document.body.classList.add("reveal");
 
-let url = new URL(location.href);
-let urlParams = url.searchParams;
 
-let point = urlParams.get('point');
+let point = sessionStorage.getItem("point");
+let time = sessionStorage.getItem("play_time");
+
 document.getElementById("point").innerHTML= '이번 판 획득 점수 : ' +point ;
-
+document.getElementById("time").innerHTML= '이번 판 플레이 시간 : ' + time + '초' ;
 setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
     let bar2 = document.getElementById('bar2');
     bar2.style.width =  point/10 + '%';

@@ -24,51 +24,57 @@
     }
     </script>
         
-        
-
 </head>
 
 <body>
 <!-- 상단바를 표시할 div 입니다 -->
 <nav class="Hyemin">
-    <h2 id = 'hello' style = 'text-align: center;'>이 곳을 맞춰볼까요?</h2>
+    <div id = 'hello' style = 'text-align: center;'>🌍 이 곳을 맞춰볼까요? 🌍</div>
     <button class="gohome custombtn Hyemin" 
             id="submitButton" 
             type="botton" 
             onclick="location.href='/map/home'"
-            style = "padding: 0.4rem 1.5%;"> 홈으로 </button></div>
+            style = "padding: 0.2rem 1.5%; border-radius : 2rem"> 홈으로 </button></div>
     <a class="login btn gmarket" 
-        style = "background-color : #50727272; top : 5px; right : 35px; height : 3.5rem; width : 3.5rem;"
+        style = "background-color : #50727272; top : 13px; right : 35px; height : 3.5rem; width : 3.5rem;"
         href = "">
         <img src="{% static 'assets/img/smile.png' %}" width=45px, height=45px>
         <a  id = 'user_info' 
             class = 'gmarket'
-            style = 'top:25px; right : 100px; width : 200px;'> 다른 장소로 할래요! ->
+            style = ' top:15px; right : 100px; width : 180px;'> 다른 장소로 갈래요! ▶️
         </a> 
     </a>
+
+    <a class="login btn gmarket" 
+        style = "cursor: pointer; background-color : #50727272; top : 13px; right : 310px; height : 3.5rem; width : 3.5rem;"
+        id = "reset">
+        <img src="{% static 'assets/img/reset.png' %}" width=45px, height=45px>
+        <a  id = 'user_info' 
+            class = 'gmarket'
+            style = 'top:45px; right : 150px; width : 140;'>    ◀️ 시작 위치로!
+        </a> 
+    </a>
+
+
 </nav>
 
 <!-- 로드뷰를 표시할 div 입니다 -->
-<div  id="roadview" style="width:100%;height:750px;border-radius: 5px"></div>
+<div  id="roadview" style="position : relative; top : 20px; width:100%;height:750px;border-radius: 5px"></div>
 
 <!-- 미니맵를 표시할 div 입니다 -->
 <div id="minimap" class = 'minimap'></div>
-
-<p id = where></p> <!-- 나중에 수정 div-->
-
-<!-- 글자 출력중인 div-->
 
 <!-- 제출 후 팝업 띄우는 div-->
 <div>
     <button class = 'custombtn gmarket' 
             id="show" 
-            style = 'visibility : hidden; position : relative; left : 25%; '> 제출하기 </button>
+            style = 'visibility : hidden; position : relative; left : 35%; bottom : -1cm '> 제출하기 </button>
     <div class="background">
         <div class="window">
             <div class="popup">
                 <p id = 'dist' class = 'gmarket'></p>
                 <div class="popup" id = 'popanswer'></div>
-                <button id="close" class = 'gmarket custombtn'>점수 확인</button>
+                <button id="close" class = 'gmarket custombtn' style = 'padding : 0.2rem 4rem; bottom : -6%'>점수 확인</button>
             </div>
         </div>
     </div>
@@ -82,7 +88,7 @@ let start = new Date(); //플레이 타임 기록용
 document.body.classList.add("reveal"); // 화면전환 효과용
 
 let latlong = JSON.parse("{{ latlong_json|escapejs }}");     //view에서 넘어논 json데이터 js 변수로 선언
-document.getElementById('where').innerHTML = latlong['name']
+
 
 // * * * * * * * * * * * * * * * * * * 로드뷰 JS  * * * * * * * * * * * * * * * * * * * * * *
 var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
@@ -94,6 +100,14 @@ var position = new kakao.maps.LatLng(latlong['lat'], latlong['long']);  // 넘�
 roadviewClient.getNearestPanoId(position, 50, function(panoId) {
     roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
 });
+
+document.querySelector("#reset").addEventListener("click", reset);
+function reset() {
+    roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+        roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+    });
+}
+
 
 
 // * * * * * * * * * * * * * * * * * * 미니맵 JS * * * * * * * * * * * * * * * * * * * * * *
@@ -251,15 +265,16 @@ document.querySelector("#close").addEventListener("click", close);
 
 // 점수확인 버튼 클릭시 페이지 이동
 function close() {
+    document.querySelector(".background").className = "background";
     let user = JSON.parse("{{ user|escapejs }}");   //현재 사용자의 정보
     let end = new Date();                           // 플레이타임 기록용
     let play_time = Math.round((end - start) / 1000)
     let username = user['name'];
 
+    sessionStorage.setItem("play_time", play_time );
+    sessionStorage.setItem("point", point );
+    sessionStorage.setItem("username", username );
 
-
-    document.querySelector(".background").className = "background";
-    
     const csrftoken = getCookie('csrftoken');
     const formData = new FormData();
 
@@ -274,8 +289,7 @@ function close() {
         headers: { 'X-CSRFToken': csrftoken }
     });
         data.then(function (result) {
-        formData.append('point', point);
-                window.location.href = '/rank/ranking' + '/?id=' + username + '&point=' + point + '&play_time=' + play_time
+            window.location.href = '/rank/ranking'// + '/?id=' + username + '&point=' + point + '&play_time=' + play_time
         });
 }
 </script>

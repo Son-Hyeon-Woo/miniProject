@@ -8,15 +8,17 @@ from django.shortcuts import redirect
 from mapquiz.models import QuizLog
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from mapquiz.models import Place
 
-
-def finish(request):
-    return render(request, 'rank/finish.html')
 
 def near_food(request):
-    request.session.get('place_id', '0')
-    around_place=Around_place.objects.all()
-    return render(request, 'rank/near_food.html', { 'data': around_place })
+    a=request.session.get('place_id', '0')
+    print(a)
+    place=Place.objects.filter(place_id=a)
+    #place=Place.objects.all()
+    around_place=Around_place.objects.filter(id_p=a)
+    
+    return render(request, 'rank/near_food.html',{ 'data': around_place ,'data2' : place})
 
 def near_place(request):
     return render(request, 'rank/near_place.html')
@@ -32,9 +34,9 @@ def ranking(request):
             point = point,
             play_time = play_time
         )
-        d1 = {'user_id':user_id,'point':point,'play_time':play_time}
-        temp =  json.dumps(d1)
-        return JsonResponse(temp, safe=False)
+        data = {'good':'잘 저장되었음!'}
+        data =  json.dumps(data)
+        return JsonResponse(data, safe=False)
     
     else:
         data = (QuizLog.objects
@@ -44,7 +46,7 @@ def ranking(request):
             .values('user_id','pnt_sum','time_sum')
             .order_by('-pnt_sum'))
         data2 = []
-        cnt = 1
+        cnt = 0
         for i in data:
             data2.append({'user_name' : User.objects.get(id = i['user_id']), 'pnt_sum' : i['pnt_sum'], 'time_sum':i['time_sum']})
             cnt += 1

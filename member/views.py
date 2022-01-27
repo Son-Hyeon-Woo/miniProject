@@ -10,18 +10,25 @@ from django.contrib.auth.models import User
 
 #회원가입
 def signup(request): 
-    if request.method == 'POST': 
-        if request.POST['password1'] == request.POST['password2']: 
-            user = User.objects.create_user( 
-                username=request.POST['username'], 
-                password=request.POST['password1'], 
-                email=request.POST['email'],
-            ) 
-            auth.login(request, user)
-            user.save()
-            return redirect('/') 
-        return render(request, 'signuperror.html') 
-    return render(request, 'signup.html')
+    try:
+        if request.method == 'POST': 
+            if request.POST['password1'] == request.POST['password2']:
+                if request.POST['username'] != '' and request.POST['email'] != '':
+                    user = User.objects.create_user( 
+                        username=request.POST['username'], 
+                        password=request.POST['password1'], 
+                        email=request.POST['email'],
+                    ) 
+                    auth.login(request, user)
+                    user.save()
+                    return redirect('/')
+                else:
+                    return render(request, 'signuperror3.html')
+                    
+            return render(request, 'signuperror.html') 
+        return render(request, 'signup.html')
+    except:
+        return render(request, 'signuperror2.html') 
 #로그인
 def login(request):
     if request.method == 'POST':

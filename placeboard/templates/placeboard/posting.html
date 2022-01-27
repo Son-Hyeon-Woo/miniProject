@@ -7,9 +7,19 @@
     <meta charset="UTF-8">
     <title>Posting!</title>
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
-    
+
+    <style>
+        #back{
+            position: absolute;
+            top : 6%;
+            left : 28%;
+            width: 40%;
+            height: 80%;
+            background-color : #fff;
+            }
+    </style>
 </head>
- 
+
     <body bgcolor = #ebf1eb>
         <div class="social-icons">
             <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
@@ -28,14 +38,16 @@
             {% endif %}
             </div>
         </div>
-        <div class=" content">
+
+        <div id=back class=" content">
             <div class="Hyemin">
-                <h1>제목 :{{post.postname}}</h1>
-                <p>작성자 :{{post.writer}}  <p style="text-align:right">작성일자 :{{post.date}}</p>
+                <h1 style="text-align: center; font-size : 250%" >제목 :{{post.postname}}</h1>
+                <p style="text-align:right">작성자 :{{post.writer}}  <p style="text-align:right;">작성일자 :{{post.date}}</p>
             </div>
             <hr />
         
         <!-- 이미지 보여주기 -->
+        <center>
         {% if post.mainphoto %}
             <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
             <br>
@@ -79,6 +91,15 @@
             <a class="custombtn Hyemin" href="edit/">수정</a>
             <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
             
+        
+        <p style="margin-left: 15%; margin-right:15%;">{{post.contents}}</p>
+        </center>
+        <!-- 버튼 -->
+        <div style="margin-left: 15%; margin-top:10%">
+                <a class="custombtn Hyemin" href="remove/">삭제</a>
+                <a class="custombtn Hyemin" href="edit/">수정</a>
+                <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
+            </div>
         </div>
         
     </body>

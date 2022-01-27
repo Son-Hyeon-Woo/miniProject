@@ -6,6 +6,16 @@
     <meta charset="UTF-8">
     <title>글쓰기 페이지</title>
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
+    <style>
+        #back{
+            position: absolute;
+            top : 6%;
+            left : 28%;
+            width: 40%;
+            height: 80%;
+            background-color : #fff;
+            }
+    </style>
 </head>
 
 
@@ -27,36 +37,46 @@
         {% endif %}
         </div>
     </div>
-    <div class="content">
-    <div class="Hyemin">
-        <h1>여행지 소개</h1>
-    </div>
-    <form class="Hyemin" action="/pb/blog/new_post/" method="POST" enctype='multipart/form-data'>
-        {% csrf_token %}
+    <div id = back class="content">
+        <div class="Hyemin">
+            <h1 style="text-align: center; font-size : 250%">여행지 소개</h1>
+        </div>
+        <form class="Hyemin" action="/pb/blog/new_post/" method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
 
+            <!-- 제목 -->
+            <div style="padding-left:25%; padding-right:2%; margin-top:5%; font-size: 140%; float: left;">
+            {{fileuploadForm.postname.label}} :
+            </div>
+            <!-- 제목 텍스트 -->
+            <input type="text" name="postname" maxlength="128" required="" id="id_postname" style="height: 25px; width:300px; margin-top:5%; ">
+            <br><br>
+            <!-- 내용 -->
+            <div style="padding-left:25%; padding-right:3%; margin-top:5%; font-size: 140%;">
+            {{fileuploadForm.contents.label}}
+            </div>
+            <!-- 내용 텍스트 -->
+            <textarea name="contents" cols="40" rows="10" required="" id="id_contents" style="height: 180px; width:400px; margin-top:1%; margin-left : 25%"></textarea>
+            <br>
+            <!-- 파일 -->
+            <div style="padding-left:25%; padding-right:3%; margin-top:5%; font-size: 140%; float: left;">
+            {{fileuploadForm.mainphoto.label}}
+            </div>
+            <!-- 파일 첨부 -->
+            <input type="file" name="mainphoto" accept="image/*" required="" id="id_mainphoto" style="height: 30px; width:300px; margin-top:5%;">
+            <br>
 
-        
-        {{fileuploadForm.postname.label}}
-        {{fileuploadForm.postname}}
-        <br>
-        {{fileuploadForm.contents.label}}
-        {{fileuploadForm.contents}}
-        <br>
-        {{fileuploadForm.mainphoto.label}}
-        {{fileuploadForm.mainphoto}}
-        <br>
-
-        {% comment %} 제목<br>
-        <input type="text" name="postname"><br>
-        내용<br>
-        <textarea rows="10" cols="50" name="contents"></textarea><br> 
-        <input type="file" name="mainphoto"><br> {% endcomment %}
-
-
-        <br>
-        <input class="custombtn Hyemin" type="submit" value="글쓰기">
-        <button class="custombtn Hyemin"><a onclick="location.href='/pb/blog'">뒤로가기</a></button>
-    </form>
+            <!-- 제목<br>
+            <input type="text" name="postname"><br>
+            내용<br>
+            <textarea rows="10" cols="50" name="contents"></textarea><br> 
+            <input type="file" name="mainphoto"><br> -->
+            <br>
+            <div style="padding-left: 30%; margin-top:15%">
+            <input class="custombtn Hyemin" type="submit" value="글쓰기">
+            <button class="custombtn Hyemin"><a onclick="location.href='/pb/blog'">뒤로가기</a></button>
+            </div>
+        </form>
     </div>
 </body>
 </html>

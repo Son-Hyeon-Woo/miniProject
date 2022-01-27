@@ -6,6 +6,16 @@
     <meta charset="UTF-8">
     <title>글삭제</title>
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
+    <style>
+        #back{
+            position: absolute;
+            top : 6%;
+            left : 28%;
+            width: 40%;
+            height: 80%;
+            background-color : #fff;
+            }
+    </style>
 </head>
 
 
@@ -29,15 +39,19 @@
         {% endif %}
         </div>
     </div>
-    <div class="content">
+
+    <div id = back class="content">
     <div class="Hyemin">
+    <center style="margin-top: 30%;">
     <form method="POST">
         {% csrf_token %}
-        <h3>{{ post.postname }} - 삭제하기</h3>
+        <h3 style="font-size: 200%;">'{{ post.postname }}' 게시글을<br>삭제하시겠습니까?</h3>
+        <br><br><br><br>
         <button class="custombtn Hyemin">삭제 </button>
 
         <a class="custombtn Hyemin" onclick="location.href='/pb/blog/{{post.pk}}/'">취소</a>
     </form>
+    </center>
 </div>
 </div>
 </body>

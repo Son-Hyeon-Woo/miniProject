@@ -57,7 +57,7 @@ def changeEM(request):
         origin_email = user.email
         new_email = request.POST["new_email"]
 
-        if origin_email != new_email:
+        if origin_email != new_email and new_email != '':
             user.email = new_email
             user.save()
             auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
