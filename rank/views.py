@@ -10,8 +10,6 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from mapquiz.models import Place
 
-def finish(request):
-    return render(request, 'rank/finish.html')
 
 def near_food(request):
     a=request.session.get('place_id', '0')
