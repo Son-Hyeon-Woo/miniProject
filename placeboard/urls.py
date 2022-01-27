@@ -17,6 +17,8 @@ urlpatterns = [
     path('blog/<int:pk>/edit/', boardEdit, name='edit'),
     path('blog/<int:pk>/download/', download, name='download'),
     path('blog/<int:pk>/comment_create/', comment_create, name='comment_create'),
-    path('blog/<int:pk>/comments/<int:comment_id>/delete', comment_delete, name='comment_delete'),
+
 
 ]
+
+

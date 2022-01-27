@@ -7,11 +7,32 @@
     <meta charset="UTF-8">
     <title>Posting!</title>
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    </script>
+
     <style>
         .content2{
             position: relative;
+            border-radius: 15px;
+            box-shadow: 5px 5px 10px rgba(61, 61, 61, 0.5);
             left: 50%;
-            transform: translate(-50%,15%);
+            transform: translate(-50%,3%);
             display: block;
             height: 90%;
             width: 50%;
@@ -68,19 +89,19 @@
         <div class="content content2">
             <div class="Hyemin">
                 <h1 style="text-align: center; font-size : 250%" >제목 :{{post.postname}}</h1>
-                <p style="text-align:right">작성자 :{{post.writer}}  <p style="text-align:right;">작성일자 :{{post.date}}</p>
+                <p style="text-align:right">작성자 :{{post.writer}}</p>  <p style="text-align:right;">작성일자 :{{post.date}}</p>
             </div>
         
         <!-- 이미지 보여주기 -->
-        <center>
-        {% if post.mainphoto %}
-            <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
-            <br>
-        {% endif %}
-        <p>{{post.contents}}</p>
+            <center>
+            {% if post.mainphoto %}
+                <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
+                <br>
+            {% endif %}
+            <p>{{post.contents}}</p>
 
         <!--댓글달기-->
-        <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
+            <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
             {% csrf_token %}    <!-- 우리 웹 서버에서 어떤 작성이 일어날때는 csrf_token이 필요하다라는 의미 // 보안상 필요 -->
             <input type="text" name="content" size="50%" placeholder="댓글을 입력해 주세요.">
             <input class="btn Hyemin " type="submit" value="댓글달기">
@@ -91,81 +112,29 @@
                     {{ message.tags }}! {{ message.message }}
                 {% endfor %}
                 </div>
-            {% comment %} <center>
-            {% if post.mainphoto %}
-                <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
-                <br> {% endcomment %}
             {% endif %}
-     
+            <hr />
+            <p><b>댓글 목록</b></p>
+            </center>
 
-        <p><b>댓글 목록</b></p>
-        </center>
-        {% for comment in comments %}
-            
-                <!-- comment_id=comment.id  같은 의미-->
-            <form action="{% url 'placeboard:comment_delete' post.pk comment.id %}" method="post">
+         
+            <form>
+            {% for comment in comments %}
                 {{ comment.comment }} &nbsp | &nbsp {{ comment.writer }} &nbsp | &nbsp {{ comment.date|date:"m-d/H:i"  }} &nbsp
-                {% csrf_token %}
-            <input class="btn Hyemin" type="submit" value="삭제">
-            </form>
-            
+
+                <button type="button" class = 'delete' id={{comment.id}} onclick="deleteFun({{comment.id}});">삭제</button>
             <br>
-        {% empty %}
-            <p>아직 댓글이 없습니다.</p>
-        {% endfor %}
-        <hr />
+            {% empty %}
+                <p>아직 댓글이 없습니다.</p>
+            {% endfor %}
+            </form>
+            <hr />
         
-        <center>
-            {% comment %} <p class = 'gmarket'>{{post.contents}}</p> {% endcomment %}
+            <center>
 
             <a class="custombtn Hyemin top_btn" href="download/">사진 저장하기</a>
 
             <div style="position: relative; top:15px">
-
-            {% comment %}
-                <button id = 'help' class = 'gmarket'>삭제</button>  
-                <div class="background">
-                    <div class="window">
-                        <div class="popup">
-                        <p id = 'dist' class = 'gmarket'></p>
-                        <p class="mb-5 Hyemin">  삭제하시겠습니까?</p>
-                        </div>
-                    </div>
-                </div>
-            {% endcomment %}
-
-
-
-            {% comment %} <p><b>댓글 목록</b></p>
-            {% for comment in comments %}
-                <li>{{ comment.comment }} //{{ comment.writer }}/{{ comment.date }}</li>
-
-                <!--<form action="{# url 'boards:comment_delete' board_id=board.id comment_id=comment.id #}"></form> 같은 의미-->
-            <form action="{% url 'placeboard:comment_delete' post.id comment.id %}" method="post">
-                {% csrf_token %}
-            <input class="custombtn3 Hyemin" type="submit" value="삭제">
-            </form>
-
-<!--충돌부분      -->
-            {% empty %}
-                <p>아직 댓글이 없습니다.</p>
-            {% endfor %}
-
-            <hr />
-            <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
-                {% csrf_token %}    <!-- 우리 웹 서버에서 어떤 작성이 일어날때는 csrf_token이 필요하다라는 의미 // 보안상 필요 -->
-                <input type="text" name="content" size="50%" placeholder="댓글을 입력해 주세요.">
-                <input class="custombtn3 Hyemin" type="submit" value="댓글달기">
-
-                {% if messages %}
-                    <div>
-                    {% for message in messages %}
-                        {{ message.tags }}! {{ message.message }}
-                    {% endfor %}
-                    </div>
-                {% endif %}
-            </form>
-            <hr /> {% endcomment %}
         
             <a class="custombtn Hyemin" href="remove/">삭제</a>
             <a class="custombtn Hyemin" href="edit/">수정</a>
@@ -174,5 +143,37 @@
             </center>
 
         </div>
+
+
+        <script>
+            const csrftoken = getCookie('csrftoken');
+            //document.getElementById('delete').addEventListener("click", deleteFun());
+            //document.getElementById('delete').addEventListener("click", deleteFun);
+
+
+            //console.log(document.getElementsByClassName('delete')[0].id)
+
+
+            function deleteFun(a) {
+                //console.log(a)
+                const formData = new FormData();
+                formData.append('id', a);
+                //console.log(document.getElementsByClassName('delete'))
+                //document.getElementsByClassName('delete')[a-1].id
+                const data = axios({
+                    url: "",
+                    method: 'POST',
+                    data : formData,
+                    headers: { 'X-CSRFToken': csrftoken }
+                });
+                    data.then(function (result) {
+                        var obj = JSON.parse(result['data']);
+                        console.log(obj['pk'])
+                        window.location.href ='http://127.0.0.1:8000/pb/blog/' + obj['pk']
+                    });  
+            };
+
+
+        </script>
     </body>
 </html>

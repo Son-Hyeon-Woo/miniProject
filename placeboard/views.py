@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 # View에 Model(Post 게시글) 가져오기
 from .models import *
@@ -11,7 +11,7 @@ from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 import urllib.parse
-
+import json
 from django.contrib import messages
 
 @login_required
@@ -27,13 +27,25 @@ def blog(request):
 
 
 def posting(request, pk):
-    # 게시글(Post) 중 pk(primary_key)를 이용해 하나의 게시글(post)를 검색
-    post = Post.objects.get(pk=pk)
-    # comment = Comment.objects.get(pk=pk)
-    comments = post.comment_set.order_by('-id').all()
-    context = {'post': post, 'comments': comments}
-    # posting.html 페이지를 열 때, 찾아낸 게시글(post)을 post라는 이름으로 가져옴
-    return render(request, 'placeboard/posting.html', context)
+    if request.method == 'POST':
+        
+        temp = request.POST.get('id')
+        print(temp)
+        comment = Comment.objects.get(pk=temp)
+        comment.delete()
+        data = {'pk': pk}
+        data =  json.dumps(data)
+        return JsonResponse(data, safe=False)
+
+    else:
+        # 게시글(Post) 중 pk(primary_key)를 이용해 하나의 게시글(post)를 검색
+        post = Post.objects.get(pk=pk)
+        # comment = Comment.objects.get(pk=pk)
+        comments = post.comment_set.order_by('-id').all()
+
+        context = {'post': post, 'comments': comments}
+        # posting.html 페이지를 열 때, 찾아낸 게시글(post)을 post라는 이름으로 가져옴
+        return render(request, 'placeboard/posting.html', context)
 
 def new_post(request):
     if request.method == 'POST':
@@ -115,9 +127,4 @@ def comment_create(request,pk):
         return redirect('placeboard:posting', pk)   
     
     
-def comment_delete(request, pk, comment_id):
-    # 댓글 삭제 로직
-    comment = Comment.objects.get(pk=comment_id)
-    comment.delete()
 
-    return redirect('placeboard:posting', pk)
