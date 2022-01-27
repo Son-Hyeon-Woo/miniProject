@@ -11,7 +11,3 @@ class FileUploadForm(ModelForm):
         model = Post
         fields = ['postname', 'mainphoto', 'contents']
 
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model=Comment
-        fields=['comment']
