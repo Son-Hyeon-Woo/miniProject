@@ -10,6 +10,23 @@
 
 
     <body bgcolor = #ebf1eb>
+        <div class="social-icons">
+            <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
+            {% if user.is_authenticated %}
+            <a class="login gmarket" href = '/mypage/mp'>
+                <img src="{% static 'assets/img/smile.png' %}" width=40px, height=40px>
+                <a id = 'user_info' class = 'gmarket'> {{ user.username }}님 <br>  반가워요!</a> 
+                <a id = 'logout' class = 'gmarket' href = '/member/logout'>로그아웃!</a> 
+            </a>
+                
+            {% else %}
+                <a class="login gmarket" href="/member/login">
+                <img src="{% static 'assets/img/man.png' %}" width=40px, height=40px>
+                <a class = 'gmarket blink' id = 'user_info' > 로그인을 해주세요</a> 
+                </a>
+            {% endif %}
+            </div>
+        </div>
       <div class="content">
           <div class="Hyemin">
             <h1>수정 페이지</h1>
@@ -36,7 +53,7 @@
         <br> {% endcomment %}
         <input class="custombtn Hyemin" type="submit" value="수정하기">
         
-        <a class="custombtn Hyemin" onclick="location.href='/pb/blog/{{post.pk}}/'">게시판으로</a>
+        <a class="custombtn Hyemin" onclick="location.href='/pb/blog/{{post.pk}}/'">뒤로가기</a>
         
         
     </form>
