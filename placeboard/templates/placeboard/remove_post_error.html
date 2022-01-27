@@ -22,8 +22,10 @@
         {% csrf_token %}
         <h3 style="font-size: 200%;">'{{ post.postname }}' 게시글을<br>삭제할 권한이 없습니다.</h3>
         <br><br><br><br>
+        <a href="/pb/blog/{{post.pk}}/">
+            <button type="button" class="btn">돌아가기</button>
+        </a>
 
-        <a class="custombtn Hyemin" onclick="location.href='/pb/blog/{{post.pk}}/'">돌아가기</a>
     </form>
     </center>
 </div>
