@@ -32,9 +32,9 @@ def ranking(request):
             point = point,
             play_time = play_time
         )
-        d1 = {'user_id':user_id,'point':point,'play_time':play_time}
-        temp =  json.dumps(d1)
-        return JsonResponse(temp, safe=False)
+        data = {'good':'잘 저장되었음!'}
+        data =  json.dumps(data)
+        return JsonResponse(data, safe=False)
     
     else:
         data = (QuizLog.objects

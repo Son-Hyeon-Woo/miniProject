@@ -251,15 +251,16 @@ document.querySelector("#close").addEventListener("click", close);
 
 // 점수확인 버튼 클릭시 페이지 이동
 function close() {
+    document.querySelector(".background").className = "background";
     let user = JSON.parse("{{ user|escapejs }}");   //현재 사용자의 정보
     let end = new Date();                           // 플레이타임 기록용
     let play_time = Math.round((end - start) / 1000)
     let username = user['name'];
 
+    sessionStorage.setItem("play_time", play_time );
+    sessionStorage.setItem("point", point );
+    sessionStorage.setItem("username", username );
 
-
-    document.querySelector(".background").className = "background";
-    
     const csrftoken = getCookie('csrftoken');
     const formData = new FormData();
 
@@ -274,8 +275,7 @@ function close() {
         headers: { 'X-CSRFToken': csrftoken }
     });
         data.then(function (result) {
-        formData.append('point', point);
-                window.location.href = '/rank/ranking' + '/?id=' + username + '&point=' + point + '&play_time=' + play_time
+            window.location.href = '/rank/ranking'// + '/?id=' + username + '&point=' + point + '&play_time=' + play_time
         });
 }
 </script>

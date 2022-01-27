@@ -118,6 +118,12 @@
             vertical-align: middle;
             font-size: 1.5rem;
             }
+        #time{
+            position: relative;
+            top : -30px;
+            vertical-align: middle;
+            font-size: 1.2rem;
+            }
         #user{
             margin : 0px;
             display : inline-block;
@@ -127,7 +133,7 @@
             border-radius: 50%;
             border: 2px solid #36602f;
             left:50%;
-            top: 35%;
+            top: 50%;
             transform: translate(-50%, -50%)
             }
         .setbtn1{
@@ -143,9 +149,12 @@
             border: 0.5px solid #78b76c;
           }
         #user2{
+            font-family: 'IM_Hyemin-Bold';
+            
+            display : table-cell;
             position :  absolute;
             left :          50%;
-            top :           50%;
+            top :           40%;
             transform:      translate(-50%, -50%);
             font-size:      50px;
             font-weight:    bold;
@@ -169,6 +178,7 @@
         <div id = 'bar1'>
             <div id = 'bar2'></div>
             <p id = 'point' class = 'gmarket'></p> 
+            <p id = 'time' class = 'gmarket'></p> 
         </div>
         
         <div >
@@ -188,11 +198,10 @@
         </div>
 
         
+        <div id = user2 stlye = 'border: 2px solid #36602f;'> {{current_user.username}}</div>
+        <div id = user2 style="top: 49%; font-size : 25px;">나의 총점수 : {{current_user_point.pnt_sum}}</div> 
 
-        <div id = user class = 'Hyemin'>  
-            <div id = user2>{{current_user.username}}</div> 
-            <div id = user2 style="top: 130%; font-size : 25px;width: 150%;">나의 총점수 : {{current_user_point.pnt_sum}}</div> 
-        </div>
+
 
     </div> 
 
@@ -219,7 +228,7 @@
                 <tr style="height: 70px;">
                 <th>{{ forloop.counter }}등</th>
                 <th>{{item.user_name}}</th>
-                <th>{{item.time_sum}}</th>
+                <th>{{item.time_sum}}초</th>
                 <th>{{item.pnt_sum}}</th>
                 </tr>
                 {% endfor %}
@@ -230,12 +239,12 @@
 <script>
 document.body.classList.add("reveal");
 
-let url = new URL(location.href);
-let urlParams = url.searchParams;
 
-let point = urlParams.get('point');
+let point = sessionStorage.getItem("point");
+let time = sessionStorage.getItem("play_time");
+
 document.getElementById("point").innerHTML= '이번 판 획득 점수 : ' +point ;
-
+document.getElementById("time").innerHTML= '이번 판 플레이 시간 : ' + time + '초' ;
 setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
     let bar2 = document.getElementById('bar2');
     bar2.style.width =  point/10 + '%';
