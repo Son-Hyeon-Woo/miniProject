@@ -68,7 +68,7 @@
             <p>아직 댓글이 없습니다.</p>
         {% endfor %}
         <hr />
-        
+        <!--댓글달기-->
         <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
             {% csrf_token %}    <!-- 우리 웹 서버에서 어떤 작성이 일어날때는 csrf_token이 필요하다라는 의미 // 보안상 필요 -->
             <input type="text" name="content" size="50%" placeholder="댓글을 입력해 주세요.">
@@ -86,7 +86,7 @@
         <hr />
    
 
-<!--충돌부분    -----------------------------------------------------------------------------------  -->
+<!--충돌부분      -->
             <a class="custombtn Hyemin" href="remove/">삭제</a>
             <a class="custombtn Hyemin" href="edit/">수정</a>
             <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  

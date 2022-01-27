@@ -101,9 +101,9 @@ def comment_create(request,pk):
         return redirect('placeboard:posting', pk)   
     
     
-def comment_delete(request, board_id, comment_id):
+def comment_delete(request, pk, comment_id):
     # 댓글 삭제 로직
     comment = Comment.objects.get(pk=comment_id)
     comment.delete()
 
-    return redirect('boards:detail', board_id)
+    return redirect('placeboard:posting', pk)
