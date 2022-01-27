@@ -33,7 +33,7 @@
                 <h1>제목 :{{post.postname}}</h1>
                 <p>작성자 :{{post.writer}}  <p style="text-align:right">작성일자 :{{post.date}}</p>
             </div>
-            
+            <hr />
         
         <!-- 이미지 보여주기 -->
         {% if post.mainphoto %}
@@ -42,22 +42,40 @@
         {% endif %}
         <p>{{post.contents}}</p>
 
+        <p><b>댓글 목록</b></p>
+        {% for comment in comments %}
+            <li>{{ comment.comment }} //{{ comment.writer }}/{{ comment.date }}</li>
 
-        {% comment %} <button id = 'help' class = 'gmarket'>삭제</button>  
-            <div class="background">
-              <div class="window">
-                  <div class="popup">
-                      <p id = 'dist' class = 'gmarket'></p>
-                        <p class="mb-5 Hyemin">  삭제하시겠습니까?</p> {% endcomment %}
+            <!--<form action="{# url 'boards:comment_delete' board_id=board.id comment_id=comment.id #}"></form> 같은 의미-->
+        <form action="{% url 'placeboard:comment_delete' post.id comment.id %}" method="post">
+            {% csrf_token %}
+        <input class="custombtn3 Hyemin" type="submit" value="삭제">
+        </form>
 
-                        <a class="custombtn Hyemin" href="remove/">삭제</a>
-                        
-                      
-{% comment %}                         
-                      <button id="close" class = 'gmarket custombtn' style = 'bottom : -10%'>닫기</button>
-                  </div>    
-              </div>
-            </div> {% endcomment %}
+        {% empty %}
+            <p>아직 댓글이 없습니다.</p>
+        {% endfor %}
+        <hr />
+        
+        <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
+            {% csrf_token %}    <!-- 우리 웹 서버에서 어떤 작성이 일어날때는 csrf_token이 필요하다라는 의미 // 보안상 필요 -->
+            <input type="text" name="content" size="50%" placeholder="댓글을 입력해 주세요.">
+            <input class="custombtn3 Hyemin" type="submit" value="댓글달기">
+
+            {% if messages %}
+                <div>
+                {% for message in messages %}
+                    {{ message.tags }}! {{ message.message }}
+                {% endfor %}
+                </div>
+            {% endif %}
+
+        </form>
+        <hr />
+   
+
+
+            <a class="custombtn Hyemin" href="remove/">삭제</a>
             <a class="custombtn Hyemin" href="edit/">수정</a>
             <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
             
