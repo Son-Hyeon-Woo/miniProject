@@ -14,10 +14,13 @@ class Post(models.Model):
     contents = models.TextField()
     writer= models.ForeignKey(User,related_name='posts', on_delete=models.CASCADE, null=True)
     date=models.DateTimeField(default=now, editable=False)
+    # hits = models.PositiveIntegerField(verbose_name='조회수', default=0)
+    # top_fixed = models.BooleanField(verbose_name='상단고정', default=False)
 
     # postname이 Post object 대신 나오기
     def __str__(self):
         return self.postname
+
         #그림파일 같이삭제
     def delete(self, *args, **kargs):
         if self.mainphoto:
