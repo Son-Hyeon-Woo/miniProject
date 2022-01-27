@@ -9,9 +9,9 @@ class Place(models.Model):
     place_lat = FloatField(null=True, default=0)
     place_long = FloatField(null=True, default=0)
     place_id = IntegerField(primary_key=True)
-    
+    place_exp=CharField(max_length=1000)
     def __str__(self) -> str:
-        return self.place_name
+        return self.place_name, self.place_exp
     
 class QuizLog(models.Model):
     play_time = IntegerField(null=True, default=0)
