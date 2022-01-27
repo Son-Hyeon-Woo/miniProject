@@ -6,8 +6,6 @@ from config import settings
 import os
 from .forms import *
 from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 import urllib.parse
@@ -73,6 +71,7 @@ def posting(request, pk):
         # posting.html 페이지를 열 때, 찾아낸 게시글(post)을 post라는 이름으로 가져옴
         return render(request, 'placeboard/posting.html', context)
 
+
 def new_post(request):
     if request.method == 'POST':
         postname = request.POST['postname']
@@ -95,6 +94,7 @@ def new_post(request):
         }
         return render(request, 'placeboard/new_post.html', context)
 
+
 ##게시글 삭제
 def remove_post(request, pk):
     post = Post.objects.get(id=pk)
@@ -108,18 +108,20 @@ def remove_post(request, pk):
 
 
 
-
 def boardEdit(request, pk):
     post = Post.objects.get(id=pk)
     if request.method == "POST":
-        post.postname = request.POST['postname']
-        post.contents = request.POST['contents']
-        post.mainphoto = request.FILES['mainphoto']
-        post.writer = request.user
-        
-        post.save()
-        return redirect('/pb/blog')
-
+        if post.writer == request.user:
+            post.delete()
+            post.postname = request.POST['postname']
+            post.contents = request.POST['contents']
+            post.mainphoto = request.FILES['mainphoto']
+            post.writer = request.user
+            
+            post.save()
+            return redirect('/pb/blog')
+        else:
+            return render(request, 'placeboard/remove_post_error.html', {'post': post})
     else:
         fileuploadForm = FileUploadForm
         context = {
@@ -127,6 +129,7 @@ def boardEdit(request, pk):
             'post':post
         }
         return render(request, 'placeboard/update_post.html', context)
+
 
 def download(request, pk):
     uploadFile = Post.objects.get(id=pk)
