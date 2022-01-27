@@ -31,21 +31,33 @@
 <body>
 <!-- 상단바를 표시할 div 입니다 -->
 <nav class="Hyemin">
-    <div id = 'hello' style = 'text-align: center;'>이 곳을 맞춰볼까요?</div>
+    <div id = 'hello' style = 'text-align: center;'>🌍 이 곳을 맞춰볼까요? 🌍</div>
     <button class="gohome custombtn Hyemin" 
             id="submitButton" 
             type="botton" 
             onclick="location.href='/map/home'"
-            style = "padding: 0.4rem 1.5%;"> 홈으로 </button></div>
+            style = "padding: 0.2rem 1.5%; border-radius : 2rem"> 홈으로 </button></div>
     <a class="login btn gmarket" 
         style = "background-color : #50727272; top : 13px; right : 35px; height : 3.5rem; width : 3.5rem;"
         href = "">
         <img src="{% static 'assets/img/smile.png' %}" width=45px, height=45px>
         <a  id = 'user_info' 
             class = 'gmarket'
-            style = 'top:30px; right : 100px; width : 200px;'> 다른 장소로 할래요! ->
+            style = ' top:15px; right : 100px; width : 180px;'> 다른 장소로 갈래요! ▶️
         </a> 
     </a>
+
+    <a class="login btn gmarket" 
+        style = "cursor: pointer; background-color : #50727272; top : 13px; right : 310px; height : 3.5rem; width : 3.5rem;"
+        id = "reset">
+        <img src="{% static 'assets/img/reset.png' %}" width=45px, height=45px>
+        <a  id = 'user_info' 
+            class = 'gmarket'
+            style = 'top:45px; right : 150px; width : 140;'>    ◀️ 시작 위치로!
+        </a> 
+    </a>
+
+
 </nav>
 
 <!-- 로드뷰를 표시할 div 입니다 -->
@@ -90,6 +102,14 @@ var position = new kakao.maps.LatLng(latlong['lat'], latlong['long']);  // 넘�
 roadviewClient.getNearestPanoId(position, 50, function(panoId) {
     roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
 });
+
+document.querySelector("#reset").addEventListener("click", reset);
+function reset() {
+    roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+        roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+    });
+}
+
 
 
 // * * * * * * * * * * * * * * * * * * 미니맵 JS * * * * * * * * * * * * * * * * * * * * * *

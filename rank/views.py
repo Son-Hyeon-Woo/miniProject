@@ -46,7 +46,7 @@ def ranking(request):
             .values('user_id','pnt_sum','time_sum')
             .order_by('-pnt_sum'))
         data2 = []
-        cnt = 1
+        cnt = 0
         for i in data:
             data2.append({'user_name' : User.objects.get(id = i['user_id']), 'pnt_sum' : i['pnt_sum'], 'time_sum':i['time_sum']})
             cnt += 1
