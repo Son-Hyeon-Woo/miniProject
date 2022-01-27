@@ -29,22 +29,29 @@
      
         div {
           width: 100%;
-          height: 1000px;
-          border: 1px solid #003458;
+         
+          border: 0.5px solid #224444;
         }
         div.left {
           width: 50%;
+          height:800px;
           float: left;
           box-sizing: border-box;
-          background: #fff;
+          background: #bddcb8;
         }
         div.right {
           width: 50%;
+          height:800px;
           float: right;
           box-sizing: border-box;
-          background: #fff;
+          background: #bddcb8;
         }
-     
+        div.under{
+          width:100%;
+          height :15%;
+          background: #bddcb8;
+   
+        }
 
       .goquiz button {
         font-size: 0.85rem;
@@ -80,19 +87,28 @@
 <body>
     <div>
       <div class="left">
-        <h1> left</h1>
-          {{data2}}
+        
+   
           {% for item2 in data2 %}
-            <h3> {{ item2.place_name }}</h3>
-          {% endfor %}
+            <h1 class="gohome Hyemin"> 정답은 {{ item2.place_name }} 입니다~</h1>
+          {% endfor %} 
+
+          {% for item2 in data2 %}
+            <h2 class="italic Hyemin"> {{item2.place_exp}}</h2>
+          {% endfor %} 
           
+         
         </div>
         <div class="right">
-          <h1>right<h1>
+          <h1 class="gohome Hyemin">주변 가볼 곳을 추천해드릴게요!<h1>
           {% for item in data %}
-            <h3>{{ item.name }}</h3>
+            <h3 class="italic Hyemin">{{ item.name }}</h3>
           {% endfor %}
-        </div>  
+        </div> 
+        <div class="under">
+          
+            <button class="gohome custombtn Hyemin"  id="submitButton" type="botton" onclick="location.href='/map/home'"> 홈으로 </button>
+        </div> 
       </div>
 
 </body>    
@@ -100,62 +116,3 @@
 
 
 
-
-{% comment %} 
- 
-<div class="masthead"> 
-  <div class="masthead-content text-white">
-    <div>
-      <div class="left">
-      {% for item2 in data2 %}
-        <h3> {{ item2.name }}</h3>
-      {% endfor %}
-        
-      </div>
-      <div class="right">
-        
-      </div>
-    </div>
-      {% for item in data %}
-        <h3>{{ item.name }}</h3>
-      {% endfor %}
-        
-      </div>
-  </div>
-</div>  {% endcomment %}
-{% comment %} <!DOCTYPE html>
-<html lang="ko" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>HTML CSS Left Right Split</title>
-    <style>
-      div {
-        width: 100%;
-        height: 500px;
-        border: 1px solid #003458;
-      }
-      div.left {
-        width: 30%;
-        float: left;
-        box-sizing: border-box;
-        background: #8977ad;
-      }
-      div.right {
-        width: 70%;
-        float: right;
-        box-sizing: border-box;
-        background: #ece6cc;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <div class="left">
-        왼쪽
-      </div>
-      <div class="right">
-        오른쪽
-      </div>
-    </div>
-  </body>
-</html> {% endcomment %}

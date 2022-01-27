@@ -239,6 +239,17 @@ setTimeout(function(){  // 정답 제출 후 화면 이동하는 효과
     bar2.style.width =  point['first']/10 + '%';
 }, 10);
 
+
+const data = axios({
+    url: '/rank/near_food/',
+    method: 'POST',
+    data: formData,
+    headers: { 'X-CSRFToken': csrftoken }
+});
+    data.then(function (result) {
+        window.location.href = '/rank/near_food/{{}}'
+        console.log(result.data);
+    });
 </script>
 
 

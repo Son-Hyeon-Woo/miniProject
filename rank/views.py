@@ -1,9 +1,7 @@
 from platform import java_ver
 from django.shortcuts import render
 from rank.models import Around_place
-
-from mapquiz.views import quiz
-
+from mapquiz.models import Place
 import json
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
@@ -18,9 +16,11 @@ def finish(request):
     return render(request, 'rank/finish.html')
 
 def near_food(request):
-    around_place=Around_place.objects.all()
-
-    return render(request, 'rank/near_food.html', { 'data': around_place })
+    place=Place.objects.filter(place_id=4)
+    #place=Place.objects.all()
+    around_place=Around_place.objects.filter(id_p=4)
+    
+    return render(request, 'rank/near_food.html',{ 'data': around_place ,'data2' : place})
 
 def near_place(request):
     
