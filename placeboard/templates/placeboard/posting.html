@@ -79,25 +79,11 @@
         {% endif %}
         <p>{{post.contents}}</p>
 
-        <p><b>댓글 목록</b></p>
-        {% for comment in comments %}
-            <li>{{ comment.comment }} //{{ comment.writer }}/{{ comment.date }}</li>
-
-            <!--<form action="{# url 'boards:comment_delete' board_id=board.id comment_id=comment.id #}"></form> 같은 의미-->
-        <form action="{% url 'placeboard:comment_delete' post.id comment.id %}" method="post">
-            {% csrf_token %}
-        <input class="custombtn3 Hyemin" type="submit" value="삭제">
-        </form>
-
-        {% empty %}
-            <p>아직 댓글이 없습니다.</p>
-        {% endfor %}
-        <hr />
         <!--댓글달기-->
         <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
             {% csrf_token %}    <!-- 우리 웹 서버에서 어떤 작성이 일어날때는 csrf_token이 필요하다라는 의미 // 보안상 필요 -->
             <input type="text" name="content" size="50%" placeholder="댓글을 입력해 주세요.">
-            <input class="custombtn3 Hyemin" type="submit" value="댓글달기">
+            <input class="btn Hyemin " type="submit" value="댓글달기">
 
             {% if messages %}
                 <div>
@@ -110,8 +96,27 @@
                 <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
                 <br> {% endcomment %}
             {% endif %}
+     
 
-            <p class = 'gmarket'>{{post.contents}}</p>
+        <p><b>댓글 목록</b></p>
+        </center>
+        {% for comment in comments %}
+            
+                <!-- comment_id=comment.id  같은 의미-->
+            <form action="{% url 'placeboard:comment_delete' post.pk comment.id %}" method="post">
+                {{ comment.comment }} &nbsp | &nbsp {{ comment.writer }} &nbsp | &nbsp {{ comment.date|date:"m-d/H:i"  }} &nbsp
+                {% csrf_token %}
+            <input class="btn Hyemin" type="submit" value="삭제">
+            </form>
+            
+            <br>
+        {% empty %}
+            <p>아직 댓글이 없습니다.</p>
+        {% endfor %}
+        <hr />
+        
+        <center>
+            {% comment %} <p class = 'gmarket'>{{post.contents}}</p> {% endcomment %}
 
             <a class="custombtn Hyemin top_btn" href="download/">사진 저장하기</a>
 
@@ -161,7 +166,7 @@
                 {% endif %}
             </form>
             <hr /> {% endcomment %}
-    
+        
             <a class="custombtn Hyemin" href="remove/">삭제</a>
             <a class="custombtn Hyemin" href="edit/">수정</a>
             <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
