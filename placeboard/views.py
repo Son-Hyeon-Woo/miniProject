@@ -51,10 +51,11 @@ def new_post(request):
 
 ##게시글 삭제
 def remove_post(request, pk):
+ 
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
-        post.delete()
-        return redirect('/pb/blog')
+      post.delete()
+      return redirect('/pb/blog')
     return render(request, 'placeboard/remove_post.html', {'post': post})
 
 
