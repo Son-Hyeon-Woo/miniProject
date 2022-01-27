@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <title>Posting!</title>
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
-    
     <style>
         .content2{
             position: relative;
@@ -35,11 +34,18 @@
             height: 30px;
             font-size: 25px;
         }
+        #back{
+            position: absolute;
+            top : 6%;
+            left : 28%;
+            width: 40%;
+            height: 80%;
+            background-color : #fff;
+            }
 
     </style>
-
 </head>
- 
+
     <body bgcolor = #ebf1eb>
         <div class="social-icons">
             <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
@@ -58,24 +64,24 @@
             {% endif %}
             </div>
         </div>
+
         <div class="content content2">
             <div class="Hyemin">
-                <h1>제목 :{{post.postname}}</h1>
-                <p>작성자 :{{post.writer}}  <p style="text-align:left">작성일자 :{{post.date}}</p>
+                <h1 style="text-align: center; font-size : 250%" >제목 :{{post.postname}}</h1>
+                <p style="text-align:right">작성자 :{{post.writer}}  <p style="text-align:right;">작성일자 :{{post.date}}</p>
             </div>
         
-        
-        <!-- 이미지 보여주기 -->
-        {% if post.mainphoto %}
-            <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
-            <br>
-        {% endif %}
+            <center>
+            {% if post.mainphoto %}
+                <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
+                <br>
+            {% endif %}
 
-        <p class = 'gmarket'>{{post.contents}}</p>
+            <p class = 'gmarket'>{{post.contents}}</p>
 
-        <a class="custombtn Hyemin top_btn" href="download/">사진 저장하기</a>
+            <a class="custombtn Hyemin top_btn" href="download/">사진 저장하기</a>
 
-        <div style="position: relative; top:15px">
+            <div style="position: relative; top:15px">
 
             {% comment %}
                 <button id = 'help' class = 'gmarket'>삭제</button>  
@@ -88,12 +94,12 @@
                     </div>
                 </div>
             {% endcomment %}
-
             <a class="custombtn Hyemin bottom_btn" href="remove/">삭제</a>            
             <a class="custombtn Hyemin bottom_btn" href="edit/">수정</a>
             <a class="custombtn Hyemin bottom_btn" href="{% url 'placeboard:blog' %}">목록</a>  
             
             </div>
+
         </div>
     </body>
 </html>
