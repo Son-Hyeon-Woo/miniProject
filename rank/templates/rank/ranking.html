@@ -186,27 +186,26 @@
         
 
         <div >
-            <button class = 'custombtn gmarket' style = 'bottom : 3cm; left : 30%;' onclick= "location.href='http://127.0.0.1:8000/map/home/'"> 홈으로</button >
+            <button class = 'custombtn gmarket' style = 'padding-top:2%; padding-bottom:2%; bottom : 3cm; left : 30%;' onclick= "location.href='http://127.0.0.1:8000/map/home/'"> 홈으로</button >
         </div>
         <div>
-            <button class = 'custombtn gmarket' style = 'bottom : 3cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/map/quiz/'">다시 하기</button >
+            <button class = 'custombtn gmarket' style = 'padding-top:2%; padding-bottom:2%; bottom : 3cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/map/quiz/'">다시 하기</button >
         </div>
         <div >
-            <button class = 'custombtn gmarket' style = 'left : 3cm; left : 30%;' onclick="location.href='http://127.0.0.1:8000/pb/blog/'">다른 여행지<br>공유</button>
+            <button class = 'custombtn gmarket' style = 'left : 3cm; left : 30%;' onclick="location.href='http://127.0.0.1:8000/pb/blog/'">다른 여행지<br>사진 게시판</button>
         </div>
         <div >
-            <button class = 'custombtn gmarket' style = 'left : 6cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/rank/near_food/'">근처 맛집<br>보기</button>
+            <button class = 'custombtn gmarket' style = 'left : 6cm; left : 70%;' onclick="location.href='http://127.0.0.1:8000/rank/near_food/'">정답<br>장소 소개</button>
         </div>
 
-        
+
         <div id = user> {{current_user.username}}</div>
         <div id = user2 >나의 총점수 : {{current_user_point.pnt_sum}}</div> 
-
-
 
     </div> 
 
     <div id = 'rank' class = 'Hyemin'>
+        
         <table class='table' border-radius :16px; width =90%; height=70%>
             <colgroup>
                 <col width="15%">
@@ -214,7 +213,8 @@
                 <col width="35%">
                 <col width="25%">
             </colgroup>
-    
+
+            <h1 style="text-align: center; font-size:270%">👑RANKING👑</h1>
             <thead>
                 <tr style="height: 62px; background-color : #bddcb8;">
                 <th>등수</th>

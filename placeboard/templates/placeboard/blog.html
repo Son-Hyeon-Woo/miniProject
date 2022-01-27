@@ -8,12 +8,22 @@
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
     {% comment %} <link href="{% static 'css/styles.css' %}" rel="stylesheet" /> {% endcomment %}
     
+    <style>
+        #back{
+            position: absolute;
+            top : 6%;
+            left : 28%;
+            width: 40%;
+            height: 80%;
+            background-color : #fff;
+            }
+    </style>
 </head>
 
 
     <body bgcolor = #ebf1eb>
         {% comment %} <!-- Background Video-->
-      <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="{% static 'assets/mp4/bg.mp4' %%}"  type="video/mp4"/></video> {% endcomment %}
+        <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="{% static 'assets/mp4/bg.mp4' %%}"  type="video/mp4"/></video> {% endcomment %}
 
         <div class="social-icons">
             <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
@@ -35,91 +45,87 @@
         
     <div>
 
-
     </div>
 
-      <div class="content">
-          <div class="Hyemin">
-              <h1>여행지를 소개해 주세요</h1>
-          </div>
-          <div style="text-align:right">
-              
-              <button class="custombtn Hyemin"><a onclick="location.href='{% url 'placeboard:new_post' %}'">글쓰기</a></button>
-              <button class="custombtn Hyemin"><a onclick="location.href='/map/home'">홈으로</a></button>
-              <p>
+    <div class="content" style="margin-top: 5%;">
+        <div class="Hyemin">
+            <h1>여행지를 소개해 주세요</h1>
+        </div>
+        <div style="text-align:right">
+            <button class="pb_btn Hyemin"><a onclick="location.href='new_post/'">글쓰기</a></button>
+            <button class="pb_btn Hyemin"><a onclick="location.href='/map/home'">홈으로</a></button>
+            <p>
                 
-          </div>
-  
-          <div style="height:280px; ">
-              <table class="board">
-                  <thead>
-                      <tr class="Hyemin">
-                          <th style="width:10%;">번호</th>
-                          <th style="width:50%">제목</th>
-                          <th style="width:20%">작성일자</th>
-                          <th style="width:20%">작성자</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  {% if board_list %}
-                      {% for data in board_list %}
-                      <tr class="{% cycle '' 'even_bgcolor' %}">
-                          <td style="text-align:center;">{{ data.id }}</td>
-                          {% comment %} forloop.counter {% endcomment %}
-                          <td>
-                              <a href="{% url 'placeboard:posting' data.id %}">
-                                  {{ data.postname }}
-                              </a>
-                          </td>
-                          <td>{{ data.date|date:'Y-m-d' }}</td>
-                          <td>{{ data.writer }}</td>
-                      </tr>
-                      {% endfor %}
-                  {% else %}
-                      <tr>
-                          <td>작성된 게시글이 없습니다.</td>
-                      </tr>
-                  {% endif %}
-                  </tbody>
-              </table>
-          </div>
-          <p>
-          <!-- Pagination -->
-          <div style="text-align:center">
-              <div class="pagination">
-              
-                  <div style="width:35%; margin: 5px;">
-                  {% if board_list.has_previous %}
-                      <a class="custombtn3 Hyemin" href="?page=1">맨 앞으로</a>
-                      <a class="custombtn3 Hyemin" href="?page={{ board_list.previous_page_number }}">이전</a>
-                  {% endif %}
-                  </div>
-  
-                  <div style="width:30%; margin: 5px;">
-                  {% for page in board_list.paginator.page_range %}
-                      {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
-                      <span class="{% if page == board_list.number %}current{% endif %}">
-                          <a class="custombtn2 Hyemin" href="?page={{ page }}">{{ page}}</a>
-                      </span>
-                      {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
-                          ..
-                      {% endif %}
-                  {% endfor %}
-                  </div>
-  
-                  <div style="width:35%; margin: 5px;">
-                  {% if board_list.has_next %}
-                      <a class="custombtn3 Hyemin" href="?page={{ board_list.next_page_number }}">다음</a>
-                      <a class="custombtn3 Hyemin" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
-                  {% endif %}
-                  </div>
-  
-              </div>  
-          </div> 
-      </div>
-      
+        </div>
 
-    
-  </body>
-  </html>
+        <div style="height:280px; ">
+            <table class="board">
+                <thead>
+                    <tr class="Hyemin">
+                        <th style="width:10%;">번호</th>
+                        <th style="width:50%">제목</th>
+                        <th style="width:20%">작성일자</th>
+                        <th style="width:20%">작성자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if board_list %}
+                        {% for data in board_list %}
+                        <tr class="{% cycle '' 'even_bgcolor' %}">
+                            <td style="text-align:center;">{{ data.id }}</td>
+                        {% comment %} forloop.counter {% endcomment %}
+                            <td>
+                                <a href="{% url 'placeboard:posting' data.id %}">
+                                    {{ data.postname }}
+                                </a>
+                            </td>
+                            <td>{{ data.date|date:'Y-m-d' }}</td>
+                            <td>{{ data.writer }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>작성된 게시글이 없습니다.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Pagination -->
+        <div style="text-align:center">
+            <div class="pagination">
+            
+                <div style="width:35%; margin: 5px;">
+                {% if board_list.has_previous %}
+                    <a class="pb_btn1 Hyemin" href="?page=1">맨 앞으로</a>
+                    <a class="pb_btn1 Hyemin" href="?page={{ board_list.previous_page_number }}">이전</a>
+                {% endif %}
+                </div>
+
+                <div style="width:30%; margin: 5px;">
+                    {% for page in board_list.paginator.page_range %}
+                        {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
+                            <span class="{% if page == board_list.number %}current{% endif %}">
+                                <a class="custombtn2 Hyemin" href="?page={{ page }}">{{ page}}</a>
+                            </span>
+                        {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
+                            ..
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div style="width:35%; margin: 5px;">
+                    {% if board_list.has_next %}
+                        <a class="pb_btn1 Hyemin" href="?page={{ board_list.next_page_number }}">다음</a>
+                        <a class="pb_btn1 Hyemin" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
+                    {% endif %}
+                </div>
+
+            </div>  
+        </div> 
+    </div>
+
+</body>
+</html>
 

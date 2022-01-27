@@ -7,8 +7,33 @@
     <meta charset="UTF-8">
     <title>Posting!</title>
     <link href="{% static 'css/default.css' %}" rel="stylesheet" />
-
     <style>
+        .content2{
+            position: relative;
+            left: 50%;
+            transform: translate(-50%,15%);
+            display: block;
+            height: 90%;
+            width: 50%;
+            background-color: rgb(255, 255, 255);
+            margin: 20px;
+            border-radius: 7%;
+            padding: 50px;
+            
+        }
+        .top_btn{
+            position: relative;
+            top : 0px;
+            background-color: rgb(6, 114, 30);
+            width: 90px;
+            height: 15px;
+            font-size: 15px;
+        }
+        .bottom_btn{
+            width: 120px;
+            height: 30px;
+            font-size: 25px;
+        }
         #back{
             position: absolute;
             top : 6%;
@@ -17,6 +42,7 @@
             height: 80%;
             background-color : #fff;
             }
+
     </style>
 </head>
 
@@ -39,12 +65,11 @@
             </div>
         </div>
 
-        <div id=back class=" content">
+        <div class="content content2">
             <div class="Hyemin">
                 <h1 style="text-align: center; font-size : 250%" >제목 :{{post.postname}}</h1>
                 <p style="text-align:right">작성자 :{{post.writer}}  <p style="text-align:right;">작성일자 :{{post.date}}</p>
             </div>
-            
         
         <!-- 이미지 보여주기 -->
         <center>
@@ -52,18 +77,102 @@
             <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
             <br>
         {% endif %}
-        
-        <p style="margin-left: 15%; margin-right:15%;">{{post.contents}}</p>
+        <p>{{post.contents}}</p>
+
+        <!--댓글달기-->
+        <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
+            {% csrf_token %}    <!-- 우리 웹 서버에서 어떤 작성이 일어날때는 csrf_token이 필요하다라는 의미 // 보안상 필요 -->
+            <input type="text" name="content" size="50%" placeholder="댓글을 입력해 주세요.">
+            <input class="btn Hyemin " type="submit" value="댓글달기">
+
+            {% if messages %}
+                <div>
+                {% for message in messages %}
+                    {{ message.tags }}! {{ message.message }}
+                {% endfor %}
+                </div>
+            {% comment %} <center>
+            {% if post.mainphoto %}
+                <img src = "{{ post.mainphoto.url }}" alt="{{ post.mainphoto }}" height="300">
+                <br> {% endcomment %}
+            {% endif %}
+     
+
+        <p><b>댓글 목록</b></p>
         </center>
-        <!-- 버튼 -->
-        <div style="margin-left: 15%; margin-top:10%">
-                <a class="custombtn Hyemin" href="remove/">삭제</a>
-                <a class="custombtn Hyemin" href="edit/">수정</a>
-                <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
-            </div>
-        </div>
+        {% for comment in comments %}
+            
+                <!-- comment_id=comment.id  같은 의미-->
+            <form action="{% url 'placeboard:comment_delete' post.pk comment.id %}" method="post">
+                {{ comment.comment }} &nbsp | &nbsp {{ comment.writer }} &nbsp | &nbsp {{ comment.date|date:"m-d/H:i"  }} &nbsp
+                {% csrf_token %}
+            <input class="btn Hyemin" type="submit" value="삭제">
+            </form>
+            
+            <br>
+        {% empty %}
+            <p>아직 댓글이 없습니다.</p>
+        {% endfor %}
+        <hr />
         
+        <center>
+            {% comment %} <p class = 'gmarket'>{{post.contents}}</p> {% endcomment %}
+
+            <a class="custombtn Hyemin top_btn" href="download/">사진 저장하기</a>
+
+            <div style="position: relative; top:15px">
+
+            {% comment %}
+                <button id = 'help' class = 'gmarket'>삭제</button>  
+                <div class="background">
+                    <div class="window">
+                        <div class="popup">
+                        <p id = 'dist' class = 'gmarket'></p>
+                        <p class="mb-5 Hyemin">  삭제하시겠습니까?</p>
+                        </div>
+                    </div>
+                </div>
+            {% endcomment %}
+
+
+
+            {% comment %} <p><b>댓글 목록</b></p>
+            {% for comment in comments %}
+                <li>{{ comment.comment }} //{{ comment.writer }}/{{ comment.date }}</li>
+
+                <!--<form action="{# url 'boards:comment_delete' board_id=board.id comment_id=comment.id #}"></form> 같은 의미-->
+            <form action="{% url 'placeboard:comment_delete' post.id comment.id %}" method="post">
+                {% csrf_token %}
+            <input class="custombtn3 Hyemin" type="submit" value="삭제">
+            </form>
+
+<!--충돌부분      -->
+            {% empty %}
+                <p>아직 댓글이 없습니다.</p>
+            {% endfor %}
+
+            <hr />
+            <form action="{% url 'placeboard:comment_create' post.pk %}" method="post">
+                {% csrf_token %}    <!-- 우리 웹 서버에서 어떤 작성이 일어날때는 csrf_token이 필요하다라는 의미 // 보안상 필요 -->
+                <input type="text" name="content" size="50%" placeholder="댓글을 입력해 주세요.">
+                <input class="custombtn3 Hyemin" type="submit" value="댓글달기">
+
+                {% if messages %}
+                    <div>
+                    {% for message in messages %}
+                        {{ message.tags }}! {{ message.message }}
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            </form>
+            <hr /> {% endcomment %}
+        
+            <a class="custombtn Hyemin" href="remove/">삭제</a>
+            <a class="custombtn Hyemin" href="edit/">수정</a>
+            <a class="custombtn Hyemin" href="{% url 'placeboard:blog' %}">목록</a>  
+
+            </center>
+
+        </div>
     </body>
 </html>
-
-

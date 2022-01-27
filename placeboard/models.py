@@ -35,13 +35,12 @@ class Post(models.Model):
         c.execute("DELETE FROM placeboard_post WHERE mainphoto='%s'"%path_photo)
         conn.commit()  
 
+class Comment(models.Model):
+    post = models.ForeignKey(Post, null=True, blank=True, on_delete=models.CASCADE)
+    comment = models.TextField()
+    writer = models.ForeignKey(User,related_name='comments', on_delete=models.CASCADE, null=True,)
+    date = models.DateTimeField(default=now, editable=False)
 
-# class Answer(models.Model):
-#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-#     content = models.TextField()
-#     writer = models.CharField(max_length=20)
-#     date = models.DateTimeField()
-
-#     def __str__(self):
-#         return self.postname
+    def __str__(self):
+        return self.comment
     
