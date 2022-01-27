@@ -55,7 +55,7 @@ def remove_post(request, pk):
     if request.method == 'POST':
         post.delete()
         return redirect('/pb/blog')
-    return render(request, 'placeboard/remove_post.html', {'Post': post})
+    return render(request, 'placeboard/remove_post.html', {'post': post})
 
 
 
