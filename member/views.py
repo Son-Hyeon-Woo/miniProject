@@ -27,6 +27,20 @@ def signup(request):
         return render(request, 'signuperror2.html') 
 #로그인
 def login(request):
+    # if request.method == 'POST':
+    #     username = request.POST['username']
+    #     password = request.POST['password']
+    #     user = authenticate(request, username=username, password=password)
+    #     if user is not None:
+    #         auth.login(request, user)
+    #         return redirect('/')
+    #     else:
+    #         return render(request, 'loginerror.html')
+    # else:
+    #     request.session['user_id']=user
+    #     return render(request, 'login.html')
+
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -37,6 +51,7 @@ def login(request):
         else:
             return render(request, 'loginerror.html')
     else:
+
         return render(request, 'login.html')
 
 
