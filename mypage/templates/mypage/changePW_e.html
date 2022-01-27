@@ -1,6 +1,39 @@
 <head>
     <meta charset="utf-8">
     <style>
+        body {
+            background-color: #2a5555;
+          }
+        .wrapper {
+            border: 1px solid black;
+            width: 400px;
+            padding: 30px;
+            box-sizing: border-box;
+            margin: auto;
+            font-weight: bold;
+        }
+
+        .center{
+            margin-left:auto; margin-right:auto; margin-top:8%
+        }
+        .custombtn {
+            display: inline-block;
+            width: 150px;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #fff;
+            background-color: #2a5555;
+            border-color: #2a5555;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            font-size: 1.5rem;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
         .errorForm{
             border : none;
             margin: 20px;
@@ -9,35 +42,90 @@
             color:red;
             text-align: left;
         }
-
+        .custombtn1 {
+            display: inline-block;
+            width: 150px;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #fff;
+            background-color: #2a5555;
+            border-color: #2a5555;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.4rem 1.5%;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .fsize{
+            font-family: 'IM_Hyemin-Bold', normal;
+            font-weight: 400;
+            line-height: 1.2;
+            font-size: 1.5rem;
+            border: 1px solid none;
+            width: 350px;
+            height: 700px;
+            padding: 30px;
+            margin: auto;
+            margin-top: 2%;
+            background: #FFFFFF;
+            border-radius: 15px;
+        }
+        .btn {
+            position:relative;
+            left:40%;
+            transform: translateX(-50%);
+            margin-bottom: 40px;
+            width:80%;
+            height:40px;
+            background: linear-gradient(125deg,#81ecec,#2a5555,#81ecec);
+            background-position: left;
+            background-size: 200%;
+            color:white;
+            font-weight: bold;
+            border:none;
+            cursor:pointer;
+            transition: 0.4s;
+            display:inline;
+            border-radius: 5px;
+        }
+          
+        .btn:hover {
+            background-position: right;
+        }
+        
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class=fsize style = "text-align : center;">
         <form method="POST">
+        <h2>비밀번호 변경</h2>
         {% csrf_token %}
-        현재 비밀번호 : 
+        <h5>현재 비밀번호 :</h5>
         <input name="origin_password" type="password">
-        <br><br>
-        변경할 비밀번호 :
-        <input name="new_password" type="password">
-        <br><br>
-        비밀번호 확인 : 
+        <h5>변경할 비밀번호 :</h5>
+        <input name="new_password" type="password" >
+        <h5>비밀번호 확인 :</h5> 
         <input name="confirm_password" type="password">
         <br><br>
-
         <div class = "errorForm">
             <p>입력하신 정보가 일치하지 않습니다.<br> 다시 한번 확인 후 입력해 주세요.</p>
         </div> 
-        <br>
-        <input class="btn btn-primary" type="submit" value="변경"> 
+        <input class="btn" type="submit" value="변경"> 
         <a href="http://127.0.0.1:8000/mypage/mp/">
-            <button type="button" class="btn btn-danger">취소</button>
+            <button type="button" class="btn">취소</button>
         </a>
-        
-
         </form>
     </div>
+
+</div>
+</body>
+
+
 
 </div>
 </body>
