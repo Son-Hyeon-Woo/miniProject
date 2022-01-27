@@ -26,6 +26,10 @@ def quiz(request):
     }
     
     latlong_json = json.dumps(latlong)
+    user = json.dumps(user)
+    
+    request.session['place_id'] = answer.place_id
+    
     return render( request, 'mapquiz/quiz.html', {'latlong_json': latlong_json, 'user' : user})
 
 def index(request):
