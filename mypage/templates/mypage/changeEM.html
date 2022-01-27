@@ -1,6 +1,9 @@
 <head>
     <meta charset="utf-8">
     <style>
+        body {
+            background-color: #2a5555;
+          }
         .wrapper {
             border: 1px solid black;
             width: 400px;
@@ -55,14 +58,14 @@
             font-weight: 400;
             line-height: 1.2;
             font-size: 1.5rem;
-            border: 1px solid black;
-            width: 500px;
-            height: 700px;
+            border: 1px solid none;
+            width: 350px;
+            height: 550px;
             padding: 30px;
             margin: auto;
             margin-top: 2%;
-            background: #97dab8;
-            border-radius: 2%;
+            background: #FFFFFF;
+            border-radius: 15px;
         }
         .errorForm{
             border : none;
@@ -72,21 +75,43 @@
             color:red;
             text-align: left;
         }
+        .btn {
+            position:relative;
+            left:40%;
+            transform: translateX(-50%);
+            margin-bottom: 40px;
+            width:80%;
+            height:40px;
+            background: linear-gradient(125deg,#81ecec,#2a5555,#81ecec);
+            background-position: left;
+            background-size: 200%;
+            color:white;
+            font-weight: bold;
+            border:none;
+            cursor:pointer;
+            transition: 0.4s;
+            display:inline;
+            border-radius: 5px;
+        }
+          
+        .btn:hover {
+            background-position: right;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class=fsize style = "text-align : center;">
         <form method="POST">
+        <h2>이메일 변경하기</h2>
         {% csrf_token %}
-        현재 이메일 : 
-        <td>{{user.email}}</td>
-        <br><br>
-        변경할 이메일 :
+        <h4>현재 이메일 : </h4>
+        <h5>{{user.email}}</h5>
+        <h4>변경할 이메일 :</h4>
         <input name="new_email" type="email">
-        <br><br><br><br>
-        <input class="btn btn-primary" type="submit" value="변경"> 
+        <br><br><br>
+        <input class="btn" type="submit" value="변경"> 
         <a href="http://127.0.0.1:8000/mypage/mp/">
-            <button type="button" class="btn btn-danger">취소</button>
+            <button type="button" class="btn">취소</button>
         </a>
         </form>
     </div>
