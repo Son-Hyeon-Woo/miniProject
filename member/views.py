@@ -12,15 +12,19 @@ from django.contrib.auth.models import User
 def signup(request): 
     try:
         if request.method == 'POST': 
-            if request.POST['password1'] == request.POST['password2']: 
-                user = User.objects.create_user( 
-                    username=request.POST['username'], 
-                    password=request.POST['password1'], 
-                    email=request.POST['email'],
-                ) 
-                auth.login(request, user)
-                user.save()
-                return redirect('/') 
+            if request.POST['password1'] == request.POST['password2']:
+                if request.POST['username'] != '' and request.POST['email'] != '':
+                    user = User.objects.create_user( 
+                        username=request.POST['username'], 
+                        password=request.POST['password1'], 
+                        email=request.POST['email'],
+                    ) 
+                    auth.login(request, user)
+                    user.save()
+                    return redirect('/')
+                else:
+                    return render(request, 'signuperror3.html')
+                    
             return render(request, 'signuperror.html') 
         return render(request, 'signup.html')
     except:
