@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
+from django.http import HttpResponse
+import urllib.parse
+
 from django.contrib import messages
 
 @login_required
@@ -83,6 +86,17 @@ def boardEdit(request, pk):
             'post':post
         }
         return render(request, 'placeboard/update_post.html', context)
+
+def download(request, pk):
+    uploadFile = Post.objects.get(id=pk)
+    filepath = str(settings.BASE_DIR) + ('/media/%s' % uploadFile.mainphoto)
+    filename = os.path.basename(filepath)
+
+    with open(filepath, 'rb') as ab:
+        response = HttpResponse(ab, content_type='application/octet-stream')
+        #response['Content-Disposition'] = 'attachment; filename=*=UTF-8'' 디아크_BhFhDxT.jpg'
+        response['Content-Disposition'] = "attachment; filename*=UTF-8''{}".format(urllib.parse.quote(filename.encode('utf-8')))
+        return response
 
 
 
