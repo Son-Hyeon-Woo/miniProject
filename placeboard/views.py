@@ -59,18 +59,14 @@ def new_post(request):
 
 ##게시글 삭제
 def remove_post(request, pk):
-    post = Post.objects.get(pk=pk)# post 해당 글 제목
-
-    print(post)
+    post = Post.objects.get(id=pk)
     if request.method == 'POST':
-        post.delete()
-        return redirect('/pb/blog')
+        if post.writer == request.user:
+            post.delete()
+            return redirect('/pb/blog')
+        else:
+            return render(request, 'placeboard/remove_post_error.html', {'post': post})
     return render(request, 'placeboard/remove_post.html', {'post': post})
-    # post = Post.objects.get(pk=pk)
-    # if request.method == 'POST':
-    #     post.delete()
-    #     return redirect('/pb/blog')
-    # return render(request, 'placeboard/remove_post.html', {'post': post})
 
 
 
