@@ -14,6 +14,7 @@ def finish(request):
     return render(request, 'rank/finish.html')
 
 def near_food(request):
+    request.session.get('place_id', '0')
     around_place=Around_place.objects.all()
     return render(request, 'rank/near_food.html', { 'data': around_place })
 
@@ -45,17 +46,10 @@ def ranking(request):
         data2 = []
         cnt = 1
         for i in data:
-            print(i)
-            print(i['user_id'])
-            print(User.objects.get(id = i['user_id']))
             data2.append({'user_name' : User.objects.get(id = i['user_id']), 'pnt_sum' : i['pnt_sum'], 'time_sum':i['time_sum']})
             cnt += 1
             if cnt == 10:
                 break;
-            
         current_user = request.user
         current_user_point = data.get(user_id = current_user.id )
-        
-
-        
         return render(request, 'rank/ranking.html',{'data2':data2,'current_user':current_user,'current_user_point':current_user_point})
