@@ -168,8 +168,13 @@
                 });
                     data.then(function (result) {
                         var obj = JSON.parse(result['data']);
-                        console.log(obj['pk'])
-                        window.location.href ='http://127.0.0.1:8000/pb/blog/' + obj['pk']
+                        if (obj['pk'] != -1) {
+                            window.location.href ='http://127.0.0.1:8000/pb/blog/' + obj['pk']
+                        }
+                        else{
+
+                            alert('삭제할 권한이 없습니다.');
+                        }
                     });  
             };
 

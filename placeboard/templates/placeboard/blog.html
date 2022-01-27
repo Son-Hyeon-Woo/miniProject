@@ -77,11 +77,16 @@
                             <td>
                                 <a href="{% url 'placeboard:posting' data.id %}">
                                     {{ data.postname }}
+                                    <script>
+                                        var i = {{ forloop.counter }}
+                                        document.write("(" + {{cnt_comment}}[i] + ")" )
+                                    </script>
                                 </a>
                             </td>
                             <td>{{ data.date|date:'Y-m-d' }}</td>
                             <td>{{ data.writer }}</td>
                         </tr>
+                        
                         {% endfor %}
                     {% else %}
                         <tr>

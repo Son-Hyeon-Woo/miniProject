@@ -5,6 +5,9 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 import os
 from django.conf import settings
 import sqlite3
+
+
+
 conn = sqlite3.connect ('db.sqlite3',check_same_thread=False)
 c = conn.cursor()
 # from member import models

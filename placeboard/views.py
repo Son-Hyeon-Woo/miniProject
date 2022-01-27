@@ -13,36 +13,62 @@ from django.http import HttpResponse
 import urllib.parse
 import json
 from django.contrib import messages
+from django.db.models import Count
+from django.forms.models import model_to_dict
 
 @login_required
 def blog(request):
-     # 모든 Post를 가져와 postlist에 저장합니다
+    
+    data = (Comment.objects
+    .values('post_id')
+    .annotate(cnt_sum=Count('id'))
+    .values('post_id','cnt_sum')
+    .order_by('-post_id'))
+    data2 = Post.objects.all()
     postlist = Post.objects.order_by('-id')
+
+    
+    cnt_comment = {}
+    cnt = 1
+    for i in postlist:
+        key = i.id
+        postlist
+        try:
+            cnt_comment[cnt] = data.get(post_id = i.id)['cnt_sum']
+        except:
+            cnt_comment[cnt] = 0
+        cnt += 1
+
+    
     paginator = Paginator(postlist, 10)
     page = int(request.GET.get('page', 1))
     board_list = paginator.get_page(page)
     # blog.html 페이지를 열 때, 모든 Post인 postlist도 같이 가져옵니다
-    return render(request, 'placeboard/blog.html',{'postlist':postlist , 'board_list':board_list})
+    return render(request, 'placeboard/blog.html',{'postlist':postlist , 'board_list':board_list,'cnt_comment':cnt_comment})
     # , {'postlist':postlist}
 
 
 def posting(request, pk):
     if request.method == 'POST':
-        
-        temp = request.POST.get('id')
-        print(temp)
-        comment = Comment.objects.get(pk=temp)
-        comment.delete()
-        data = {'pk': pk}
-        data =  json.dumps(data)
-        return JsonResponse(data, safe=False)
+        pkk = request.POST.get('id')
+        comment = Comment.objects.get(pk=pkk)
+        user_id = request.user.id
+        if user_id == comment.writer_id:    
+            comment.delete()
+            data = {'pk': pk}
+            data =  json.dumps(data)
+            return JsonResponse(data, safe=False)
+        else:
+            data = {'pk': -1}
+            data =  json.dumps(data)
+            return JsonResponse(data, safe=False)
 
     else:
         # 게시글(Post) 중 pk(primary_key)를 이용해 하나의 게시글(post)를 검색
         post = Post.objects.get(pk=pk)
-        # comment = Comment.objects.get(pk=pk)
-        comments = post.comment_set.order_by('-id').all()
 
+        comments = post.comment_set.order_by('-id').all()
+    
         context = {'post': post, 'comments': comments}
         # posting.html 페이지를 열 때, 찾아낸 게시글(post)을 post라는 이름으로 가져옴
         return render(request, 'placeboard/posting.html', context)
