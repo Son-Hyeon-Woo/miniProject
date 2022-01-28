@@ -45,7 +45,7 @@ def blog(request):
     return render(request, 'placeboard/blog.html',{'postlist':postlist , 'board_list':board_list,'cnt_comment':cnt_comment})
     # , {'postlist':postlist}
 
-
+@login_required
 def posting(request, pk):
     if request.method == 'POST':
         pkk = request.POST.get('id')
@@ -71,7 +71,7 @@ def posting(request, pk):
         # posting.html 페이지를 열 때, 찾아낸 게시글(post)을 post라는 이름으로 가져옴
         return render(request, 'placeboard/posting.html', context)
 
-
+@login_required
 def new_post(request):
     if request.method == 'POST':
         postname = request.POST['postname']
@@ -94,7 +94,7 @@ def new_post(request):
         }
         return render(request, 'placeboard/new_post.html', context)
 
-
+@login_required
 ##게시글 삭제
 def remove_post(request, pk):
     post = Post.objects.get(id=pk)
@@ -107,7 +107,7 @@ def remove_post(request, pk):
     return render(request, 'placeboard/remove_post.html', {'post': post})
 
 
-
+@login_required
 def boardEdit(request, pk):
     post = Post.objects.get(id=pk)
     if request.method == "POST":
@@ -130,7 +130,7 @@ def boardEdit(request, pk):
         }
         return render(request, 'placeboard/update_post.html', context)
 
-
+@login_required
 def download(request, pk):
     uploadFile = Post.objects.get(id=pk)
     filepath = str(settings.BASE_DIR) + ('/media/%s' % uploadFile.mainphoto)
@@ -142,7 +142,7 @@ def download(request, pk):
         return response
 
 
-
+@login_required
 def comment_create(request,pk):
     if request.method == 'POST':
         content = request.POST.get('content')

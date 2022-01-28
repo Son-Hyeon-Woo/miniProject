@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 def mp(request):
     
     return render(request, 'mypage/mp.html')
-
+@login_required
 def changePW_e(request):
     if request.method == "POST":
         user = request.user
@@ -29,7 +29,7 @@ def changePW_e(request):
             return render(request, 'mypage/changePW_e.html')
     else:
         return render(request, 'mypage/changePW.html')
-
+@login_required
 def changePW(request):
     if request.method == "POST":
         user = request.user
@@ -51,7 +51,7 @@ def changePW(request):
     else:
         return render(request, 'mypage/changePW.html')
 
-
+@login_required
 def changeEM(request):
     if request.method == "POST":
         user = request.user
@@ -68,7 +68,7 @@ def changeEM(request):
     else:
         return render(request, 'mypage/changeEM.html')
 
-
+@login_required
 def changeEM_e(request):
     if request.method == "POST":
         user = request.user
@@ -86,7 +86,7 @@ def changeEM_e(request):
         return render(request, 'mypage/changeEM.html')
 
 
-
+@login_required
 def deleteID(request):
     if request.method == "POST":
         user = request.user
