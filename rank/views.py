@@ -9,7 +9,8 @@ from mapquiz.models import QuizLog
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from mapquiz.models import Place
-
+from django.contrib.auth.decorators import login_required
+@login_required
 
 def near_food(request):
     a=request.session.get('place_id', '0')

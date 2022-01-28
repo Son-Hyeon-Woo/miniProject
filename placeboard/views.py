@@ -138,7 +138,6 @@ def download(request, pk):
 
     with open(filepath, 'rb') as ab:
         response = HttpResponse(ab, content_type='application/octet-stream')
-        #response['Content-Disposition'] = 'attachment; filename=*=UTF-8'' 디아크_BhFhDxT.jpg'
         response['Content-Disposition'] = "attachment; filename*=UTF-8''{}".format(urllib.parse.quote(filename.encode('utf-8')))
         return response
 
@@ -155,7 +154,6 @@ def comment_create(request,pk):
             return redirect('placeboard:posting',pk)
         
         Comment.objects.create(post=post, writer=writer, comment=content)
-
         return redirect('placeboard:posting', pk)   
     
     

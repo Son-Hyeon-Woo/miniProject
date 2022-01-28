@@ -23,10 +23,10 @@ class Post(models.Model):
         #그림파일 같이삭제
     def delete(self, *args, **kargs):
         if self.mainphoto:
-            path_photo=self.mainphoto
             os.remove(os.path.join(settings.MEDIA_ROOT, self.mainphoto.path))
             
-
+ 
+        super(Post, self).delete(*args, **kargs)
 class Comment(models.Model):
     post = models.ForeignKey(Post, null=True, blank=True, on_delete=models.CASCADE)
     comment = models.TextField()
