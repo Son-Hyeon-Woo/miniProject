@@ -14,10 +14,3 @@ class Around_place(models.Model):
         managed = False
       
       
-        
-# class Point(models.Model):
-#     point = models.IntegerField(default=0)
-#     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-#     def __str__(self) -> str:
-#         return self.user_id
-# Create your models here.
