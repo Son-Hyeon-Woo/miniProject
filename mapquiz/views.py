@@ -32,6 +32,3 @@ def quiz(request):
 
 def index(request):
     return render(request, 'mapquiz/index.html')
-
-def quizend(request):
-    return render(request, 'mapquiz/quizend.html')
