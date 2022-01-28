@@ -9,8 +9,10 @@ from mapquiz.models import QuizLog
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from mapquiz.models import Place
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def near_food(request):
     a=request.session.get('place_id', '0')
     print(a)
@@ -20,9 +22,7 @@ def near_food(request):
     
     return render(request, 'rank/near_food.html',{ 'data': around_place ,'data2' : place})
 
-def near_place(request):
-    return render(request, 'rank/near_place.html')
-
+@login_required
 def ranking(request):
     if request.method == 'POST':
         user_id = request.POST.get('username', False)
